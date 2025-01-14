@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Color de iconos del sidebar AdminLTE */
+.icon-adminlte {
+  color: rgb(255, 136, 136);
+}
+
+/* imágen cuando se muestra el formulario al editar */
+.img_view_edit{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}

@@ -2638,7 +2638,7 @@
       var toastHeader = $__default["default"]('<div class="toast-header">');
 
       if (this._config.image != null) {
-        var toastImage = $__default["default"]('<img />').addClass('rounded mr-2').attr('src', this._config.image).attr('alt', this._config.imageAlt);
+        var toastImage = $__default["default"]('<images />').addClass('rounded mr-2').attr('src', this._config.image).attr('alt', this._config.imageAlt);
 
         if (this._config.imageHeight != null) {
           toastImage.height(this._config.imageHeight).width('auto');
