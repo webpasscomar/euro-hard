@@ -325,7 +325,7 @@ return [
     ['header' => 'SHOWROOM'],
     [
       'text' => 'Colores',
-      'route' => '',
+      'route' => 'admin.colors.index',
       'icon' => 'fas fa-fw fa-palette',
     ],
     [

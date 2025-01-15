@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\GalleryRequest;
 use App\Models\Gallery;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -18,7 +17,7 @@ class GalleryController extends Controller
   public function index(): View
   {
     // Confirmar la eliminación de un item
-    $title = 'Eliminar Slide?';
+    $title = 'Eliminar slide?';
     $text = "Está acción no se podrá revertir";
     confirmDelete($title, $text);
 
@@ -59,7 +58,7 @@ class GalleryController extends Controller
         'status' => 1
       ]);
 
-      toast('Se agrego una nueva imágen', 'success');
+      toast('Se agregó una nueva imágen', 'success');
       return redirect(route('admin.galleries.index'));
     } catch (\Throwable $th) {
       // dd($th);
@@ -87,7 +86,7 @@ class GalleryController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(GalleryRequest $request, Gallery $gallery)
+  public function update(GalleryRequest $request, Gallery $gallery): RedirectResponse
   {
     $request->validated();
 
@@ -125,7 +124,7 @@ class GalleryController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Gallery $gallery)
+  public function destroy(Gallery $gallery): RedirectResponse
   {
     // Eliminar el registro imágen borrando su respectiva imágen
     try {

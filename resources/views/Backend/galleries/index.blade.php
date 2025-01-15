@@ -1,7 +1,7 @@
 @extends('layouts.adminlte')
 @section('subtitle', 'Galerias')
 @section('content_header_title', 'Admin')
-@section('content_header_subtitle', 'Galeria')
+@section('content_header_subtitle', 'Galerias')
 
 @section('content_body')
     <div class="card">
@@ -18,10 +18,10 @@
                         <tr>
                             <th class="text-left">Cod.</th>
                             <th class="text-left align-middle">Título</th>
-                            <th class="text-left align-middle">Publicado</th>
+                            {{-- <th class="text-left align-middle">Publicado</th> --}}
                             <th class="text-left align-middle">Orden</th>
                             <th class="text-left align-middle">Imágen</th>
-                            <th class="text-left align-middle">Estado</th>
+                            <th class="text-left align-middle">Publicado</th>
                             <th class="text-left align-middle">Acciones</th>
                         </tr>
                     </thead>
@@ -30,10 +30,10 @@
                             <tr>
                                 <td class="align-middle text-left">{{ $slide->id }}</td>
                                 <td class="align-middle text-left">{{ $slide->title }}</td>
-                                <td class="align-middle text-left">
+                                {{-- <td class="align-middle text-left">
                                     <livewire:components.published wire:key="{{ $slide->id }}" :model="$slide"
                                         field="status" />
-                                </td>
+                                </td> --}}
                                 <td class="align-middle text-left">{{ $slide->order }}</td>
                                 <td class="align-middle text-left">
                                     <img src="{{ isset($slide->image) && file_exists(public_path('storage/galleries/' . $slide->image)) ? asset('storage/galleries/' . $slide->image) : asset('img/Imagen-no-disponible.png') }}"
