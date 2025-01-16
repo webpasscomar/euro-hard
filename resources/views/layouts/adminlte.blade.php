@@ -13,7 +13,7 @@
 
 @section('content_header')
     @hasSection('content_header_title')
-        <h1 class="text-muted">
+        <h1 class="text-muted py-3">
             @yield('content_header_title')
 
             @hasSection('content_header_subtitle')
@@ -21,6 +21,12 @@
                     <i class="fas fa-xs fa-angle-right text-muted"></i>
                     @yield('content_header_subtitle')
                 </small>
+                @hasSection('content_header_detail')
+                    <small class="text-gray-500">
+                        <i class="fas fa-xs fa-angle-right text-muted"></i>
+                        @yield('content_header_detail')
+                    </small>
+                @endif
             @endif
         </h1>
     @endif
@@ -37,12 +43,12 @@
 
 @section('footer')
     <div class="float-right">
-        Version: {{ config('app.version', '1.0.0') }}
+        Version: {{ config('app.version', '1.0.1') }}
     </div>
 
     <strong>
-        <a href="{{ config('app.company_url', '#') }}">
-            {{ config('app.company_name', 'My company') }}
+        <a href="{{ config('app.company_url', '#') }}" target="_blank" class="text-decoration-none">
+            {{ \Illuminate\Support\Str::title(config('app.company_name', 'Webpass')) }}
         </a>
     </strong>
 @stop
@@ -52,8 +58,17 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            $('#myTable').DataTable();
+            $('#adminTable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/2.2.1/i18n/es-MX.json',
+                },
+                stateSave: true
+            });
         });
+        // document.addEventListener('livewire:navigate', () => {
+        //     $('#adminTable').DataTable().destroy();
+        //     $('#adminTable').DataTable();
+        // });
     </script>
 @endpush
 
@@ -63,12 +78,14 @@
     <style type="text/css">
         {{-- You can add AdminLTE customizations here --}}
         /*
-            .card-header {
-                border-bottom: none;
-            }
-            .card-title {
-                font-weight: 600;
-            }
-            */
+                                                                                                                                                                                                                                                                        .card-header {
+                                                                                                                                                                                                                                                                            border-bottom: none;
+                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                        .card-title {
+                                                                                                                                                                                                                                                                            font-weight: 600;
+                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                        */
     </style>
+    <!-- Scripts -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 @endpush

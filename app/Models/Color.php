@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Color extends Model
 {
- 
-    protected $table = 'colores'; 
+  use SoftDeletes;
 
-    protected $fillable = ['color']; 
+  protected $table = 'colors';
+  protected $fillable = [
+    'color'
+  ];
 }
-
