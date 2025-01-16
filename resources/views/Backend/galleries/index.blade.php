@@ -37,7 +37,7 @@
                                 <td class="align-middle text-left">{{ $slide->order }}</td>
                                 <td class="align-middle text-left">
                                     <img src="{{ isset($slide->image) && file_exists(public_path('storage/galleries/' . $slide->image)) ? asset('storage/galleries/' . $slide->image) : asset('img/Imagen-no-disponible.png') }}"
-                                        alt="{{ $slide->title }}" class="img-fluid" width="50" height="50">
+                                        alt="{{ $slide->title }}" class="img-fluid" width="40" height="40">
                                 </td>
 
                                 <td class="text-center align-bottom">

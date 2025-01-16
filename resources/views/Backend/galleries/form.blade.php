@@ -43,20 +43,20 @@
 
 @push('js')
     <script>
-        {{-- Vista previa de la imágen --}}
+        // {{-- Vista previa de la imágen --}}
         const imagePreview = (event) => {
             const containerPreview = document.querySelector('#imgPreview');
             containerPreview.innerHTML = '';
             const title = document.createElement('h6');
             title.style.fontWeight = 'bold';
-            title.textContent = 'Vista Previa';
+            title.textContent = 'Vista Previa Imágen';
             containerPreview.appendChild(title);
             let reader = new FileReader();
 
             reader.onload = (event) => {
                 const image = document.createElement('img');
                 image.src = event.target.result;
-                image.alt = 'imagen de prueba';
+                image.alt = 'vista previa imágen';
                 image.className = 'img-thumbnail';
                 image.setAttribute('style', `object-fit:cover; width:200px; height:200px;`);
                 containerPreview.appendChild(image);

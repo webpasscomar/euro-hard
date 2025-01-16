@@ -330,7 +330,7 @@ return [
     ],
     [
       'text' => 'Categorias',
-      'route' => '',
+      'route' => 'admin.productCategory.index',
       'icon' => 'fas fa-fw fa-sitemap',
     ],
     [
