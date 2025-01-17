@@ -9,8 +9,12 @@
 }
 
 /* imágen cuando se muestra el formulario al editar */
-.img_view_edit{
+.img_view_edit {
   width: 200px;
   height: 200px;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 200px;
+  max-height: 200px;
   object-fit: cover;
 }
