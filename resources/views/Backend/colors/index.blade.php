@@ -6,7 +6,7 @@
 @section('content_body')
     <div class="card">
         <div class="card-header text-right">
-            <a href="{{ route('admin.colors.create') }}" class="btn btn-outline-secondary" wire:navigate><i
+            <a href="{{ route('admin.colors.create') }}" class="btn btn-outline-secondary"><i
                     class="fas fa-file mr-2"></i>Nuevo</a>
         </div>
 

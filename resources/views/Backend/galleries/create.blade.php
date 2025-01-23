@@ -8,7 +8,7 @@
 @section('content_body')
     <div class="card">
         <div class="card-header text-right">
-            <a href="{{ route('admin.galleries.index') }}" class="btn btn-outline-secondary" wire:navigate>
+            <a href="{{ route('admin.galleries.index') }}" class="btn btn-outline-secondary">
                 <i class="fas fa-arrow-left"></i> Volver
             </a>
         </div>

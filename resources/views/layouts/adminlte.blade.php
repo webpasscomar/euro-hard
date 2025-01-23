@@ -65,26 +65,14 @@
                 stateSave: true
             });
         });
-        // document.addEventListener('livewire:navigate', () => {
-        //     $('#adminTable').DataTable().destroy();
-        //     $('#adminTable').DataTable();
-        // });
     </script>
 @endpush
 
 {{-- Add common CSS customizations --}}
 
 @push('css')
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/44.1.0/ckeditor5.css" />
     <style type="text/css">
-        {{-- You can add AdminLTE customizations here --}}
-        /*
-                                                                                                                                                                                                                                                                        .card-header {
-                                                                                                                                                                                                                                                                            border-bottom: none;
-                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                        .card-title {
-                                                                                                                                                                                                                                                                            font-weight: 600;
-                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                        */
     </style>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])

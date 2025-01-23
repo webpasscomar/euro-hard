@@ -97,7 +97,7 @@ class GalleryController extends Controller
           Storage::disk('public')->delete('galleries/' . $gallery->image);
         }
         // crear el nombre de la imágen
-        $id = Gallery::max('id') + 1;
+        $id = $gallery->id;
         $originalName = $request->file('image')->getClientOriginalName();
         $image_name = $id . '_gallery_' . $originalName;
         // Guardar la imágen en Storage

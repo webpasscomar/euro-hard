@@ -1,31 +1,40 @@
 <?php
 
-namespace App\Livewire\Components;
+  namespace App\Livewire\Components;
 
-use Illuminate\Database\Eloquent\Model;
-use Livewire\Component;
+  use App\Models\ProductCategory;
+  use Illuminate\Database\Eloquent\Model;
+  use Livewire\Component;
 
-class ToggleButton extends Component
-{
-  public Model $model;
-  public string $field;
-  public bool $active;
-
-  public function mount()
+  class ToggleButton extends Component
   {
-    $this->active = (bool)$this->model->getAttribute($this->field);
-  }
+    public Model $model;
+    public string $field;
+    public bool $active;
 
-  public function render()
-  {
-    return view('livewire.components.toggle-button');
-  }
+    public function mount()
+    {
+      $this->active = (bool)$this->model->getAttribute($this->field);
+    }
 
-  public function updating($field, $value)
-  {
-    $this->model->setAttribute($this->field, $value);
-    $this->model->save();
+    public function render()
+    {
+      return view('livewire.components.toggle-button');
+    }
 
-    // $this->dispatch('change-active');
+    public function updating($field, $value)
+    {
+      $this->model->setAttribute($this->field, $value);
+      $this->model->save();
+
+      if ($this->model instanceof ProductCategory) {
+        if (!$value) {
+          $this->model->inactiveWithRelations();
+          $this->redirect(route('admin.productCategory.index'), navigate: true);
+        } else {
+          $this->model->activeWithRelations();
+          $this->redirect(route('admin.productCategory.index'), navigate: true);
+        };
+      }
+    }
   }
-}

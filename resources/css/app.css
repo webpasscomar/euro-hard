@@ -2,10 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* Color de iconos del sidebar AdminLTE */
 .icon-adminlte {
   color: rgb(255, 136, 136);
+}
+
+.ck.ck-balloon-panel.ck-powered-by-balloon[class*=position_border] {
+  display: none;
 }
 
 /* imágen cuando se muestra el formulario al editar */
@@ -13,8 +16,8 @@
   width: 200px;
   height: 200px;
   min-width: 200px;
-  min-height: 200px;
-  max-width: 200px;
-  max-height: 200px;
+  min-height: 120px;
+  max-width: 120px;
+  max-height: 120px;
   object-fit: cover;
 }

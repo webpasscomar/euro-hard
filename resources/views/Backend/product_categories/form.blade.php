@@ -17,7 +17,8 @@
     <div class="col-md-6">
         <div class="form-group mb-3">
             <label for="image" class="form-label">Imágen</label><span class="fs-4 text-danger">*</span>
-            <input type="file" name="image" id="image" class="form-control" onchange="imagePreview(event)">
+            <input type="file" name="image" id="image" class="form-control"
+                onchange="imageCategoryPreview(event)">
             <p class="ml-1">
                 <small class="text-secondary">Recomendaciones: imágenes jpg , png ó svg de 512px x
                     512px - tamaño máximo de 1mb
@@ -108,7 +109,7 @@
 
 <p class="text-right"><span class="fs-4 text-danger">*</span><small> Campos requeridos</small></p>
 <div class="d-sm-flex gap-3">
-    <div id="imgPreview">
+    <div id="imgCategoriesPreview">
         @isset($productCategory->image)
             @if ($edit)
                 <h6 class="fw-bold">Imágen</h6>
@@ -139,8 +140,8 @@
             console.log(event.target.value);
         };
         //  Vista previa de la imágen
-        const imagePreview = (event) => {
-            const containerPreview = document.querySelector('#imgPreview');
+        const imageCategoryPreview = (event) => {
+            const containerPreview = document.querySelector('#imgCategoriesPreview');
             containerPreview.innerHTML = '';
             const title = document.createElement('h6');
             title.style.fontWeight = 'bold';

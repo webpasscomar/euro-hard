@@ -58,7 +58,7 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="{{ route('admin.galleries.index') }}" wire:navigate class="small-box-footer">Más info <i
+                    <a href="{{ route('admin.galleries.index') }}" class="small-box-footer">Más info <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -76,7 +76,7 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="{{ route('admin.colors.index') }}" wire:navigate class="small-box-footer">Más info <i
+                    <a href="{{ route('admin.colors.index') }}" class="small-box-footer">Más info <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -90,7 +90,7 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="{{ route('admin.productCategory.index') }}" wire:navigate class="small-box-footer">Más info <i
+                    <a href="{{ route('admin.productCategory.index') }}" class="small-box-footer">Más info <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -104,7 +104,8 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.products.index') }}" class="small-box-footer">Más info <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>
