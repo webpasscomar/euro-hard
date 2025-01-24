@@ -19,7 +19,8 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.users.index') }}" class="small-box-footer">Más info <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             {{--      Datos Contacto --}}
@@ -32,7 +33,8 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.contacts.index') }}" class="small-box-footer">Más info <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             {{--      Empresa --}}
@@ -45,7 +47,8 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.company.index') }}" class="small-box-footer">Más info <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             {{--  Galería / Slide --}}
@@ -122,7 +125,8 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.catalogs.index') }}" class="small-box-footer">Más info <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             {{--      Categoria Novedades --}}
@@ -135,7 +139,8 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.noveltyCategory.index') }}" class="small-box-footer">Más info <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             {{--      Novedades --}}
@@ -148,7 +153,8 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.novelties.index') }}" class="small-box-footer">Más info <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             {{--      Suscriptores --}}
@@ -161,7 +167,8 @@
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
-                    <a href="" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('admin.subscribers.index') }}" class="small-box-footer">Más info <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>

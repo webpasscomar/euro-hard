@@ -24,8 +24,8 @@
 {{-- Imágen --}}
 <div class="form-group mb-3">
   <label for="image" class="form-label">Imágen</label><span class="fs-4 text-danger">*</span>
-  <input type="file" name="image" class="form-control" onchange="imagePreview(event)">
-  <p class="ml-1"><small class="text-secondary">Recomendaciones: imágenes jpg , png ó svg de 512px x 512px - tamaño
+  <input type="file" name="image" class="form-control" accept=".png, .svg, .jpg, .jpeg" onchange="imagePreview(event)">
+  <p class="ml-1"><small class="text-secondary">Recomendaciones: jpg , png ó svg de 1920px x 1080px - tamaño
       máximo
       de 1mb</small></p>
   @error('image')
@@ -45,25 +45,25 @@
 
 @push('js')
   <script>
-    // {{-- Vista previa de la imágen --}}
+    // Vista previa de la imágen
     const imagePreview = (event) => {
-    const containerPreview = document.querySelector('#imgPreview');
-    containerPreview.innerHTML = '';
-    const title = document.createElement('h6');
-    title.style.fontWeight = 'bold';
-    title.textContent = 'Vista Previa Imágen';
-    containerPreview.appendChild(title);
-    let reader = new FileReader();
+      const containerPreview = document.querySelector('#imgPreview');
+      containerPreview.innerHTML = '';
+      const title = document.createElement('h6');
+      title.style.fontWeight = 'bold';
+      title.textContent = 'Vista Previa Imágen';
+      containerPreview.appendChild(title);
+      let reader = new FileReader();
 
-    reader.onload = (event) => {
-      const image = document.createElement('img');
-      image.src = event.target.result;
-      image.alt = 'vista previa imágen';
-      image.className = 'img-thumbnail';
-      image.setAttribute('style', `object-fit:cover; width:200px; max-width:200px; min-width:200px;height:200px; min-height:200px; max-height:200px;`);
-      containerPreview.appendChild(image);
-    }
-    reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event) => {
+        const image = document.createElement('img');
+        image.src = event.target.result;
+        image.alt = 'vista previa imágen';
+        image.className = 'img-thumbnail';
+        image.setAttribute('style', `object-fit:cover; width:200px; max-width:200px; min-width:200px;height:120px; min-height:120px; max-height:120px;`);
+        containerPreview.appendChild(image);
+      }
+      reader.readAsDataURL(event.target.files[0]);
     }
   </script>
 @endpush
