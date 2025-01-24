@@ -185,7 +185,7 @@ class ProductController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(ProductRequest $request, Product $product)
+  public function update(ProductRequest $request, Product $product): RedirectResponse
   {
     $request->validated();
 
@@ -358,7 +358,7 @@ class ProductController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Product $product)
+  public function destroy(Product $product): RedirectResponse
   {
     // Comprobar si la imágen principal y las que se encuentren en el storage estén y eliminarlas al eliminar el producto
     if (Storage::disk('public')->exists('products/' . $product->image_main)) {
@@ -392,8 +392,6 @@ class ProductController extends Controller
 
     // Eliminar el producto
     try {
-      $product->colors()->detach();
-      $product->relatedProducts()->detach();
       $product->delete();
       toast('Producto eliminado con éxito', 'success');
       return redirect()->route('admin.products.index');
