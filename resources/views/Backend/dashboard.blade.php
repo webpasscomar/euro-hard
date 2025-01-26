@@ -129,20 +129,6 @@
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-            {{--      Categoria Novedades --}}
-            <div class="col-md-3 col-12">
-                <div class="small-box bg-indigo-500 text-white">
-                    <div class="inner">
-                        <h3>0</h3>
-                        <h5>Categoría Novedades</h5>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-bag"></i>
-                    </div>
-                    <a href="{{ route('admin.noveltyCategory.index') }}" class="small-box-footer">Más info <i
-                            class="fas fa-arrow-circle-right"></i></a>
-                </div>
-            </div>
             {{--      Novedades --}}
             <div class="col-md-3 col-12">
                 <div class="small-box bg-fuchsia-500 text-white">

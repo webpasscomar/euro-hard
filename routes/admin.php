@@ -8,7 +8,6 @@ use App\Http\Controllers\Backend\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\GalleryController;
-use App\Http\Controllers\Backend\NoveltyCategoriesController;
 use App\Http\Controllers\Backend\NoveltyController;
 use App\Http\Controllers\Backend\ProductCategoriesController;
 use App\Http\Controllers\Backend\SubscriberController;
@@ -58,11 +57,6 @@ Route::resource('usuarios', UserController::class)
 Route::resource('catalogos', CatalogController::class)
   ->parameter('catalogos', 'catalog')
   ->names('catalogs');
-
-// Novedades Categoría
-Route::resource('novedades-categoria', NoveltyCategoriesController::class)
-  ->parameter('novedades-categoria', 'noveltyCategory')
-  ->names('noveltyCategory');
 
 
 // Novedades

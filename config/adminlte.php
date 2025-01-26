@@ -345,11 +345,6 @@ return [
       'icon' => 'fas fa-fw fa-book-open',
     ],
     [
-      'text' => 'Categoría Novedades',
-      'route' => 'admin.noveltyCategory.index',
-      'icon' => 'fas fa-fw fa-list-ul',
-    ],
-    [
       'text' => 'Novedades',
       'route' => 'admin.novelties.index',
       'icon' => 'fas fa-fw fa-clock',
