@@ -13,6 +13,10 @@ return new class extends Migration
   {
     Schema::create('novelties', function (Blueprint $table) {
       $table->id();
+      $table->string('title')->unique();
+      $table->text('description');
+      $table->string('image');
+      $table->tinyInteger('status')->default(1);
       $table->timestamps();
       $table->softDeletes();
     });

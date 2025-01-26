@@ -13,6 +13,13 @@ return new class extends Migration
   {
     Schema::create('subscribers', function (Blueprint $table) {
       $table->id();
+      $table->string('firstName');
+      $table->string('lastName');
+      $table->string('company')->nullable();
+      $table->string('phone');
+      $table->string('email')->unique();
+      $table->string('title')->nullable();
+      $table->text('message')->nullable();
       $table->timestamps();
       $table->softDeletes();
     });

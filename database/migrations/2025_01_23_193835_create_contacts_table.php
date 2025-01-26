@@ -13,6 +13,15 @@ return new class extends Migration
   {
     Schema::create('contacts', function (Blueprint $table) {
       $table->id();
+      $table->string('address');
+      $table->string('phone');
+      $table->string('email');
+      $table->string('facebook');
+      $table->string('instagram');
+      $table->string('youtube');
+      $table->string('whatsapp');
+      $table->string('map');
+      $table->tinyInteger('status')->default(1);
       $table->timestamps();
       $table->softDeletes();
     });
