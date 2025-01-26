@@ -10,5 +10,10 @@ class Novelty extends Model
   use SoftDeletes;
 
   protected $table = 'novelties';
-  protected $fillable = [];
+  protected $fillable = [
+    'title',
+    'description',
+    'image',
+    'status'
+  ];
 }
