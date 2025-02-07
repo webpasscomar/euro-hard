@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -14,54 +16,97 @@ class ContactController extends Controller
    */
   public function index(): View
   {
-    return view('Backend.contacts.index');
+    // Confirmar eliminación
+    $title = 'Eliminar contacto?';
+    $description = 'Esta acción no se podrá revertir';
+    confirmDelete($title, $description);
+
+    $contacts = Contact::all();
+    return view('Backend.contacts.index', compact('contacts'));
   }
 
   /**
    * Show the form for creating a new resource.
    */
-  public function create()
+  public function create(): View
   {
-    //
+    return view('Backend.contacts.create');
   }
 
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(ContactRequest $request): RedirectResponse
   {
-    //
-  }
+    $request->validated();
+    try {
+      Contact::create([
+        'address' => $request->input('address'),
+        'phone' => $request->input('phone'),
+        'email' => $request->input('email'),
+        'facebook' => $request->input('facebook'),
+        'instagram' => $request->input('instagram'),
+        'youtube' => $request->input('youtube'),
+        'whatsapp' => $request->input('whatsapp'),
+        'status' => 1
+      ]);
 
-  /**
-   * Display the specified resource.
-   */
-  public function show(Contact $contact)
-  {
-    //
+      toast('Contacto creado correctamente', 'success');
+      return redirect()->route('admin.contacts.index');
+    } catch (\Throwable $th) {
+      //dd($th);
+      toast('No se pudo crear el contacto', 'error');
+      return redirect()->route('admin.contacts.index');
+    }
   }
 
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(Contact $contact)
+  public function edit(Contact $contact): View
   {
-    //
+    return view('Backend.contacts.edit', compact('contact'));
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, Contact $contact)
+  public function update(ContactRequest $request, Contact $contact): RedirectResponse
   {
-    //
+    $request->validated();
+    try {
+      $contact->update([
+        'address' => $request->input('address'),
+        'phone' => $request->input('phone'),
+        'email' => $request->input('email'),
+        'facebook' => $request->input('facebook'),
+        'instagram' => $request->input('instagram'),
+        'youtube' => $request->input('youtube'),
+        'whatsapp' => $request->input('whatsapp'),
+      ]);
+
+      toast('Contacto actualizado correctamente', 'success');
+      return redirect()->route('admin.contacts.index');
+    } catch (\Throwable $th) {
+      dd($th);
+      toast('No se pudo actualizar el contacto', 'error');
+      return redirect()->route('admin.contacts.index');
+    }
   }
 
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(Contact $contact)
+  public function destroy(Contact $contact): RedirectResponse
   {
-    //
+    try {
+      $contact->delete();
+      toast('Contacto eliminado correctamente', 'success');
+      return redirect()->route('admin.contacts.index');
+    } catch (\Throwable $th) {
+      //dd($th);
+      toast('No se pudo eliminar el contacto', 'error');
+      return redirect()->route('admin.contacts.index');
+    }
   }
 }
