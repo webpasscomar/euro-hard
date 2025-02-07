@@ -135,7 +135,7 @@ class GalleryController extends Controller
       toast('La imágen se eliminó correctamente', 'success');
       return redirect(route('admin.galleries.index'));
     } catch (\Throwable $th) {
-      dd($th);
+      // dd($th);
       toast('No se pudo eliminar la imágen', 'error');
       return redirect(route('admin.galleries.index'));
     }
