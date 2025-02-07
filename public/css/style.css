@@ -96,6 +96,9 @@ body {
 .cleared {
     clear: both;
 }
+.negro {
+    color: var(--negro);
+}
 .blanco {
     color: var(--blanco);
 }
@@ -143,6 +146,13 @@ body {
 }
 .bold {
     font-weight: var(--FWBold);
+}
+a.link-breadcrumb {
+    color: var(--gris);
+    text-decoration: none;
+}
+a.link-breadcrumb:hover {
+    color: var(--negro);
 }
 /* fin de GENERAL */
 
@@ -414,6 +424,7 @@ h1.title-carrusel {
 .title-category {
     border-bottom: solid 1px var(--gris);
     margin: 32px 0 16px 0;
+    font-weight: var(--FWLight);
 }
 .content-cat {
     cursor: pointer;
@@ -879,8 +890,171 @@ img.icon-EH-hero {
 /* --fin de CARRUSEL CATEGORIA */
 /* -fin de CATEGORIA */
 
+/* -LISTADO DE PRODUCTOS */
+.content-product {
+    position: relative;
+}
+.card-new {
+    position: absolute;
+    width: 72px;
+    height: 40px;
+    background: url(../images/back-new.svg);
+    z-index: 999;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding: 5px 0 0 0;
+    color: var(--blanco);
+    font-size: 14px;
+    right: 1rem;
+}
+.carrusel-product .carousel-item {
+    height: 350px;
+}
+.title-product {
+    font-size: 22px;
+    font-weight: var(--FWBold);
+    line-height: var(--LHExpandSmall);
+    color: var(--negro);
+    margin: 0 0 32px 0;
+}
+.description-product {
+    font-size: 18px;
+    font-weight: var(--FWLight);
+    line-height: var(--LHExpandSmall);
+    color: var(--negro);
+}
+.content-btn-products {
+    position: absolute;
+    bottom: 2rem;
+}
+a.btn-rojo {
+    background: var(--eurohard);
+    color: var(--blanco);
+    border: none;
+    padding: 8px 28px;
+    font-size: 18px;
+    margin: 0 4px;
+    text-decoration: none;
+    text-align: center;
+}
+a.btn-gris {
+    background: var(--gris);
+    color: var(--blanco);
+    border: none;
+    padding: 8px 28px;
+    font-size: 18px;
+    margin: 0 4px;
+    text-decoration: none;
+    text-align: center;
+}
+a.btn-rojo:hover,
+a.btn-gris:hover {
+    background: var(--negro);
+}
+/* -fin de LISTADO DE PRODUCTOS */
 
 
+/* -DETALLE DEL PRODUCTO */
+.content-product-plano {
+    padding: 2.5rem 64px !important;
+    position: relative;
+}
+.content-img-plano-products {
+    margin: 32px 0 0;
+}
+.img-plano-product {
+    width: 100%;
+}
+.content-btn-detalle-products {
+    position: absolute;
+    bottom: 2rem;
+    width: calc(100% - 128px);
+    text-align: center;
+}
+.card-new-line {
+    position: absolute;
+    width: 72px;
+    height: 40px;
+    background: url(../images/back-new-line.svg);
+    z-index: 999;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding: 5px 0 0 0;
+    color: var(--eurohard);
+    font-size: 14px;
+    right: 1rem;
+    top: -32px;
+}
+table.table.table-details {
+    border-color: var(--gris) !important;
+}
+.table-details th {
+    background: #CCCCCC !important;
+    color: var(--gris) !important;
+    font-weight: var(--FWMedium) !important;
+}
+.table-details td.destacado {
+    background: #E1E1E1 !important;
+}
+/* -fin de DETALLE DEL PRODUCTO */
+
+/* -LISTADO NOVEDADES */
+.content-btn-nove {
+    position: relative;
+    display: block;
+    margin: 24px 0;
+}
+.description-nove {
+    font-size: 16px;
+    font-weight: var(--FWLight);
+    line-height: var(--LHExpandSmall);
+    color: var(--negro);
+}
+/* -fin de LISTADO NOVEDADES */
+
+/* -CONTACTO */
+.img-overlay-contacto {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+    display: block;
+    position: absolute;
+    width: 50%;
+    left: 0;
+    top: 0;
+    height: 100%;
+}
+.contact-content {
+    margin: 0 0 16px;
+    padding: 16px 8px;
+}
+.content-colum-contact-izq {
+    padding: 32px 8px 0 128px;
+}
+.content-colum-contact-der {
+    padding: 32px 128px 0 8px;
+}
+select.form-select.contact-content {
+    color: var(--gris);
+    border: solid 1px var(--gris);
+    border-radius: 0;
+}
+textarea.form-control.contact-content {
+    color: var(--gris);
+    border: solid 1px var(--gris);
+    border-radius: 0;
+}
+button.btn.btn-primary.btn-contact {
+    float: right;
+    background: var(--eurohard);
+    border: none;
+    border-radius: 0;
+    padding: 8px 64px;
+}
+button.btn.btn-primary.btn-contact:hover {
+    background: var(--negro);
+}
+/* -fin de CONTACTO */
 
 /* RESPONSIVE CSS
 -------------------------------------------------- */
@@ -1001,6 +1175,12 @@ img.icon-EH-hero {
     .owl-carousel .owl-nav button.owl-next {
         right: -20px;
     }
+    .content-colum-contact-izq {
+        padding: 32px 64px 0;
+    }
+    .content-colum-contact-der {
+        padding: 0 64px;
+    }
 
 }
 
@@ -1034,5 +1214,38 @@ img.icon-EH-hero {
     .owl-carousel .owl-nav button.owl-next::before {
         width: 16px;
         height: 60px;
+    }
+    .content-btn-products {
+        position: relative;
+        margin: 24px 0 0 0;
+        bottom: 0;
+    }
+    .content-product-plano {
+        padding: 1.5rem !important;
+    }
+    .content-table {
+        font-size: 14px;
+        word-break: break-word;
+    }
+    .content-btn-detalle-products {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+    a.btn-rojo {
+        margin: 4px;
+        display: block;
+        width: 100%;
+    }
+    a.btn-gris {
+        margin: 4px;
+        display: block;
+        width: 100%;
+    }
+    .content-colum-contact-izq {
+        padding: 32px 24px 0;
+    }
+    .content-colum-contact-der {
+        padding: 0 24px;
     }
 }

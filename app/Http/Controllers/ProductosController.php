@@ -8,11 +8,11 @@ class ProductosController extends Controller
 {
     public function index()
     {
-        return view('home');
+        return view('productos');
     }
 
     public function categorias()
     {
-        return view('productos-categorias');
+        return view('categorias');
     }
 }

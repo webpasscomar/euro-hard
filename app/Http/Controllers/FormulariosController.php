@@ -8,6 +8,6 @@ class FormulariosController extends Controller
 {
     public function index()
     {
-        return view('home');
+        return view('formularios');
     }
 }
