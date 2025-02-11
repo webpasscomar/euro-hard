@@ -59,6 +59,7 @@ class ProductCategoriesController extends Controller
       ProductCategory::create([
         'name' => $request->input('name'),
         'color' => $request->input('color'),
+        'slug' => $request->input('slug'),
         'image' => $image_name,
         'banner' => $banner_name,
         'status' => 1,
@@ -130,6 +131,7 @@ class ProductCategoriesController extends Controller
       $productCategory->update([
         'name' => $request->input('name'),
         'color' => $request->input('color'),
+        'slug' => $request->input('slug'),
         'image' => $image_name,
         'banner' => $banner_name,
         'categoryParent_id' => $request->input('categoryParent_id'),
