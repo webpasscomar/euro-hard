@@ -56,6 +56,7 @@
         <label for="whatsapp" class="form-label">Whatsapp</label>
         <input type="whatsapp" name="whatsapp" id="whatsapp" class="form-control"
             value="{{ old('whatsapp', $contact->whatsapp ?? '') }}">
+        <small class="text-secondary d-block">Ejemplo: 5491123456789</small>
         @error('whatsapp')
             <span class="ms-1 text-danger">{{ $message }}</span>
         @enderror

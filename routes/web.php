@@ -22,3 +22,6 @@ Route::get('/instructivos', [InstructivosController::class, 'index'])->name('ins
 Route::get('/novedades', [NovedadesController::class, 'index'])->name('novedades');
 Route::get('/formularios', [FormulariosController::class, 'index'])->name('formularios');
 Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
+
+// Envio de formulario de contacto
+Route::post('contacto', [ContactoController::class,'store'])->name('contacto.store');
