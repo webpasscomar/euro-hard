@@ -5,27 +5,24 @@ services:
     build: ./
     ports:
       - 80:80
-      # - 443:443
-      # - 5173:5173
     working_dir: /
-    image: eurohaard_app
+    image: eurohard_app
     volumes:
       - ./:/var/www/html
     depends_on:
       - db
     networks:
       - app-network
-    # command: bash -c "php /var/www/html/artisan migrate:fresh --seed && php-fpm"
 
   db:
     image: mariadb:10.8
     ports:
       - 3306:3306
     environment:
-      MYSQL_DATABASE: eurohaard
-      MYSQL_ROOT_PASSWORD: eurohaard
-      MYSQL_PASSWORD: eurohaard
-      MYSQL_USER: eurohaard
+      MYSQL_DATABASE: eurohard
+      MYSQL_ROOT_PASSWORD: eurohard
+      MYSQL_PASSWORD: eurohard
+      MYSQL_USER: eurohard
     volumes:
       - ./database_local:/var/lib/mysql
     networks:
@@ -35,8 +32,8 @@ services:
     image: phpmyadmin:5.1.1
     environment:
       PMA_HOST: db
-      PMA_USER: eurohaard
-      PMA_PASSWORD: eurohaard
+      PMA_USER: eurohard
+      PMA_PASSWORD: eurohard
     ports:
       - 8080:80
     networks:
