@@ -25,90 +25,44 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6 p-4">
-          <div class="row">
-            <div class="col-lg-6 col-md-6 p-3 content-product">
-              <div class="content-img-instructivo">
-                <img src="images/instructivo-01.jpg" class="d-block w-100" alt="...">
+        @forelse($products as $product)
+          <div class="col-lg-6 p-4">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 p-3 content-product">
+                <div class="content-img-instructivo">
+                  <img
+                    src="{{$product->image_main && file_exists(public_path('storage/products/'.$product->image_main)) ? asset('storage/products/'. $product->image_main):asset('img/no_disponible.jpg')}}"
+                    class="d-block w-100" alt="...">
+                </div>
               </div>
-            </div>
-            <div class="col-lg-6 col-md-6 p-3 content-product">
-              <div class="title-product">
-                FRENTE INTERNO PARA CAJÓN DOBLE
-              </div>
-              <div class="description-product">
-                EHLDPFB1110
-              </div>
-              <div class="content-btn-products">
-                <a class="btn-rojo" href="producto-001.php">PDF</a>
-                <a class="btn-gris" href="#">Video</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6 p-4">
-          <div class="row">
-            <div class="col-lg-6 col-md-6 p-3 content-product">
-              <div class="content-img-instructivo">
-                <img src="images/instructivo-01.jpg" class="d-block w-100" alt="...">
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 p-3 content-product">
-              <div class="title-product">
-                FRENTE INTERNO PARA CAJÓN DOBLE
-              </div>
-              <div class="description-product">
-                EHLDPFB1110
-              </div>
-              <div class="content-btn-products">
-                <a class="btn-rojo" href="producto-001.php">PDF</a>
-                <a class="btn-gris" href="#">Video</a>
+              <div class="col-lg-6 col-md-6 p-3 content-product">
+                <div class="title-product">
+                  {{ Str::title($product->name)}}
+                </div>
+                <div class="description-product">
+                  {{ Str::ucfirst($product->description)}}
+                </div>
+                <div class="content-btn-products">
+                  <a class="btn-rojo" href="{{asset('storage/products/'.$product->instruction_file)}}" download>PDF</a>
+                  @unless($product->video == null)
+                    {{--                    <a class="btn-gris" href="#">Video</a>--}}
+                    <button type="button" class="btn-gris" data-bs-toggle="modal"
+                            data-bs-target="#modalVideo{{$product->id}}">
+                      Video
+                    </button>
+                    <x-modal-youtube :id="$product->id" :video-url="$product->video"/>
+                  @endunless
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-6 p-4">
+        @empty
           <div class="row">
-            <div class="col-lg-6 col-md-6 p-3 content-product">
-              <div class="content-img-instructivo">
-                <img src="images/instructivo-01.jpg" class="d-block w-100" alt="...">
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 p-3 content-product">
-              <div class="title-product">
-                FRENTE INTERNO PARA CAJÓN DOBLE
-              </div>
-              <div class="description-product">
-                EHLDPFB1110
-              </div>
-              <div class="content-btn-products">
-                <a class="btn-rojo" href="producto-001.php">PDF</a>
-                <a class="btn-gris" href="#">Video</a>
-              </div>
+            <div class="col">
+              <h2 class="mt-3 fs-5 text-center">No hay productos disponibles</h2>
             </div>
           </div>
-        </div>
-        <div class="col-lg-6 p-4">
-          <div class="row">
-            <div class="col-lg-6 col-md-6 p-3 content-product">
-              <div class="content-img-instructivo">
-                <img src="images/instructivo-01.jpg" class="d-block w-100" alt="...">
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 p-3 content-product">
-              <div class="title-product">
-                FRENTE INTERNO PARA CAJÓN DOBLE
-              </div>
-              <div class="description-product">
-                EHLDPFB1110
-              </div>
-              <div class="content-btn-products">
-                <a class="btn-rojo" href="producto-001.php">PDF</a>
-                <a class="btn-gris" href="#">Video</a>
-              </div>
-            </div>
-          </div>
-        </div>
+        @endforelse
       </div>
     </div>
   </div>
