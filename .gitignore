@@ -52,3 +52,5 @@ Homestead.json
 .env.production
 .phpactor.json
 auth.json
+
+database_local/
