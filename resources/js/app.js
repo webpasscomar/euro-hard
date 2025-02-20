@@ -1,8 +1,9 @@
 import 'bootstrap';
 import '@popperjs/core';
 // import './bootstrap';
-
-import $ from 'jquery';
+// import $ from 'jquery';
+import 'owl.carousel/dist/assets/owl.carousel.min.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 import 'owl.carousel';
 import '@fortawesome/fontawesome-free/js/all';
 
@@ -11,10 +12,11 @@ $(document).ready(function () {
     loop: true,
     margin: 10,
     nav: true,
+    dots: true,
     responsive: {
-      0: { items: 1 },
-      600: { items: 2 },
-      1000: { items: 4 }
+      0: {items: 1},
+      600: {items: 2},
+      1000: {items: 4}
     }
   });
 });

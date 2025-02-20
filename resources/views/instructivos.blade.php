@@ -45,7 +45,6 @@
                 <div class="content-btn-products">
                   <a class="btn-rojo" href="{{asset('storage/products/'.$product->instruction_file)}}" download>PDF</a>
                   @unless($product->video == null)
-                    {{--                    <a class="btn-gris" href="#">Video</a>--}}
                     <button type="button" class="btn-gris" data-bs-toggle="modal"
                             data-bs-target="#modalVideo{{$product->id}}">
                       Video

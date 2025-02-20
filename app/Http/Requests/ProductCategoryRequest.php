@@ -48,7 +48,11 @@ class ProductCategoryRequest extends FormRequest
         Rule::unique('product_categories', 'slug')->ignore($put ? $id : null)
       ],
       'image' => $put ? 'image|mimes:jpeg,png,jpg,svg|max:1024' : 'required|image|mimes:jpeg,png,jpg,svg|max:1024',
-      'color' => 'required|string',
+      'color' => [
+        'required',
+        'string',
+        Rule::exists('colors', 'color')
+      ],
       'categoryParent_id' => [
         'nullable',
         'integer',
@@ -68,14 +72,14 @@ class ProductCategoryRequest extends FormRequest
       'name.required' => 'Ingrese un nombre',
       'name.string' => 'Ingrese un nombre válido',
       'name.min' => 'Ingrese un mínimo de 3 caracteres',
+      'name.max' => 'La cantidad de caracteres no debe ser mayor a 255',
+      'name.unique' => 'El nombre ya existe',
       'slug.required' => 'Ingrese un slug',
       'slug.string' => 'Ingrese un slug válido',
       'slug.regex' => 'Ingrese un slug válido',
       'slug.min' => 'Ingrese un mínimo de 3 caracteres',
       'slug.unique' => 'El slug ya existe',
       'slug.max' => 'La cantidad de caracteres no debe ser mayor a 100',
-      'min.max' => 'La cantidad de caracteres no debe ser mayor a 255',
-      'min.unique' => 'El nombre ya existe',
       'image.required' => 'Ingrese una imágen',
       'image.image' => 'Ingrese una imágen válida',
       'image.mimes' => 'Ingrese una imágen válida',
@@ -86,6 +90,7 @@ class ProductCategoryRequest extends FormRequest
       'banner.max' => 'La imágen no debe ser mayor a 1Mb',
       'color.string' => 'Ingrese un color válido',
       'color.required' => 'Ingrese un color',
+      'color.exists' => 'El color no existe',
     ];
   }
 }
