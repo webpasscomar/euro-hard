@@ -13,20 +13,6 @@
 
   Auth::routes();
 
-<<<<<<< HEAD
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/empresa', [EmpresaController::class, 'index'])->name('empresa');
-Route::get('/productos', [ProductosController::class, 'index'])->name('productos');
-Route::get('/productos/categorias/{productoCategoria}', [ProductosController::class, 'categorias'])->name('productos.categorias');
-Route::get('/catalogo', [CatalogoController::class, 'index'])->name('catalogo');
-Route::get('/instructivos', [InstructivosController::class, 'index'])->name('instructivos');
-Route::get('/novedades', [NovedadesController::class, 'index'])->name('novedades');
-Route::get('/formularios', [FormulariosController::class, 'index'])->name('formularios');
-Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
-
-// Envio de formulario de contacto
-Route::post('contacto', [ContactoController::class, 'store'])->name('contacto.store');
-=======
   Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
   Route::get('/empresa', [EmpresaController::class, 'index'])->name('empresa');
   Route::get('/productos', [ProductosController::class, 'productosGeneral'])->name('productos');
@@ -41,4 +27,4 @@ Route::post('contacto', [ContactoController::class, 'store'])->name('contacto.st
 
 // Envio de formulario de contacto
   Route::post('contacto', [ContactoController::class, 'store'])->name('contacto.store');
->>>>>>> EH-27
+

@@ -5,14 +5,19 @@
     <div class="container-slider">
       <div id="carouselExampleAutoplaying" class="carousel slide mb-6" data-bs-ride="carousel">
         <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1"
-            aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2"
-            aria-label="Slide 3"></button>
-          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="3"
-            aria-label="Slide 4"></button>
+          @for($i = 0; $i < count($sliders); $i++)
+            <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="{{$i}}"
+                    class="{{ $i == 0 ? 'active' :'' }}"
+                    aria-current="true" aria-label="Slide {{$i}}">
+            </button>
+
+          @endfor
+          {{--          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="1"--}}
+          {{--                  aria-label="Slide 2"></button>--}}
+          {{--          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="2"--}}
+          {{--                  aria-label="Slide 3"></button>--}}
+          {{--          <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="3"--}}
+          {{--                  aria-label="Slide 4"></button>--}}
         </div>
         <div class="carousel-inner">
           {{-- <div class="carousel-item active" data-bs-interval="5000">
@@ -77,19 +82,19 @@
           </div> --}}
           @foreach ($sliders as $slider)
             <div class="carousel-item {{ $loop->first ? 'active' : '' }}" data-bs-interval="5000">
-              <div style="background: url('{{ asset('public/storage/galleries/' . $slider->image) }}'');"
+              <div
+                style="background: url({{ $slider->image && file_exists(public_path('storage/galleries/'. $slider->image)) ? asset('storage/galleries/' . $slider->image) : asset('img/Imagen-no-disponible.png') }});"
                 class="bd-placeholder-img" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                 preserveAspectRatio="xMidYMid slice" focusable="false">
-
                 <div class="img-overlay"></div>
               </div>
               <div class="container">
-                <img src="{{ asset('storage/gallery/' . $slider->image) }}" alt="{{ $slider->title }}">
+                <img src="{{ asset('storage/galleries/' . $slider->image) }}" alt="{{ $slider->title }}">
                 <div class="carousel-caption text-start carousel-content-info">
                   <div class="content-icon-EH">
-                    <img src="images/icono-EH.svg" class="icon-EH">
+                    <img src="{{asset('images/icono-EH.svg')}}" class="icon-EH">
                   </div>
-                  <h1 class="title-carrusel">{{ $slider->title }}</h1>
+                  <h1 class="title-carrusel">{{ Str::title($slider->title) }}</h1>
                 </div>
               </div>
             </div>
@@ -115,11 +120,14 @@
       </div>
       <div class="row">
         @foreach ($categoriasPadre as $categoria)
+          @php
+            $categoriaImage = $categoria->image && file_exists(public_path('storage/product_categories/'.$categoria->image)) ? asset('storage/product_categories/'.$categoria->image) : asset('img/no_disponible.jpg');
+          @endphp
           <div class="col-lg-3 col-md-6 col-sm-12 p-3">
             <div class="content-cat">
               {{-- {{ route('noticia.show', [$noticia->categoria->slug, $noticia->slug]) }} --}}
               <a href="{{ route('productos.categorias', [$categoria->slug]) }}" class="link-mas-info">
-                <div class="img-content-cat4">
+                <div class="img-content-cat" style="background-image: url({{$categoriaImage}})">
                   <div class="title-cat-column">
                     {{ $categoria->name }}
                   </div>

@@ -8,13 +8,22 @@
           <div class="content-icon-EH-hero">
             <img src="{{ asset('images/icono-EH-gris.svg') }}" class="icon-EH-hero">
           </div>
-          <h1 class="title-hero">{{ Str::title($subcategoria->name) }}</h1>
+          @empty($subcategoria)
+            <h1 class="title-hero">{{ Str::title($categoria->name) }}</h1>
+          @else
+            <h1 class="title-hero">{{ Str::title($subcategoria->name) }}</h1>
+          @endempty
         </div>
       </div>
       <div class="img-hero">
         <div class="img-overlay"></div>
-        <img
-          src="{{ $subcategoria->image && file_exists(public_path('storage/product_categories/'.$subcategoria->banner)) ? asset('storage/product_categories/'.$subcategoria->banner) : asset('img/Imagen-no-disponible.png') }}">
+        @empty($subcategoria)
+          <img
+            src="{{ $categoria->image && file_exists(public_path('storage/product_categories/'.$categoria->banner)) ? asset('storage/product_categories/'.$categoria->banner) : asset('img/Imagen-no-disponible.png') }}">
+        @else
+          <img
+            src="{{ $subcategoria->image && file_exists(public_path('storage/product_categories/'.$subcategoria->banner)) ? asset('storage/product_categories/'.$subcategoria->banner) : asset('img/Imagen-no-disponible.png') }}">
+        @endempty
       </div>
     </div>
     <div class="container">
@@ -23,8 +32,9 @@
           <h5 class="title-category gris">
             <a href="{{route('home')}}" class="link-breadcrumb">Categorías </a> - <a
               href="{{route('productos.categorias',$categoria->slug)}}"
-              class="link-breadcrumb">{{ Str::title($categoria->name) }}</a>
-            - <span class="negro">{{ Str::title($subcategoria->name)  }}</span>
+              class="link-breadcrumb">{{ Str::title($categoria->name) }}</a>@unless(empty($subcategoria))
+              - <span class="negro">{{ Str::title($subcategoria->name)  }}</span>
+            @endunless
           </h5>
         </div>
       </div>
@@ -66,8 +76,10 @@
                     @for($i=1; $i<=6; $i++)
                       @if(!empty($producto->{'image_'.$i}))
                         <div class="carousel-item">
-                          <img src="{{asset('storage/products/'.$producto->{'image_'.$i})}}" class="d-block w-100"
-                               alt="{{$producto->name}}">
+                          <img
+                            src="{{$producto->{'image_'.$i} && file_exists(public_path('storage/products/'. $producto->{'image_'.$i})) ? asset('storage/products/'.$producto->{'image_'.$i}) : asset('img/no_disponible.jpg')}}"
+                            class="d-block w-100"
+                            alt="{{$producto->name}}">
                         </div>
                       @endif
                     @endfor
@@ -82,7 +94,9 @@
                   {{Str::ucfirst($producto->description)}}
                 </div>
                 <div class="content-btn-products">
-                  <a class="btn-rojo" href="{{ asset('storage/products/'.$producto->datasheet_file)}}" target="_blank">Ficha
+                  <a class="btn-rojo"
+                     href="{{ $producto->datasheet_file && file_exists(public_path('storage/products/'. $producto->datasheet_file)) ? asset('storage/products/'.$producto->datasheet_file) : '#'}}"
+                     @if(!empty($producto->datasheet_file)) target="_blank" @endif>Ficha
                     técnica</a>
                   @if($producto->video)
                     <button type="button" class="btn-gris" data-bs-toggle="modal"

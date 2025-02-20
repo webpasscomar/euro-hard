@@ -516,6 +516,10 @@ h1.title-carrusel {
   cursor: pointer;
 }
 
+.content-cat:hover .img-content-cat {
+  background-size: 150%;
+}
+
 .content-cat:hover .img-content-cat1 {
   background-size: 150%;
 }
@@ -532,16 +536,27 @@ h1.title-carrusel {
   background-size: 150%;
 }
 
-/*.img-content-cat1 {*/
-/*  !*background: url(../../public/images/cat-coc-lav.png);*!*/
-/*  height: 370px;*/
-/*  background-repeat: no-repeat;*/
-/*  background-size: 120%;*/
-/*  padding: 20px 25px;*/
-/*  position: relative;*/
-/*  background-position: center;*/
-/*  transition: all 0.3s ease-in-out;*/
-/*}*/
+.img-content-cat {
+  /*background: url(../../public/images/cat-coc-lav.png);*/
+  height: 370px;
+  background-repeat: no-repeat;
+  background-size: 120%;
+  padding: 20px 25px;
+  position: relative;
+  background-position: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.img-content-cat1 {
+  /*background: url(../../public/images/cat-coc-lav.png);*/
+  height: 370px;
+  background-repeat: no-repeat;
+  background-size: 120%;
+  padding: 20px 25px;
+  position: relative;
+  background-position: center;
+  transition: all 0.3s ease-in-out;
+}
 
 .img-content-cat2 {
   background: url(../../public/images/cat-liv.png);
