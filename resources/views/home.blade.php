@@ -15,7 +15,7 @@
             aria-label="Slide 4"></button>
         </div>
         <div class="carousel-inner">
-          <div class="carousel-item active" data-bs-interval="5000">
+          {{-- <div class="carousel-item active" data-bs-interval="5000">
             <div style="background: url(images/slider-home-1.jpg);" class="bd-placeholder-img"
               xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice"
               focusable="false">
@@ -74,16 +74,35 @@
                 <h1 class="title-carrusel">Living</h1>
               </div>
             </div>
-          </div>
+          </div> --}}
+          @foreach ($sliders as $slider)
+            <div class="carousel-item {{ $loop->first ? 'active' : '' }}" data-bs-interval="5000">
+              <div style="background: url('{{ asset('public/storage/galleries/' . $slider->image) }}'');"
+                class="bd-placeholder-img" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                preserveAspectRatio="xMidYMid slice" focusable="false">
+
+                <div class="img-overlay"></div>
+              </div>
+              <div class="container">
+                <img src="{{ asset('storage/gallery/' . $slider->image) }}" alt="{{ $slider->title }}">
+                <div class="carousel-caption text-start carousel-content-info">
+                  <div class="content-icon-EH">
+                    <img src="images/icono-EH.svg" class="icon-EH">
+                  </div>
+                  <h1 class="title-carrusel">{{ $slider->title }}</h1>
+                </div>
+              </div>
+            </div>
+          @endforeach
         </div>
         <!--<button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>-->
+                                                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                      <span class="visually-hidden">Previous</span>
+                                                  </button>
+                                                  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                                                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                      <span class="visually-hidden">Next</span>
+                                                  </button>-->
       </div>
     </div>
     <div class="container">
@@ -95,7 +114,31 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-12 p-3">
+        @foreach ($categoriasPadre as $categoria)
+          <div class="col-lg-3 col-md-6 col-sm-12 p-3">
+            <div class="content-cat">
+              {{-- {{ route('noticia.show', [$noticia->categoria->slug, $noticia->slug]) }} --}}
+              <a href="{{ route('productos.categorias', [$categoria->slug]) }}" class="link-mas-info">
+                <div class="img-content-cat4">
+                  <div class="title-cat-column">
+                    {{ $categoria->name }}
+                  </div>
+                </div>
+                <div class="footer-content-cat-home">
+                  <div class="color-cat">
+                    <div class="cat-color-line-soporte"></div>
+                    <div class="cat-color-line-conexion"></div>
+                    <div class="cat-color-line-productividad"></div>
+                  </div>
+                  <div class="btn-mas-info">
+                    + info
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        @endforeach
+        {{-- <div class="col-lg-3 col-md-6 col-sm-12 p-3">
           <div class="content-cat">
             <a href="cocina&lavadero.php" class="link-mas-info">
               <div class="img-content-cat1">
@@ -183,7 +226,7 @@
               </div>
             </a>
           </div>
-        </div>
+        </div> --}}
       </div>
     </div>
   </div>

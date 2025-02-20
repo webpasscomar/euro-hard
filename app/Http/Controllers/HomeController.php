@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gallery;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // $this->middleware('auth');
-    }
+
 
     /**
      * Show the application dashboard.
@@ -23,6 +17,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $sliders = Gallery::get();
+        // $categoriasPadre = ProductCategory::get();
+        $categoriasPadre = ProductCategory::whereNull('categoryParent_id')
+        ->where('status', 1)
+        ->get();
+
+        return view('home', compact('sliders', 'categoriasPadre'));
     }
 }
