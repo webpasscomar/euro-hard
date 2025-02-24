@@ -54,3 +54,4 @@ Homestead.json
 auth.json
 
 database_local/
+composer.phar
