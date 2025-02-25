@@ -22,7 +22,7 @@ class GalleryController extends Controller
     confirmDelete($title, $text);
 
     $slides = Gallery::all();
-    return view('backend.galleries.index', compact('slides'));
+    return view('Backend.galleries.index', compact('slides'));
   }
 
   /**
@@ -30,7 +30,7 @@ class GalleryController extends Controller
    */
   public function create(): View
   {
-    return View('backend.galleries.create');
+    return View('Backend.galleries.create');
   }
 
   /**
