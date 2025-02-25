@@ -1,16 +1,16 @@
 <?php
 
-  namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers\Backend;
 
-  use App\Http\Controllers\Controller;
-  use App\Models\Catalog;
-  use Illuminate\Http\Request;
-  use Illuminate\View\View;
+use App\Http\Controllers\Controller;
+use App\Models\Catalog;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
-  class DashboardController extends Controller
+class DashboardController extends Controller
+{
+  public function index(): View
   {
-    public function index(): View
-    {
-      return view('backend.dashboard');
-    }
+    return view('Backend.dashboard');
   }
+}
