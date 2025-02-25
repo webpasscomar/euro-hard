@@ -11,6 +11,7 @@
     {
       $products = Product::where('instruction_file', '!=', null)
         ->where('status', 1)
+        ->where ('instruction_button', 1)
         ->get();
 
 //      dd($products);

@@ -23,17 +23,17 @@ class ContactoController extends Controller
   {
     $contact = $request->validated();
 
-    $response = NoCaptcha::verifyResponse($request->input('g-recaptcha-response'));
+   // $response = NoCaptcha::verifyResponse($request->input('g-recaptcha-response'));
 
-    if ($response) {
+    //if ($response) {
       Mail::send(new ContactSendEmail($request->input('email'), $request->input('name'), $request->input('lastName')));
       Mail::send(new ContactRecieveEmail($contact));
       toast('Los datos se envíaron correctamente', 'success');
       return redirect()->route('contacto');
-    } else {
-      toast('No se pudo enviar los datos', 'error');
-      return redirect()->route('contacto');
-    };
+   // } else {
+    //  toast('No se pudo enviar los datos', 'error');
+      //return redirect()->route('contacto');
+    //};
 
 
 
