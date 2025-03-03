@@ -10,4 +10,19 @@ class FormulariosController extends Controller
     {
         return view('formularios');
     }
+
+    public function experiencia()
+    {
+        return view('formulario-experiencia');
+    }
+
+    public function distribuidores()
+    {
+        return view('formulario-distribuidores');
+    }
+
+    public function productos()
+    {
+        return view('formulario-productos');
+    }
 }

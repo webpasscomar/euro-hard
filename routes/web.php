@@ -23,6 +23,9 @@ Route::get('/catalogo', [CatalogoController::class, 'index'])->name('catalogo');
 Route::get('/instructivos', [InstructivosController::class, 'index'])->name('instructivos');
 Route::get('/novedades', [NovedadesController::class, 'index'])->name('novedades');
 Route::get('/formularios', [FormulariosController::class, 'index'])->name('formularios');
+Route::get('/formularios/experiencia', [FormulariosController::class, 'experiencia'])->name('formularios.experiencia');
+Route::get('/formularios/distribuidores', [FormulariosController::class, 'distribuidores'])->name('formularios.distribuidores');
+Route::get('/formularios/productos', [FormulariosController::class, 'productos'])->name('formularios.productos');
 Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
 
 // Envio de formulario de contacto
