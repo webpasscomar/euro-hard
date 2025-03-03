@@ -1,4 +1,6 @@
-@import "owl.carousel/dist/assets/owl.carousel.min.css";
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import 'bootstrap/dist/css/bootstrap.min.css';
+/* @import "owl.carousel/dist/assets/owl.carousel.min.css"; */
 
 /* VARIABLES */
 :root {
@@ -383,7 +385,7 @@ input.form-control::placeholder {
   font-size: 22px;
   display: block;
   text-align: center;
-  padding: 7px 0 0;
+  padding: 11px 0 0; /* Posiciona el alto de los iconos redes sociales para que quede centrado */
 }
 
 .icon-WA {
@@ -801,14 +803,11 @@ img.icon-EH-hero {
   left: -40px;
 }
 
-.owl-carousel .owl-nav button.owl-next:hover,
-.owl-carousel .owl-nav button.owl-prev:hover {
-  opacity: 0.5;
-}
+
 
 .owl-carousel .owl-nav button.owl-next::before {
   content: ''; /*unicode for arrow-right*/
-  background: url(../../public/images/angle-der.svg);
+  background: url('../../public/images/angle-der.svg');
   margin-right: 5px;
   background-size: 100%;
   position: absolute;
@@ -831,6 +830,13 @@ img.icon-EH-hero {
   right: 0;
   background-repeat: no-repeat;
 }
+
+.owl-carousel .owl-nav button.owl-next:hover,
+.owl-carousel .owl-nav button.owl-prev:hover {
+  opacity: 0.5;
+  background-color:transparent;
+}
+
 
 .owl-carousel .owl-nav .owl-next [aria-label="Next"],
 .owl-carousel .owl-nav .owl-prev [aria-label="Previous"] {

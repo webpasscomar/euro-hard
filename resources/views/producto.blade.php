@@ -134,7 +134,7 @@
             </div>
             @if (count($producto->relatedProducts) > 0)
                 <div class="p-3">
-                    <h3 class="fw-bold my-5">Productos Relacionados</h3>
+                    <h5 class="fw-bold my-4">Productos Relacionados</h5>
                     <table class="table table-details">
                         <thead>
                             <tr>

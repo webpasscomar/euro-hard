@@ -43,9 +43,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap"
   rel="stylesheet"> --}}
 
+
+
+    {{-- < src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('vendor/owlCarousel/dist/assets/owl.carousel.min.css') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('vendor/owlCarousel/dist/assets/owl.theme.default.min.css') }}"> --}}
+    <!-- Script carrusel -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous">
+    </script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" crossorigin="anonymous"> --}}
+    </script>
     <!-- Scripts -->
     @stack('head')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/style.css', 'resources/js/app.js'])
 
 </head>
 
@@ -66,8 +77,8 @@
 
     @include('layouts.partials.footer')
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/owlCarousel/dist/owl.carousel.min.js') }}"></script>
     @stack('js')
-
 </body>
 
 </html>
