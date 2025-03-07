@@ -17,7 +17,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $sliders = Gallery::get();
+        $sliders = Gallery::where('status', 1)  
+        ->orderBy('order', 'asc')  
+        ->get();
         // $categoriasPadre = ProductCategory::get();
         $categoriasPadre = ProductCategory::whereNull('categoryParent_id')
         ->where('status', 1)

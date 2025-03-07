@@ -1,11 +1,22 @@
 <div class="row">
     {{-- Nombre --}}
-    <div class="col-md-12">
+    <div class="col-md-6">
         <div class="form-group mb-3">
             <label for="name" class="form-label">Nombre</label><span class="fs-4 text-danger">*</span>
             <input type="text" id="name" name="name" class="form-control"
-                value="{{ old('name', $product->name ?? '') }}">
+                value="{{ old('name', $product->name ?? '') }}" onkeyup="autocompleteSlug()">
             @error('name')
+                <span class="ms-1 text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+    {{-- Slug --}}
+    <div class="col-md-6">
+        <div class="form-group mb-3">
+            <label for="slug" class="form-label">Slug</label><span class="fs-4 text-danger">*</span>
+            <input type="text" id="slug" name="slug" class="form-control"
+                value="{{ old('slug', $product->slug ?? '') }}">
+            @error('slug')
                 <span class="ms-1 text-danger">{{ $message }}</span>
             @enderror
         </div>
@@ -136,7 +147,8 @@
 </div>
 {{-- Galerías de imágenes 1,2,3,4,5,6 --}}
 <div class="row">
-    <label class="mt-3 mb-4 fs-5">Galeria de imágenes</label>
+    <label class="mt-3 mb-4 fs-5">Galeria de imágenes <small class="fs-6 text-secondary">( Se deben cargar en el orden
+            correspondiente )</small></label>
     {{--  Imágen 1   --}}
     <div class="col-md-4">
         <div class="form-group mb-3">
@@ -468,5 +480,25 @@
             }
             reader.readAsDataURL(event.target.files[0]);
         };
+        // Generar slug desde el nombre
+        const generateSlug = (name) => {
+            // Convierte a minúsculas
+            let slug = name.toLowerCase();
+
+            // Elimina caracteres especiales y espacios
+            slug = slug.replace(/[^a-z0-9\s-]/g, '');
+            slug = slug.replace(/\s+/g, '-');
+
+            // Ajusta la longitud máxima (opcional)
+            slug = slug.substring(0, 100);
+
+            return slug;
+        }
+        // Escribir el slug automáticamente
+        function autocompleteSlug() {
+            const name = document.querySelector('#name');
+            const slug = document.querySelector('#slug');
+            slug.value = generateSlug(name.value);
+        }
     </script>
 @endpush

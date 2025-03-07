@@ -349,11 +349,11 @@ return [
       'route' => 'admin.novelties.index',
       'icon' => 'fas fa-fw fa-clock',
     ],
-    [
-      'text' => 'Suscriptores',
-      'route' => 'admin.subscribers.index',
-      'icon' => 'fas fa-fw fa-book-reader',
-    ],
+    // [
+    //   'text' => 'Suscriptores',
+    //   'route' => 'admin.subscribers.index',
+    //   'icon' => 'fas fa-fw fa-book-reader',
+    // ],
 
   ],
 

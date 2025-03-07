@@ -125,6 +125,7 @@ class ProductController extends Controller
 
       $product = Product::create([
         'name' => $request->input('name'),
+        'slug' => $request->input('slug'),
         'description' => $request->input('description'),
         'image_main' => $image_main_name,
         'image_1' => $image_1,
@@ -315,6 +316,7 @@ class ProductController extends Controller
       // Actualizar producto
       $product->update([
         'name' => $request->input('name'),
+        'slug' => $request->input('slug'),
         'description' => $request->input('description'),
         'image_main' => $image_main_name,
         'image_1' => $image_1,

@@ -4,7 +4,10 @@
         <div class="form-group mb-3">
             <label for="name" class="form-label">Nombre</label><span class="fs-4 text-danger">*</span>
             <input type="text" id="name" name="name" class="form-control"
-                value="{{ old('name', $productCategory->name ?? '') }}" onkeyup="autocompleteSlug()">
+                value="{{ old('name', $productCategory->name ?? '') }}"
+                @unless ($edit)
+                onkeyup="autocompleteSlug()"
+                @endunless>
             @error('name')
                 <span class="ms-1 text-danger">{{ $message }}</span>
             @enderror
@@ -42,9 +45,7 @@
     {{-- Banner --}}
     <div class="col-md-6 mt-2">
         <div class="form-group mb-3">
-            <label for="banner" class="form-label">Banner</label><small class="ms-2 text-secondary">(Si la
-                categoría
-                es principal se debe cargar el banner)</small>
+            <label for="banner" class="form-label">Banner</label><span class="fs-4 text-danger">*</span>
             <input type="file" id="banner" name="banner" class="form-control" accept=".png, .jpeg, .jpg, .svg"
                 onchange="imageBannerPreview(event)">
             <p class="ml-1">
@@ -195,7 +196,7 @@
 
         const generateSlug = (name) => {
             // Convierte a minúsculas
-            let slug = name.toLowerCase();
+            let slug = name.toLowerCase().trim();
 
             // Elimina caracteres especiales y espacios
             slug = slug.replace(/[^a-z0-9\s-]/g, '');

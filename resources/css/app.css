@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+/* @import '@fortawesome/fontawesome-free/css/all.min.css'; */
+/* @import 'owl.carousel/dist/assets/owl.carousel.css'; */
+/* @import 'owl.carousel/dist/assets/owl.theme.default.css'; */
+/* @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap'); */
 @import 'bootstrap/dist/css/bootstrap.min.css';
-@import 'style.css';
-
-@import '@fortawesome/fontawesome-free/css/all.min.css';
-@import 'owl.carousel/dist/assets/owl.carousel.css';
-@import 'owl.carousel/dist/assets/owl.theme.default.css';
+/* @import 'style.css'; */
 
 @tailwind base;
 @tailwind components;

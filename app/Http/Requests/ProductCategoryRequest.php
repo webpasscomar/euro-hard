@@ -62,7 +62,7 @@ class ProductCategoryRequest extends FormRequest
           }
         }
       ],
-      'banner' => $put && $categoryParent == null && !$banner ? 'required|image|mimes:jpeg,png,jpg,svg|max:1024' : ($categoryParent == null && !$banner ? 'required|image|mimes:jpeg,png,jpg,svg|max:1024' : 'image|mimes:jpeg,png,jpg,svg|max:1024'),
+      'banner' => $put ? 'image|mimes:jpeg,png,jpg,svg|max:1024' : 'required|image|mimes:jpeg,png,jpg,svg|max:1024',
     ];
   }
 

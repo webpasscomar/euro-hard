@@ -23,8 +23,20 @@
             class="nav-link {{ request()->routeIS('instructivos') ? 'active' : '' }}">Instructivos</a></li>
         <li class="nav-item"><a href="{{ route('novedades') }}"
             class="nav-link {{ request()->routeIS('novedades') ? 'active' : '' }}">Novedades</a></li>
-        <li class="nav-item"><a href="{{ route('formularios') }}"
-            class="nav-link {{ request()->routeIS('formularios') ? 'active' : '' }}">Formularios</a></li>
+        {{-- <li class="nav-item"><a href="{{ route('formularios') }}"
+            class="nav-link {{ request()->routeIS('formularios') ? 'active' : '' }}">Formularios</a></li> --}}
+        <!-- Dropdown para Formularios -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle {{ request()->routeIS('formularios') ? 'active' : '' }}" href="#"
+            id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Formularios
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{{ route('formularios.experiencia') }}">Experiencia</a></li>
+            <li><a class="dropdown-item" href="{{ route('formularios.distribuidores') }}">Distribuidores</a></li>
+            <li><a class="dropdown-item" href="{{ route('formularios.productos') }}">Productos</a></li>
+          </ul>
+        </li>
         <li class="nav-item"><a href="{{ route('contacto') }}"
             class="nav-link {{ request()->routeIS('contacto') ? 'active' : '' }}">Contacto</a></li>
         <li class="nav-item"><a href="#" class="nav-link btn-icon-cart"><img

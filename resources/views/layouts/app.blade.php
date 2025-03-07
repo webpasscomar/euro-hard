@@ -11,13 +11,13 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>Euro Hard</title>
+  <title>Euro Hard @yield('title')</title>
 
-  <link rel="icon" type="image/png" href="{{ asset('images/favicon/favicon-96x96.png') }}" sizes="96x96"/>
-  <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon/favicon-96x96.png') }}"/>
-  <link rel="shortcut icon" href="{{ asset('images/favicon/favicon.ico') }}"/>
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon/apple-touch-icon.png') }}"/>
-  <link rel="manifest" href="{{ asset('images/favicon/site.webmanifest') }}"/>
+  <link rel="icon" type="image/png" href="{{ asset('images/favicon/favicon-96x96.png') }}" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon/favicon-96x96.png') }}" />
+  <link rel="shortcut icon" href="{{ asset('images/favicon/favicon.ico') }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon/apple-touch-icon.png') }}" />
+  <link rel="manifest" href="{{ asset('images/favicon/site.webmanifest') }}" />
 
   <!-- Bootstrap core CSS -->
   {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -43,31 +43,42 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap"
   rel="stylesheet"> --}}
 
+
+
+  {{-- < src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script> --}}
+  {{-- <link rel="stylesheet" href="{{ asset('vendor/owlCarousel/dist/assets/owl.carousel.min.css') }}"> --}}
+  {{-- <link rel="stylesheet" href="{{ asset('vendor/owlCarousel/dist/assets/owl.theme.default.min.css') }}"> --}}
+  <!-- Script carrusel -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous">
+  </script>
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script> --}}
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" crossorigin="anonymous"> --}}
+  </script>
   <!-- Scripts -->
   @stack('head')
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  @vite(['resources/css/style.css', 'resources/js/app.js'])
 
 </head>
 
 <body>
 
-@include('layouts.partials.header')
+  @include('layouts.partials.header')
 
 
-<div id="app">
+  <div id="app">
 
-  <main>
-    @yield('content')
-    @include('sweetalert::alert')
-  </main>
+    <main>
+      @yield('content')
+      @include('sweetalert::alert')
+    </main>
 
-</div>
+  </div>
 
 
-@include('layouts.partials.footer')
-<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-@stack('js')
-
+  @include('layouts.partials.footer')
+  <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ asset('vendor/owlCarousel/dist/owl.carousel.min.js') }}"></script>
+  @stack('js')
 </body>
 
 </html>

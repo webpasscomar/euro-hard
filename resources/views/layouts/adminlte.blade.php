@@ -71,9 +71,10 @@
 {{-- Add common CSS customizations --}}
 
 @push('css')
+    <link rel="stylesheet" href="https://fonts.bunny.net/css?family=Nunito" />
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/44.1.0/ckeditor5.css" />
     <style type="text/css">
     </style>
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 @endpush
