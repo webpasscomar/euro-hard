@@ -61,3 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+// Agrega EDU para el Catalogo, revisar !!!
+import $ from "jquery";
+import "turn.js";
+import { getDocument } from "pdfjs-dist";
+
+// Hacer que Turn.js esté disponible globalmente
+window.$ = window.jQuery = $;
+window.turn = $.fn.turn;
