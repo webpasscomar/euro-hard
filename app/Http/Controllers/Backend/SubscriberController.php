@@ -14,7 +14,7 @@ class SubscriberController extends Controller
    */
   public function index(): View
   {
-    return view('Backend.subscribers.index');
+    return view('backend.subscribers.index');
   }
 
   /**

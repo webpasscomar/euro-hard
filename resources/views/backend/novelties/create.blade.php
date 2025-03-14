@@ -16,7 +16,7 @@
             <form action="{{ route('admin.novelties.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 {{-- Incluir formulario de creación / actualización --}}
-                @include('Backend.novelties.form')
+                @include('backend.novelties.form')
 
                 <div class="text-right my-4">
                     <button type="submit" class="btn btn-outline-primary">

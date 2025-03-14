@@ -15,7 +15,7 @@
             <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 {{-- Incluir formulario de creación / actualización --}}
-                @include('Backend.products.form')
+                @include('backend.products.form')
 
                 <div class="text-right my-4">
                     <button type="submit" class="btn btn-outline-primary">

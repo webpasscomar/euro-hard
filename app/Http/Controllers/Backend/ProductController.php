@@ -25,7 +25,7 @@ class ProductController extends Controller
     confirmDelete($title, $text);
 
     $products = Product::all();
-    return view('Backend.products.index', compact('products'));
+    return view('backend.products.index', compact('products'));
   }
 
   /**
@@ -37,7 +37,7 @@ class ProductController extends Controller
     $colors = Color::all();
     $products = Product::where('status', 1)->get();
     $productCategories = ProductCategory::where('status', 1)->get();
-    return view('Backend.products.create', compact('colors', 'products', 'productCategories', 'edit'));
+    return view('backend.products.create', compact('colors', 'products', 'productCategories', 'edit'));
   }
 
   /**
@@ -174,7 +174,7 @@ class ProductController extends Controller
       ->where('id', '!=', $product->id)
       ->get();
 
-    return view('Backend.products.edit', [
+    return view('backend.products.edit', [
       'edit' => true,
       'product' => $product,
       'colors' => $colors,

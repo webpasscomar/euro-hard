@@ -56,4 +56,5 @@ auth.json
 database_local/
 composer.phar
 Dockerfile
-docker-compose.yaml
+docker-compose.yml
+.gitignore
