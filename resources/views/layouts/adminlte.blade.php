@@ -60,7 +60,7 @@
         $(document).ready(function() {
             $('#adminTable').DataTable({
                 language: {
-                    url: '//cdn.datatables.net/plug-ins/2.2.1/i18n/es-MX.json',
+                    url: 'https://cdn.datatables.net/plug-ins/2.2.1/i18n/es-MX.json',
                 },
                 stateSave: true
             });
