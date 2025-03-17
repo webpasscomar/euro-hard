@@ -14,7 +14,7 @@ class CatalogController extends Controller
    */
   public function index(): View
   {
-    return view('Backend.catalogs.index');
+    return view('backend.catalogs.index');
   }
 
   /**

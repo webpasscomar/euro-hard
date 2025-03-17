@@ -80,7 +80,7 @@ class GalleryController extends Controller
    */
   public function edit(Gallery $gallery): View
   {
-    return view('Backend.galleries.edit', compact('gallery'));
+    return view('backend.galleries.edit', compact('gallery'));
   }
 
   /**

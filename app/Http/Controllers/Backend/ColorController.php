@@ -22,7 +22,7 @@ class ColorController extends Controller
     confirmDelete($title, $text);
 
     $colors = Color::all();
-    return view('Backend.colors.index', compact('colors'));
+    return view('backend.colors.index', compact('colors'));
   }
 
   /**
@@ -30,7 +30,7 @@ class ColorController extends Controller
    */
   public function create(): View
   {
-    return view('Backend.colors.create');
+    return view('backend.colors.create');
   }
 
   /**

@@ -62,4 +62,9 @@ class ProductCategory extends Model
       $product->update(['status' => 1]);
     }
   }
+
+  public function getRouteKeyName(): string
+  {
+    return 'slug';
+  }
 }

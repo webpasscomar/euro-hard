@@ -22,7 +22,7 @@ class ContactController extends Controller
     confirmDelete($title, $description);
 
     $contacts = Contact::all();
-    return view('Backend.contacts.index', compact('contacts'));
+    return view('backend.contacts.index', compact('contacts'));
   }
 
   /**
@@ -30,7 +30,7 @@ class ContactController extends Controller
    */
   public function create(): View
   {
-    return view('Backend.contacts.create');
+    return view('backend.contacts.create');
   }
 
   /**
@@ -65,7 +65,7 @@ class ContactController extends Controller
    */
   public function edit(Contact $contact): View
   {
-    return view('Backend.contacts.edit', compact('contact'));
+    return view('backend.contacts.edit', compact('contact'));
   }
 
   /**

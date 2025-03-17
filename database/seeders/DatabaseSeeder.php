@@ -10,19 +10,19 @@ use Database\Seeders\UserTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
-    {
-        
-        $this->call([
-            UserTableSeeder::class,
-            ColorTableSeeder::class,
-            GalleryTableSeeder::class,
-            ProductCategoryTableSeeder::class,
-            NoveltyTableSeeder::class,
-           
-        ]);
-    }
+  /**
+   * Seed the application's database.
+   */
+  public function run(): void
+  {
+
+    $this->call([
+      UserTableSeeder::class,
+      ColorTableSeeder::class,
+      GalleryTableSeeder::class,
+      ProductCategoryTableSeeder::class,
+      NoveltyTableSeeder::class,
+      ContactSeeder::class,
+    ]);
+  }
 }

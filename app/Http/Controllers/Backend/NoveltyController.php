@@ -23,7 +23,7 @@ class NoveltyController extends Controller
     confirmDelete($title, $description);
 
     $novelties = Novelty::all();
-    return view('Backend.novelties.index', compact('novelties'));
+    return view('backend.novelties.index', compact('novelties'));
   }
 
   /**
@@ -32,7 +32,7 @@ class NoveltyController extends Controller
   public function create(): View
   {
     $edit = false;
-    return view('Backend.novelties.create', compact('edit'));
+    return view('backend.novelties.create', compact('edit'));
   }
 
   /**
@@ -72,7 +72,7 @@ class NoveltyController extends Controller
   public function edit(Novelty $novelty): View
   {
     $edit = true;
-    return view('Backend.novelties.edit', compact('novelty', 'edit'));
+    return view('backend.novelties.edit', compact('novelty', 'edit'));
   }
 
   /**

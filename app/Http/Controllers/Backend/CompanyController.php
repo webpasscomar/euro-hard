@@ -14,7 +14,7 @@ class CompanyController extends Controller
    */
   public function index(): View
   {
-    return view('Backend.company.index');
+    return view('backend.company.index');
   }
 
   /**
