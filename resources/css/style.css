@@ -1294,6 +1294,70 @@ button.btn.btn-primary.btn-contact:hover {
 
 /* -fin de CONTACTO */
 
+/* -FORMULARIOS */
+
+.content-colum-form-izq {
+  padding: 32px 128px 0 0px;
+}
+
+label.label-forms {
+  font-size: 16px;
+  font-weight: var(--FWLight);
+  line-height: var(--LHExpandSmall);
+  color: var(--negro);
+  margin: 0 0 8px 0;
+  padding: 0;
+}
+
+.check-content {
+  margin: 0 0 32px 0;
+}
+
+.content-check-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.myinput.large {
+  height: 32px;
+  width: 32px;
+  margin: 0 8px 0 0;
+}
+
+.myinput.large[type="checkbox"]:before {
+  width: 20px;
+  height: 20px;
+}
+
+.myinput.large[type="checkbox"]:after {
+  top: -20px;
+  width: 16px;
+  height: 16px;
+}
+
+button.btn.btn-primary.btn-form {
+  background: var(--eurohard);
+  border: none;
+  border-radius: 0;
+  padding: 8px 64px;
+  width: auto;
+  margin: 24px auto 0;
+}
+
+button.btn.btn-primary.btn-form:hover {
+  background: var(--negro);
+}
+
+.requerido {
+  color: var(--eurohard);
+}
+
+.filas-checkbox {
+  margin-top: 16px !important;
+}
+
+/* -fin de FORMULARIOS */
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 

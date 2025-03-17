@@ -18,7 +18,7 @@ class ProductCategoriesController extends Controller
   public function index(): View
   {
     $productCategories = ProductCategory::all();
-    return view('Backend.product_categories.index', compact('productCategories'));
+    return view('backend.product_categories.index', compact('productCategories'));
   }
 
   /**
@@ -29,7 +29,7 @@ class ProductCategoriesController extends Controller
     $edit = false;
     $productCategories = ProductCategory::where('status', 1)->get();
     $colors = Color::all();
-    return view('Backend.product_categories.create', compact('colors', 'productCategories', 'edit'));
+    return view('backend.product_categories.create', compact('colors', 'productCategories', 'edit'));
   }
 
   /**
@@ -93,7 +93,7 @@ class ProductCategoriesController extends Controller
       ->where('id', '!=', $productCategory->id)
       ->get();
     $edit = true;
-    return view('Backend.product_categories.edit', compact('productCategory', 'colors', 'productCategories', 'edit'));
+    return view('backend.product_categories.edit', compact('productCategory', 'colors', 'productCategories', 'edit'));
   }
 
   /**
