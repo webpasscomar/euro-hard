@@ -38,125 +38,83 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="content-colum-contact-der">
-                        <form class="row" id="sectionForm">
+                        <form action="{{ route('formularios.envio.distribuidores') }}" method="POST" class="row"
+                            id="sectionForm">
+                            @csrf
                             <label class="label-forms">Nombre y apellido <span class="requerido">*</span></label>
-                            <input type="text" class="form-control contact-content" required>
+                            <input type="text"
+                                class="form-control contact-content @error('fullName') is-invalid @enderror" name="fullName"
+                                value="{{ old('fullName') }}">
+                            @error('fullName')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Teléfono <span class="requerido">*</span></label>
-                            <input type="text" class="form-control contact-content" required>
+                            <input type="text" name="phone"
+                                class="form-control contact-content @error('phone') is-invalid @enderror"
+                                value="{{ old('phone') }}">
+                            @error('phone')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Correo electrónico <span class="requerido">*</span></label>
-                            <input type="email" class="form-control contact-content" id="inputEmail4" required>
+                            <input type="email" name="email" value="{{ old('email') }}"
+                                class="form-control contact-content @error('email') is-invalid @enderror" id="inputEmail4">
+                            @error('email')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Marque la opcion correspondiente <span
                                     class="requerido">*</span></label>
                             <div class="check-content">
                                 <div class="check-individual">
                                     <div class="row">
                                         <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Distribuidor" id="checkDistri" value="1"
-                                                class="only-one myinput large"> Es distribuidor
+                                            <input type="checkbox" name="client" id="checkDistri" value="distribuidor"
+                                                @checked(old('client') == 'distribuidor') class="only-one myinput large"> Es distribuidor
                                         </div>
                                         <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="ConsumidorFinal" id="checkConFin" value="2"
-                                                class="only-one myinput large"> Es consumidor final
+                                            <input type="checkbox" name="client" id="checkConFin" value="consumidor final"
+                                                @checked(old('client') == 'consumidor final') class="only-one myinput large"> Es
+                                            consumidor final
                                         </div>
                                         <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Otros" id="checkOtros" value="3"
-                                                class="only-one myinput large">
+                                            <input type="checkbox" name="client" id="checkOtros" value="otros"
+                                                @checked(old('client') == 'otros') class="only-one myinput large">
                                             Otros
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            @error('client')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Provincia en la que comercializa los productos EUROHARD <span
                                     class="requerido">*</span></label>
-                            <select class="form-select contact-content" aria-label="Default select example" required>
-                                <option value="" selected>Seleccione la provincia</option>
-                                <option value="Buenos Aires">Buenos Aires</option>
-                                <option value="Ciudad Autónoma de Buenos Aires">Ciudad Autónoma de Buenos Aires</option>
-                                <option value="Catamarca">Catamarca</option>
-                                <option value="Chaco">Chaco</option>
-                                <option value="Chubut">Chubut</option>
-                                <option value="Córdoba">Córdoba</option>
-                                <option value="Corrientes">Corrientes</option>
-                                <option value="Entre Ríos">Entre Ríos</option>
-                                <option value="Formosa">Formosa</option>
-                                <option value="Jujuy">Jujuy</option>
-                                <option value="La Pampa">La Pampa</option>
-                                <option value="La Rioja">La Rioja</option>
-                                <option value="Mendoza">Mendoza</option>
-                                <option value="Misiones">Misiones</option>
-                                <option value="Neuquén">Neuquén</option>
-                                <option value="Río Negro">Río Negro</option>
-                                <option value="Salta">Salta</option>
-                                <option value="San Juan">San Juan</option>
-                                <option value="San Luis">San Luis</option>
-                                <option value="Santa Cruz">Santa Cruz</option>
-                                <option value="Santa Fe">Santa Fe</option>
-                                <option value="Santiago del Estero">Santiago del Estero</option>
-                                <option value="Tierra del Fuego">Tierra del Fuego</option>
-                                <option value="Tucumán">Tucumán</option>
+                            <select class="form-select contact-content @error('province') is-invalid @enderror"
+                                aria-label="Default select example" name="province">
+                                <option value="">Seleccione la provincia</option>
+                                @foreach ($provincias as $provincia)
+                                    <option value="{{ $provincia->name }}" @selected(old('province') == $provincia->name)>
+                                        {{ Str::title($provincia->name) }}</option>
+                                @endforeach
                             </select>
-                            <label class="label-forms">Indique las familias de producto que comercializa <span
+                            @error('province')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
+                            <label class="label-forms mt-2">Indique las familias de producto que comercializa <span
                                     class="requerido">*</span></label>
                             <div class="check-content" id="sectionFormFamilia">
                                 <div class="check-individual">
-                                    <div class="row">
-                                        <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Elementos de apoyo" id="1"
-                                                value="Elementos de apoyo" class="myinput large"> Elementos de apoyo
-                                        </div>
-                                        <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Elementos de puerta" id="2"
-                                                value="Elementos de puerta" class="myinput large"> Elementos de puerta
-                                        </div>
-                                        <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Elementos de cajón" id="3"
-                                                value="Elementos de cajón" class="myinput large"> Elementos de cajón
-                                        </div>
+                                    <div class="row mt-2">
+                                        @foreach ($productos_comerciales as $producto)
+                                            <div class="col-lg-4 content-check-input">
+                                                <input type="checkbox" name="products[]" value="{{ $producto->name }}"
+                                                    class="myinput large" @checked(in_array($producto->name, old('products', [])))>
+                                                {{ Str::ucfirst($producto->name) }}
+                                            </div>
+                                        @endforeach
                                     </div>
-                                    <div class="row filas-checkbox">
-                                        <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Cerraduras" id="4" value="Cerraduras"
-                                                class="myinput large"> Cerraduras
-                                        </div>
-                                        <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Elementos de unión" id="5"
-                                                value="Elementos de unión" class="myinput large"> Elementos de unión
-                                        </div>
-                                        <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Barrales y tiradores" id="6"
-                                                value="Barrales y tiradores" class="myinput large"> Barrales y tiradores
-                                        </div>
-                                    </div>
-                                    <div class="row filas-checkbox">
-                                        <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Accesorios de cocina" id="7"
-                                                value="Accesorios de cocina" class="myinput large"> Accesorios de cocina
-                                        </div>
-                                        <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Acc. de placard" id="8"
-                                                value="Acc. de placard" class="myinput large"> Acc. de placard
-                                        </div>
-                                        <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Acc. para muebles de ofic." id="9"
-                                                value="Acc. para muebles de ofic." class="myinput large"> Acc. para
-                                            muebles de ofic.
-                                        </div>
-                                    </div>
-                                    <div class="row filas-checkbox">
-                                        <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Corredizos" id="10" value="Corredizos"
-                                                class="myinput large"> Corredizos
-                                        </div>
-                                        <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Aluminio" id="11" value="Aluminio"
-                                                class="myinput large">
-                                            Aluminio
-                                        </div>
-                                        <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Herramientas" id="12"
-                                                value="Herramientas" class="myinput large"> Herramientas
-                                        </div>
-                                    </div>
+                                    @error('products')
+                                        <p class="text-danger p-0 mt-1">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                             <label class="label-forms">¿Tuvo algún inconveniente con los productos EUROHARD? <span
@@ -165,128 +123,80 @@
                                 <div class="check-individual">
                                     <div class="row">
                                         <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Si" id="Si" value="1"
-                                                class="only-one myinput large"> Si
+                                            <input type="checkbox" name="inconvenient" id="Si" value="si"
+                                                class="only-one-inconvenient myinput large" @checked(old('inconvenient') == 'si')>
+                                            Si
                                         </div>
                                         <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="No" id="No" value="2"
-                                                class="only-one myinput large"> No
+                                            <input type="checkbox" name="inconvenient" id="No" value="no"
+                                                class="only-one-inconvenient myinput large" @checked(old('inconvenient') == 'no')>
+                                            No
                                         </div>
                                     </div>
                                 </div>
+                                @error('inconvenient')
+                                    <p class="text-danger p-0 mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
-                            <textarea class="form-control contact-content" id="Inconvenientes" rows="8" aria-label="Inconvenientes"></textarea>
-
+                            <textarea class="form-control contact-content @error('inconvenient_description') is-invalid @enderror"
+                                name="inconvenient_description" id="Inconvenientes" rows="8" aria-label="Inconvenientes">{{ old('inconvenient_description') }}</textarea>
+                            @error('inconvenient_description')
+                                <p class="text-danger p-0 mt-1">{{ $message }}</p>
+                            @enderror
+                            {{-- Errores de captcha --}}
+                            <div class="mt-2 mb-4">
+                                @error('g-recaptcha-response')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
                             <button type="submit" class="btn btn-primary btn-form">Enviar</button>
                         </form>
                         <script type="text/javascript">
-                            let Checked = null;
-                            //The class name can vary
-                            for (let CheckBox of document.getElementsByClassName('only-one')) {
-                                CheckBox.onclick = function() {
-                                    if (Checked != null) {
-                                        Checked.checked = false;
-                                        Checked = CheckBox;
+                            document.addEventListener('DOMContentLoaded', function() {
+                                let Checked = null;
+                                let checkedInconvenient = null;
+                                // Obtener los checkboxes y asignar el estado inicial (Laravel "old()")
+                                // Chequear tipo de cliente
+                                const checkboxes = document.getElementsByClassName('only-one');
+                                for (let CheckBox of checkboxes) {
+                                    if (CheckBox.checked) {
+                                        Checked = CheckBox; // Marcar el checkbox inicial si viene de `old()`
                                     }
-                                    Checked = CheckBox;
-                                }
-                            }
 
-                            (function() {
-                                const form = document.querySelector('#sectionForm');
-                                const checkboxes = form.querySelectorAll('input[type=checkbox]');
-                                const checkboxLength = checkboxes.length;
-                                const firstCheckbox = checkboxLength > 0 ? checkboxes[0] : null;
-
-                                function init() {
-                                    if (firstCheckbox) {
-                                        for (let i = 0; i < checkboxLength; i++) {
-                                            checkboxes[i].addEventListener('change', checkValidity);
+                                    CheckBox.onclick = function() {
+                                        if (Checked === this) {
+                                            // Permitir desmarcar el checkbox actual
+                                            this.checked = false;
+                                            Checked = null; // Resetear la variable
+                                        } else {
+                                            if (Checked != null) {
+                                                Checked.checked = false; // Desmarcar el anterior
+                                            }
+                                            Checked = this; // Actualizar al nuevo checkbox
                                         }
-
-                                        checkValidity();
+                                    };
+                                }
+                                // chequear inconveniente
+                                const checkboxes = document.getElementsByClassName('only-one-inconvenient');
+                                for (let CheckBox of checkboxes) {
+                                    if (CheckBox.checked) {
+                                        Checked = CheckBox; // Marcar el checkbox inicial si viene de `old()`
                                     }
-                                }
 
-                                function isChecked() {
-                                    for (let i = 0; i < checkboxLength; i++) {
-                                        if (checkboxes[i].checked) return true;
-                                    }
-
-                                    return false;
-                                }
-
-                                function checkValidity() {
-                                    const errorMessage = !isChecked() ? 'Se debe seleccionar una opción.' : '';
-                                    firstCheckbox.setCustomValidity(errorMessage);
-                                }
-
-                                init();
-                            })();
-
-                            (function() {
-                                const form = document.querySelector('#sectionFormFamilia');
-                                const checkboxes = form.querySelectorAll('input[type=checkbox]');
-                                const checkboxLength = checkboxes.length;
-                                const firstCheckbox = checkboxLength > 0 ? checkboxes[0] : null;
-
-                                function init() {
-                                    if (firstCheckbox) {
-                                        for (let i = 0; i < checkboxLength; i++) {
-                                            checkboxes[i].addEventListener('change', checkValidity);
+                                    CheckBox.onclick = function() {
+                                        if (Checked === this) {
+                                            // Permitir desmarcar el checkbox actual
+                                            this.checked = false;
+                                            Checked = null; // Resetear la variable
+                                        } else {
+                                            if (Checked != null) {
+                                                Checked.checked = false; // Desmarcar el anterior
+                                            }
+                                            Checked = this; // Actualizar al nuevo checkbox
                                         }
-
-                                        checkValidity();
-                                    }
+                                    };
                                 }
-
-                                function isChecked() {
-                                    for (let i = 0; i < checkboxLength; i++) {
-                                        if (checkboxes[i].checked) return true;
-                                    }
-
-                                    return false;
-                                }
-
-                                function checkValidity() {
-                                    const errorMessage = !isChecked() ? 'Se debe seleccionar una opción.' : '';
-                                    firstCheckbox.setCustomValidity(errorMessage);
-                                }
-
-                                init();
-                            })();
-
-                            (function() {
-                                const form = document.querySelector('#sectionFormProblemas');
-                                const checkboxes = form.querySelectorAll('input[type=checkbox]');
-                                const checkboxLength = checkboxes.length;
-                                const firstCheckbox = checkboxLength > 0 ? checkboxes[0] : null;
-
-                                function init() {
-                                    if (firstCheckbox) {
-                                        for (let i = 0; i < checkboxLength; i++) {
-                                            checkboxes[i].addEventListener('change', checkValidity);
-                                        }
-
-                                        checkValidity();
-                                    }
-                                }
-
-                                function isChecked() {
-                                    for (let i = 0; i < checkboxLength; i++) {
-                                        if (checkboxes[i].checked) return true;
-                                    }
-
-                                    return false;
-                                }
-
-                                function checkValidity() {
-                                    const errorMessage = !isChecked() ? 'Se debe seleccionar una opción.' : '';
-                                    firstCheckbox.setCustomValidity(errorMessage);
-                                }
-
-                                init();
-                            })();
+                            });
                         </script>
                     </div>
                 </div>

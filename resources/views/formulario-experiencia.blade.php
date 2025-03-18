@@ -38,81 +38,88 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="content-colum-contact-der">
-                        <form class="row" id="sectionForm">
-                            <label class="label-forms">Nombre y apellido <span class="requerido">*</span></label>
-                            <input type="text" class="form-control contact-content" required>
+                        <form class="row" id="sectionForm" method="POST"
+                            action="{{ route('formularios.envio.experiencia') }}">
+                            @csrf
+                            <label class="label-forms">Nombre y apellido
+                                <span class="requerido">*</span></label>
+                            <input type="text" name="fullName"
+                                class="form-control contact-content @error('fullName') is-invalid @enderror"
+                                value="{{ old('fullName') }}">
+                            @error('fullName')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Teléfono <span class="requerido">*</span></label>
-                            <input type="text" class="form-control contact-content" required>
+                            <input type="text" name="phone" value="{{ old('phone') }}"
+                                class="form-control contact-content @error('phone') is-invalid @enderror">
+                            @error('phone')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Correo electrónico <span class="requerido">*</span></label>
-                            <input type="email" class="form-control contact-content" id="inputEmail4" required>
+                            <input type="email" name="email" value="{{ old('email') }}"
+                                class="form-control contact-content @error('email') is-invalid @enderror" id="inputEmail4">
+                            @error('email')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Marque la opcion correspondiente <span
                                     class="requerido">*</span></label>
                             <div class="check-content">
                                 <div class="check-individual">
                                     <div class="row">
                                         <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Distribuidor" id="checkDistri" value="1"
-                                                class="only-one myinput large"> Es distribuidor
+                                            <input type="checkbox" name="client" id="checkDistri" value="distribuidor"
+                                                class="only-one myinput large" @checked(old('client') == 'distribuidor')>
+                                            Es distribuidor
                                         </div>
                                         <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="ConsumidorFinal" id="checkConFin" value="2"
-                                                class="only-one myinput large"> Es consumidor final
+                                            <input type="checkbox" name="client" id="checkConFin" value="consumidor final"
+                                                @checked(old('client') == 'consumidor final') class="only-one myinput large"> Es consumidor
+                                            final
                                         </div>
                                         <div class="col-lg-4 content-check-input">
-                                            <input type="checkbox" name="Otros" id="checkOtros" value="3"
-                                                class="only-one myinput large">
+                                            <input type="checkbox" role="radio" name="client" id="checkOtros"
+                                                value="otros" class="only-one myinput large" @checked(old('client') == 'otros')>
                                             Otros
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <button type="submit" class="btn btn-primary btn-form">Enviar</button>
+                            @error('client')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
+                            <div class="mt-2 mb-4">
+                                @error('g-recaptcha-response')
+                                    <p class="text-danger p-0">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <button class="btn btn-primary btn-form">Enviar</button>
                         </form>
+
                         <script type="text/javascript">
-                            let Checked = null;
-                            //The class name can vary
-                            for (let CheckBox of document.getElementsByClassName('only-one')) {
-                                CheckBox.onclick = function() {
-                                    if (Checked != null) {
-                                        Checked.checked = false;
-                                        Checked = CheckBox;
+                            document.addEventListener('DOMContentLoaded', function() {
+                                let Checked = null;
+
+                                // Obtener los checkboxes y asignar el estado inicial (Laravel "old()")
+                                const checkboxes = document.getElementsByClassName('only-one');
+                                for (let CheckBox of checkboxes) {
+                                    if (CheckBox.checked) {
+                                        Checked = CheckBox; // Marcar el checkbox inicial si viene de `old()`
                                     }
-                                    Checked = CheckBox;
-                                }
-                            }
 
-                            (function() {
-                                const form = document.querySelector('#sectionForm');
-                                const checkboxes = form.querySelectorAll('input[type=checkbox]');
-                                const checkboxLength = checkboxes.length;
-                                const firstCheckbox = checkboxLength > 0 ? checkboxes[0] : null;
-
-                                function init() {
-                                    if (firstCheckbox) {
-                                        for (let i = 0; i < checkboxLength; i++) {
-                                            checkboxes[i].addEventListener('change', checkValidity);
+                                    CheckBox.onclick = function() {
+                                        if (Checked === this) {
+                                            // Permitir desmarcar el checkbox actual
+                                            this.checked = false;
+                                            Checked = null; // Resetear la variable
+                                        } else {
+                                            if (Checked != null) {
+                                                Checked.checked = false; // Desmarcar el anterior
+                                            }
+                                            Checked = this; // Actualizar al nuevo checkbox
                                         }
-
-                                        checkValidity();
-                                    }
+                                    };
                                 }
-
-                                function isChecked() {
-                                    for (let i = 0; i < checkboxLength; i++) {
-                                        if (checkboxes[i].checked) return true;
-                                    }
-
-                                    return false;
-                                }
-
-                                function checkValidity() {
-                                    const errorMessage = !isChecked() ? 'Se debe seleccionar una opción.' : '';
-                                    firstCheckbox.setCustomValidity(errorMessage);
-                                }
-
-                                init();
-                            })();
+                            });
                         </script>
                     </div>
                 </div>

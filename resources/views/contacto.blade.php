@@ -122,7 +122,7 @@
                             aria-label="Default select example" name="company">
                             <option value="">Empresa:</option>
                             <option value="Distribuidor" @selected(old('company') == 'Distribuidor')>Distribuidor</option>
-                            <option value="carpintero" @selected(old('company') == 'Carpintero')>Carpintero</option>
+                            <option value="Carpintero" @selected(old('company') == 'Carpintero')>Carpintero</option>
                             <option value="Fabricante" @selected(old('company') == 'Fabricante')>Fabricante</option>
                             <option value="Arquitecto" @selected(old('company') == 'Arquitecto')>Arquitecto</option>
                             <option value="Consumidor final" @selected(old('company') == 'Consumidor final')>Consumidor final</option>

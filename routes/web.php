@@ -29,11 +29,22 @@ Route::get('/novedades', [NovedadesController::class, 'index'])->name('novedades
 
 Route::get('/formularios', [FormulariosController::class, 'index'])->name('formularios');
 
+// Formulario Experiencia
 Route::get('/formularios/experiencia', [FormulariosController::class, 'experiencia'])->name('formularios.experiencia');
+// Envío formulario de experiencia
+Route::post('formularios/experiencia', [FormulariosController::class, 'enviar_formulario_experiencia'])->name('formularios.envio.experiencia');
+
+// Formulario Distribuidores
 Route::get('/formularios/distribuidores', [FormulariosController::class, 'distribuidores'])->name('formularios.distribuidores');
+// Envio formulario de distribuidores
+Route::post('formularios/distribuidores', [FormulariosController::class, 'enviar_formulario_distribuidores'])->name('formularios.envio.distribuidores');
+
+// Formulario productos
 Route::get('/formularios/productos', [FormulariosController::class, 'productos'])->name('formularios.productos');
+// Envio formulario de productos
+Route::post('/formularios/productos', [FormulariosController::class, 'enviar_formulario_productos'])->name('formularios.envio.productos');
 
+// Formulario contacto
 Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
-
 // Envio de formulario de contacto
 Route::post('contacto', [ContactoController::class, 'store'])->name('contacto.store');

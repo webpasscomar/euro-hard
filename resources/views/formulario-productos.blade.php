@@ -39,66 +39,93 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="content-colum-contact-der">
-                        <form class="row">
+                        <form action="{{ route('formularios.envio.productos') }}" method="POST" class="row"
+                            enctype="multipart/form-data">
+                            @csrf
                             <label class="label-forms">Nombre y apellido <span class="requerido">*</span></label>
-                            <input type="text" class="form-control contact-content" required>
+                            <input type="text"
+                                class="form-control contact-content @error('fullName') is-invalid @enderror" name="fullName"
+                                value="{{ old('fullName') }}">
+                            @error('fullName')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Teléfono <span class="requerido">*</span></label>
-                            <input type="text" class="form-control contact-content" required>
+                            <input type="text" class="form-control contact-content @error('phone') is-invalid @enderror"
+                                name="phone" value="{{ old('phone') }}">
+                            @error('phone')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Correo electrónico <span class="requerido">*</span></label>
-                            <input type="email" class="form-control contact-content" id="inputEmail4" required>
+                            <input type="email" class="form-control contact-content @error('email') is-invalid @enderror"
+                                id="inputEmail4" name="email" value="{{ old('email') }}">
+                            @error('email')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Provincia <span class="requerido">*</span></label>
-                            <select class="form-select contact-content" aria-label="Default select example" required>
-                                <option value="" selected>Seleccione la provincia</option>
-                                <option value="Buenos Aires">Buenos Aires</option>
-                                <option value="Ciudad Autónoma de Buenos Aires">Ciudad Autónoma de Buenos Aires</option>
-                                <option value="Catamarca">Catamarca</option>
-                                <option value="Chaco">Chaco</option>
-                                <option value="Chubut">Chubut</option>
-                                <option value="Córdoba">Córdoba</option>
-                                <option value="Corrientes">Corrientes</option>
-                                <option value="Entre Ríos">Entre Ríos</option>
-                                <option value="Formosa">Formosa</option>
-                                <option value="Jujuy">Jujuy</option>
-                                <option value="La Pampa">La Pampa</option>
-                                <option value="La Rioja">La Rioja</option>
-                                <option value="Mendoza">Mendoza</option>
-                                <option value="Misiones">Misiones</option>
-                                <option value="Neuquén">Neuquén</option>
-                                <option value="Río Negro">Río Negro</option>
-                                <option value="Salta">Salta</option>
-                                <option value="San Juan">San Juan</option>
-                                <option value="San Luis">San Luis</option>
-                                <option value="Santa Cruz">Santa Cruz</option>
-                                <option value="Santa Fe">Santa Fe</option>
-                                <option value="Santiago del Estero">Santiago del Estero</option>
-                                <option value="Tierra del Fuego">Tierra del Fuego</option>
-                                <option value="Tucumán">Tucumán</option>
+                            <select class="form-select contact-content @error('province') is-invalid @enderror"
+                                aria-label="Default select example" name="province">
+                                <option value="">Seleccione la provincia</option>
+                                @foreach ($provincias as $provincia)
+                                    <option value="{{ $provincia->name }}" @selected(old('province') == $provincia->name)>
+                                        {{ Str::title($provincia->name) }}</option>
+                                @endforeach
                             </select>
+                            @error('province')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Usuario <span class="requerido">*</span></label>
-                            <input type="text" class="form-control contact-content" required>
+                            <input type="text" class="form-control contact-content @error('user') is-invalid @enderror"
+                                name="user" value="{{ old('user') }}">
+                            @error('user')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Razón de la consulta <span class="requerido">*</span></label>
-                            <select class="form-select contact-content" aria-label="Default select example" required>
-                                <option value="" selected>Seleccione uno opción</option>
-                                <option value="1">Consumidor final</option>
-                                <option value="2">Distribuidor</option>
-                                <option value="3">Otros</option>
+                            <select class="form-select contact-content @error('client') is-invalid @enderror"
+                                aria-label="Default select example" name="client">
+                                <option value="">Seleccione uno opción</option>
+                                <option value="consumidor final" @selected(old('client') == 'consumidor final')>Consumidor final</option>
+                                <option value="distribuidor" @selected(old('client') == 'distribuidor')>Distribuidor</option>
+                                <option value="otros" @selected(old('client') == 'otros')>Otros</option>
                             </select>
+                            @error('client')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Código del producto a consultar <span
                                     class="requerido">*</span></label>
-                            <select class="form-select contact-content" aria-label="Default select example" required>
-                                <option value="" selected>Consultas sobre productos e instalaciones</option>
-                                <option value="2">Producto 1</option>
-                                <option value="2">Producto 2</option>
-                                <option value="3">Producto 3</option>
+                            <select class="form-select contact-content @error('cod_product') is-invalid @enderror"
+                                aria-label="Default select example" name="cod_product">
+                                <option value="">Consultas sobre productos e instalaciones</option>
+                                <option value="producto 1" @selected(old('cod_product') == 'producto 1')>Producto 1</option>
                             </select>
+                            @error('cod_product')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Nombre del producto a consultar <span
                                     class="requerido">*</span></label>
-                            <input type="text" class="form-control contact-content" required>
+                            <input type="text"
+                                class="form-control contact-content @error('name_product') is-invalid @enderror"
+                                name="name_product" value="{{ old('name_product') }}">
+                            @error('name_product')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">Su consulta <span class="requerido">*</span></label>
-                            <textarea class="form-control contact-content" id="Consulta" rows="8" aria-label="Consulta:" required></textarea>
+                            <textarea class="form-control contact-content @error('consultation') is-invalid @enderror" name="consultation"
+                                id="Consulta" rows="8" aria-label="Consulta:">{{ old('consultation') }}</textarea>
+                            @error('consultation')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
                             <label class="label-forms">¿Desea adjuntar foto?</label>
-                            <input type="file" id="myfile" name="myfile" class="form-control contact-content">
-
+                            <input type="file" id="myfile" name="image" accept=".jpg,.jpeg,.png"
+                                class="form-control contact-content @error('image') is-invalid @enderror">
+                            @error('image')
+                                <p class="text-danger p-0">{{ $message }}</p>
+                            @enderror
+                            {{-- captcha --}}
+                            <div class="mt-2 mb-4">
+                                @error('g-recaptcha-response')
+                                    <p class="text-danger p-0">{{ $message }}</p>
+                                @enderror
+                            </div>
                             <button type="submit" class="btn btn-primary btn-form">Enviar</button>
                         </form>
                     </div>

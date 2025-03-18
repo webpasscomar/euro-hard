@@ -37,7 +37,6 @@ class ProductCategoriesController extends Controller
    */
   public function store(ProductCategoryRequest $request)
   {
-    dd($request->all());
     $request->validated();
     try {
       //    Guardar imágen de la categoria si se carga
