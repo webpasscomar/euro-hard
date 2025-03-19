@@ -50,15 +50,15 @@
         </div>
     </div>
 </div>
-{{-- Categoría --}}
+{{-- Categoría/s --}}
 <div class="row">
     <div class="col-md-12">
-        <div class="form-group mb-3">
-            <label for="productCategory_id" class="form-label">Categoria</label><span class="fs-4 text-danger">*</span>
-            <select name="productCategory_id" id="productCategory_id" class="form-select">
-                <option value="">Seleccione una categoria</option>
+        <div class="form-group mb-4">
+            <label for="productCategory_id" class="form-label">Categoria/s</label><span
+                class="fs-4 text-danger">*</span><small class="text-secondary"> - ( seleccione una ó varias )</small>
+            <select name="categories[]" id="categories" class="categories form-select" multiple>
                 @forelse ($productCategories as $category)
-                    <option value="{{ $category->id }}" @selected(old('productCategory_id', $product->productCategory_id ?? '') == $category->id)>{{ $category->name }}</option>
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @empty
                     <option class="text-sm text-secondary">No hay ninguna categoria. Ingrese una</option>
                 @endforelse
@@ -69,10 +69,20 @@
         </div>
     </div>
 </div>
-{{-- Colores - Nuevo producto --}}
+{{-- Código - Colores - Nuevo producto --}}
 <div class="row">
+    {{-- Código del producto --}}
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="cod_product" class="form-label">Código</label>
+            <input class="form-control" type="text" id="cod_product" name="cod_product">
+            @error('cod_product')
+                <span class="ms-1 text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
     {{-- Colores  --}}
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-group mb-3">
             <label for="image" class="form-label d-flex align-items-center">Colores</label>
             <div class="dropdown">
@@ -106,7 +116,7 @@
         </div>
     </div>
     {{--  Producto nuevo --}}
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-group mb-3 text-center mt-3">
             <label for="product_id" class="form-label">Producto nuevo</label>
             <div class="form-check form-switch">
@@ -432,7 +442,6 @@
     </div>
 </div>
 
-
 {{-- Imágenes previas - muetra de colores previos --}}
 @push('js')
     <script>
@@ -500,5 +509,12 @@
             const slug = document.querySelector('#slug');
             slug.value = generateSlug(name.value);
         }
+
+        // Implementación de select multiple con Select2 para elegir las categorias
+        $(document).ready(function() {
+            $('.categories').select2({
+                theme: "classic",
+            });
+        });
     </script>
 @endpush
