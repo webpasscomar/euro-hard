@@ -33,10 +33,6 @@ class ContactoController extends Controller
     } else {
       toast('No se pudo enviar los datos', 'error');
       return redirect()->route('contacto');
-
-
-    toast('El formulario se envío correctamente', 'success');
-    return redirect()->route('contacto');
+    }
   }
-}
 }

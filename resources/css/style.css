@@ -1317,6 +1317,7 @@ label.label-forms {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin:10px 0;
 }
 
 .myinput.large {
@@ -1356,6 +1357,7 @@ button.btn.btn-primary.btn-form:hover {
 .filas-checkbox {
   margin-top: 16px !important;
 }
+
 
 /* -fin de FORMULARIOS */
 /* RESPONSIVE CSS

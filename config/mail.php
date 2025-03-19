@@ -112,4 +112,12 @@ return [
     'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
     'name' => env('MAIL_FROM_NAME', 'Example'),
   ],
+
+  // Formularios de contacto - variables de entorno
+  'form' => [
+    'contact' => env('MAIL_CONTACT', 'contact@example.com'),
+    'experience' => env('MAIL_EXPERIENCE', 'experience@example.com'),
+    'distributors' => env('MAIL_DISTRIBUTORS', 'distributors@example.com'),
+    'products' => env('MAIL_PRODUCTS', 'products@example.com'),
+  ]
 ];

@@ -5,11 +5,13 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 
-class ContactRecieveEmail extends Mailable
+class FormProductReceive extends Mailable
 {
   use Queueable, SerializesModels;
   public $contact;
@@ -27,8 +29,8 @@ class ContactRecieveEmail extends Mailable
   public function envelope(): Envelope
   {
     return new Envelope(
-      subject: 'Nuevo Contacto',
-      to: config('mail.form.contact'),
+      subject: 'Contacto - Productos',
+      from: config('mail.form.products'),
     );
   }
 
@@ -38,7 +40,7 @@ class ContactRecieveEmail extends Mailable
   public function content(): Content
   {
     return new Content(
-      view: 'mail.contact.recieve',
+      markdown: 'mail.product.receive',
       with: [
         'contact' => $this->contact,
       ]
@@ -52,6 +54,14 @@ class ContactRecieveEmail extends Mailable
    */
   public function attachments(): array
   {
-    return [];
+    if (isset($this->contact['image'])) {
+      return [
+        Attachment::fromPath($this->contact['image']->getRealPath())
+          ->as($this->contact['image']->getClientOriginalName())
+          ->withMime($this->contact['image']->getMimeType()),
+      ];
+    } else {
+      return [];
+    }
   }
 }

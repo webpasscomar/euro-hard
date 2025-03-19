@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
       ProductCategoryTableSeeder::class,
       NoveltyTableSeeder::class,
       ContactSeeder::class,
+      ProvinceTableSeeder::class,
     ]);
   }
 }

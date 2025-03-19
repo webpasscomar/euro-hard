@@ -9,16 +9,17 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ContactRecieveEmail extends Mailable
+class FormExperienceSend extends Mailable
 {
   use Queueable, SerializesModels;
-  public $contact;
+
+  public $fullName;
   /**
    * Create a new message instance.
    */
-  public function __construct($contact)
+  public function __construct($fullName)
   {
-    $this->contact = $contact;
+    $this->fullName = $fullName;
   }
 
   /**
@@ -27,8 +28,8 @@ class ContactRecieveEmail extends Mailable
   public function envelope(): Envelope
   {
     return new Envelope(
-      subject: 'Nuevo Contacto',
-      to: config('mail.form.contact'),
+      subject: 'EUROHARD',
+      from: config('mail.form.experience'),
     );
   }
 
@@ -38,10 +39,10 @@ class ContactRecieveEmail extends Mailable
   public function content(): Content
   {
     return new Content(
-      view: 'mail.contact.recieve',
+      markdown: 'mail.experience.send',
       with: [
-        'contact' => $this->contact,
-      ]
+        'fullName' => $this->fullName
+      ],
     );
   }
 
