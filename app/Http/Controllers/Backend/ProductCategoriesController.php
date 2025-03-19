@@ -60,6 +60,7 @@ class ProductCategoriesController extends Controller
         'name' => $request->input('name'),
         'color' => $request->input('color'),
         'slug' => $request->input('slug'),
+        'feature' => $request->input('feature'),
         'image' => $image_name,
         'banner' => $banner_name,
         'status' => 1,
@@ -68,7 +69,7 @@ class ProductCategoriesController extends Controller
       toast('Se agregó una nueva categoría', 'success');
       return redirect()->route('admin.productCategory.index');
     } catch (\Throwable $th) {
-      dd($th);
+      // dd($th);
       toast('No se pudo agregar la categoria');
       return redirect()->route('admin.productCategory.index');
     }
@@ -101,7 +102,7 @@ class ProductCategoriesController extends Controller
   public function update(ProductCategoryRequest $request, ProductCategory $productCategory)
   {
     $request->validated();
-
+    dd($request->all());
     try {
       // Si se cambia la imágen eliminar la anterior y subir la nueva
       if ($request->hasFile('image')) {
@@ -132,6 +133,7 @@ class ProductCategoriesController extends Controller
         'name' => $request->input('name'),
         'color' => $request->input('color'),
         'slug' => $request->input('slug'),
+        'feature' => $request->input('feature'),
         'image' => $image_name,
         'banner' => $banner_name,
         'categoryParent_id' => $request->input('categoryParent_id'),
