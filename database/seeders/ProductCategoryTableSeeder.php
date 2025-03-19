@@ -18,6 +18,7 @@ class ProductCategoryTableSeeder extends Seeder
         [
           'name' => 'Cocina y Lavadero',
           'slug' => 'cocina-y-lavadero',
+          'feature' => '',
           'color' => '#FFFFFF',
           'image' => 'cat-coc-lav.png',
           'banner' => '1_product_category_banner_banner_cocina.jpg',
@@ -28,6 +29,7 @@ class ProductCategoryTableSeeder extends Seeder
         [
           'name' => 'Living',
           'slug' => 'living',
+          'feature' => '',
           'color' => '#FFFFFF',
           'image' => 'cat-liv.png',
           'banner' => 'banner-cat.jpg',
@@ -38,6 +40,7 @@ class ProductCategoryTableSeeder extends Seeder
         [
           'name' => 'Dormitorio',
           'slug' => 'dormitorio',
+          'feature' => '',
           'color' => '#FFFFFF',
           'image' => 'cat-dorm.png',
           'banner' => 'banner-cat.jpg',
@@ -48,6 +51,7 @@ class ProductCategoryTableSeeder extends Seeder
         [
           'name' => 'Novedades',
           'slug' => 'novedades',
+          'feature' => '',
           'color' => '#FFFFFF',
           'image' => 'cat-noved.png',
           'banner' => 'banner-cat.jpg',
@@ -62,6 +66,7 @@ class ProductCategoryTableSeeder extends Seeder
         [
           'name' => 'Tiradores y Manijas',
           'slug' => 'tiradores-y-manijas',
+          'feature' => '',
           'color' => '#666666',
           'image' => 'cat-01.jpg',
           'banner' => 'banner-cat.jpg',
@@ -73,6 +78,7 @@ class ProductCategoryTableSeeder extends Seeder
         [
           'name' => 'Bisagras',
           'slug' => 'bisagras',
+          'feature' => '',
           'color' => '#444444',
           'image' => 'cat-02.jpg',
           'banner' => 'banner-cat.jpg',
@@ -84,6 +90,7 @@ class ProductCategoryTableSeeder extends Seeder
         [
           'name' => 'Canasteria',
           'slug' => 'canasteria',
+          'feature' => '',
           'color' => '#444444',
           'image' => 'cat-03.jpg',
           'banner' => 'banner-cat.jpg',
@@ -95,6 +102,7 @@ class ProductCategoryTableSeeder extends Seeder
         [
           'name' => 'Soportes y Unión',
           'slug' => 'soportes-y-union',
+          'feature' => '',
           'color' => '#777777',
           'image' => 'cat-04.jpg',
           'banner' => 'banner-cat.jpg',
