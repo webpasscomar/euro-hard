@@ -22,11 +22,16 @@
             <div class="row">
                 <div class="col">
                     <h5 class="title-category gris">
-                        <a href="{{ route('home') }}" class="link-breadcrumb">Categorías </a> -
-                        <a href="{{ route('productos.categorias', $categoria) }}"
-                            class="link-breadcrumb">{{ Str::title($categoria) }}</a> - <a
-                            href="{{ route('productos.list', [$categoria, $subcategoria->slug]) }}"
-                            class="link-breadcrumb"><span class="negro">{{ Str::title($subcategoria->name) }}</span></a>
+                        @if ($categoria !== 'categoria')
+                            <a href="{{ route('home') }}" class="link-breadcrumb">Categorías </a> -
+                            <a href="{{ route('productos.categorias', $categoria) }}"
+                                class="link-breadcrumb">{{ Str::title($categoria) }}</a> - <a
+                                href="{{ route('productos.list', [$categoria, $subcategoria->slug]) }}"
+                                class="link-breadcrumb"><span
+                                    class="negro">{{ Str::title($subcategoria->name) }}</span></a>
+                        @else
+                            <span class="negro">{{ Str::title($subcategoria->name) }}</span>
+                        @endif
                     </h5>
                 </div>
             </div>

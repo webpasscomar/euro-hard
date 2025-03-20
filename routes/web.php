@@ -19,7 +19,9 @@ Route::get('/empresa', [EmpresaController::class, 'index'])->name('empresa');
 Route::get('/productos/{categoriaSlug}/{subcategoriaSlug}/{productoSlug}', [ProductosController::class, 'productoDetalle'])->name('productos.detalle');
 Route::get('/productos/{categoriaSlug}/{subcategoriaSlug}', [ProductosController::class, 'productos'])->name('productos.list');
 Route::get('/productos/{categoriaSlug}', [ProductosController::class, 'categorias'])->name('productos.categorias');
-Route::get('/productos', [ProductosController::class, 'productosGeneral'])->name('productos');
+Route::get('/productos', [ProductosController::class, 'productosHome'])->name('productos');
+// Ruta para mostrar los productos de las subcategorias que vienen de productos en el home
+Route::get('/productos/categoria/{subcategoria}', [ProductosController::class, 'productos'])->name('productos.subcategoria');
 
 Route::get('/catalogo', [CatalogoController::class, 'index'])->name('catalogo');
 
