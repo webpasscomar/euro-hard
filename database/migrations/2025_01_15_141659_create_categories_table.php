@@ -11,16 +11,16 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('product_categories', function (Blueprint $table) {
+    Schema::create('categories', function (Blueprint $table) {
       $table->id();
       $table->string('name')->unique();
       $table->string('slug')->unique();
-      $table->string('feature');
-      $table->string('color');
+      $table->string('feature')->nullable();
+      $table->string('color', 12);
       $table->string('image');
       $table->string('banner');
       $table->tinyInteger('status')->default(1);
-      $table->foreignId('categoryParent_id')->nullable()->constrained('product_categories', 'id')->nullOnDelete();
+      $table->foreignId('categoryParent_id')->nullable()->constrained('categories', 'id')->nullOnDelete();
       $table->timestamps();
       $table->softDeletes();
     });
@@ -31,6 +31,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('product_categories');
+    Schema::dropIfExists('categories');
   }
 };

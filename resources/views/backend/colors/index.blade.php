@@ -26,7 +26,8 @@
                             <tr>
                                 <td class="align-middle text-left">{{ $color->id }}</td>
                                 <td class="align-middle text-left">
-                                    <div class="w-8 h-8 rounded-full" style="background-color: {{ $color->color }}"></div>
+                                    <div class="w-8 h-8 rounded-full border-1 border-black"
+                                        style="background-color: {{ $color->color }}"></div>
                                 </td>
                                 <td class="text-right align-middle">
                                     <a href="{{ route('admin.colors.destroy', $color) }}"

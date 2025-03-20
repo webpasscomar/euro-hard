@@ -3,21 +3,21 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProductCategoryRequest;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Color;
-use App\Models\ProductCategory;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
-class ProductCategoriesController extends Controller
+class CategoryController extends Controller
 {
   /**
    * Display a listing of the resource.
    */
   public function index(): View
   {
-    $productCategories = ProductCategory::all();
+    $productCategories = Category::all();
     return view('backend.product_categories.index', compact('productCategories'));
   }
 
@@ -27,7 +27,7 @@ class ProductCategoriesController extends Controller
   public function create(): View
   {
     $edit = false;
-    $productCategories = ProductCategory::where('status', 1)->get();
+    $productCategories = Category::where('status', 1)->get();
     $colors = Color::all();
     return view('backend.product_categories.create', compact('colors', 'productCategories', 'edit'));
   }
@@ -35,28 +35,28 @@ class ProductCategoriesController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(ProductCategoryRequest $request)
+  public function store(CategoryRequest $request)
   {
-    $request->validated();
+    // $request->validated();
     try {
       //    Guardar imágen de la categoria si se carga
       if ($request->hasFile('image')) {
         $original_name = $request->file('image')->getClientOriginalName();
-        $id = ProductCategory::max('id') + 1;
+        $id = Category::max('id') + 1;
         $image_name = $id . '_product_category_' . $original_name;
         $request->file('image')->storeAs('product_categories', $image_name);
       }
       // Guardar imágen del banner si se carga
       if ($request->hasFile('banner')) {
         $original_name = $request->file('banner')->getClientOriginalName();
-        $id = ProductCategory::max('id') + 1;
+        $id = Category::max('id') + 1;
         $banner_name = $id . '_product_category_banner_' . $original_name;
         $request->file('banner')->storeAs('product_categories', $banner_name);
       } else {
         $banner_name = '';
       }
       // Crear categoria
-      ProductCategory::create([
+      Category::create([
         'name' => $request->input('name'),
         'color' => $request->input('color'),
         'slug' => $request->input('slug'),
@@ -78,7 +78,7 @@ class ProductCategoriesController extends Controller
   /**
    * Display the specified resource.
    */
-  public function show(ProductCategory $productCategory)
+  public function show(Category $productCategory)
   {
     //
   }
@@ -86,10 +86,10 @@ class ProductCategoriesController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(ProductCategory $productCategory): View
+  public function edit(Category $productCategory): View
   {
     $colors = Color::all();
-    $productCategories = ProductCategory::where('status', 1)
+    $productCategories = Category::where('status', 1)
       ->where('id', '!=', $productCategory->id)
       ->get();
     $edit = true;
@@ -99,10 +99,10 @@ class ProductCategoriesController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(ProductCategoryRequest $request, ProductCategory $productCategory)
+  public function update(CategoryRequest $request, Category $productCategory)
   {
     $request->validated();
-    dd($request->all());
+    // dd($request->all());
     try {
       // Si se cambia la imágen eliminar la anterior y subir la nueva
       if ($request->hasFile('image')) {
@@ -141,7 +141,7 @@ class ProductCategoriesController extends Controller
       toast('La categoría se actualizo correctamente', 'success');
       return redirect()->route('admin.productCategory.index');
     } catch (\Throwable $th) {
-      //        dd($th);
+      // dd($th);
       toast('No se pudo actualizar la categoría', 'error');
       return redirect()->route('admin.productCategory.index');
     }
@@ -150,7 +150,7 @@ class ProductCategoriesController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(ProductCategory $productCategory)
+  public function destroy(Category $productCategory)
   {
     //
   }

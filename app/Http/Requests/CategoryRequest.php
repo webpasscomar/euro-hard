@@ -3,11 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Models\Color;
-use App\Models\ProductCategory;
+use App\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ProductCategoryRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -29,15 +29,14 @@ class ProductCategoryRequest extends FormRequest
     $categoryParent = $this->request->get('categoryParent_id');
     $currentCategory = $this->route('productCategory')['banner'] ?? null;
     $banner = (bool)$currentCategory;
-    //      dd($id);
-    // dd($banner);
+
     return [
       'name' => [
         'required',
         'string',
         'min:3',
         'max:255',
-        Rule::unique('product_categories', 'name')->ignore($put ? $id : null)
+        Rule::unique('categories', 'name')->ignore($put ? $id : null)
       ],
       'slug' => [
         'required',
@@ -45,8 +44,9 @@ class ProductCategoryRequest extends FormRequest
         'min:3',
         'max:100',
         'regex:/^[a-z0-9-]+$/',
-        Rule::unique('product_categories', 'slug')->ignore($put ? $id : null)
+        Rule::unique('categories', 'slug')->ignore($put ? $id : null)
       ],
+      'feature' => 'nullable',
       'image' => $put ? 'image|mimes:jpeg,png,jpg,svg|max:1024' : 'required|image|mimes:jpeg,png,jpg,svg|max:1024',
       'color' => [
         'required',

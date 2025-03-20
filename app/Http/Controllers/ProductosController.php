@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\ProductCategory;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -16,7 +16,7 @@ class ProductosController extends Controller
 
   public function categorias($categoriaSlug): View
   {
-    $categoria = ProductCategory::where('slug', $categoriaSlug)
+    $categoria = Category::where('slug', $categoriaSlug)
       ->where('status', 1)
       ->firstOrFail();
 
@@ -33,12 +33,12 @@ class ProductosController extends Controller
     // Traemos todos los productos de la categoria correspondiente
     if ($subcategoria != null) {
       $productos = Product::where('status', 1)
-        ->whereHas('category', function ($query) use ($subcategoria) {
+        ->whereHas('categories', function ($query) use ($subcategoria) {
           $query->where('slug', $subcategoria);
         })
         ->get();
-      $categoria = ProductCategory::where('slug', $categoria)->firstOrFail();
-      $subcategoria = ProductCategory::where('slug', $subcategoria)->firstOrFail();
+      $categoria = Category::where('slug', $categoria)->firstOrFail();
+      $subcategoria = Category::where('slug', $subcategoria)->firstOrFail();
       return view('productos', compact('categoria', 'subcategoria', 'productos'));
     } else {
       $productos = Product::where('status', 1)
@@ -57,7 +57,7 @@ class ProductosController extends Controller
       ->where('status', 1)
       ->firstOrFail();
 
-    $subcategoria = ProductCategory::where('slug', $subcategoriaSlug)->firstOrFail();
+    $subcategoria = Category::where('slug', $subcategoriaSlug)->firstOrFail();
 
     return view('producto', [
       'producto' => $producto,

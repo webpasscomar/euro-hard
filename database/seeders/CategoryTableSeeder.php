@@ -4,24 +4,26 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\ProductCategory;
+use App\Models\Category;
 
-class ProductCategoryTableSeeder extends Seeder
+class CategoryTableSeeder extends Seeder
 {
   /**
    * Run the database seeds.
    */
   public function run(): void
   {
-    ProductCategory::insert(
+
+    Category::insert(
       [
         [
           'name' => 'Cocina y Lavadero',
           'slug' => 'cocina-y-lavadero',
-          'feature' => '',
+          'feature' => null,
           'color' => '#FFFFFF',
           'image' => 'cat-coc-lav.png',
           'banner' => '1_product_category_banner_banner_cocina.jpg',
+          'categoryParent_id' => null,
           'status' => 1,
           'created_at' => now(),
           'updated_at' => now(),
@@ -29,10 +31,11 @@ class ProductCategoryTableSeeder extends Seeder
         [
           'name' => 'Living',
           'slug' => 'living',
-          'feature' => '',
+          'feature' => null,
           'color' => '#FFFFFF',
           'image' => 'cat-liv.png',
           'banner' => 'banner-cat.jpg',
+          'categoryParent_id' => null,
           'status' => 1,
           'created_at' => now(),
           'updated_at' => now(),
@@ -40,10 +43,11 @@ class ProductCategoryTableSeeder extends Seeder
         [
           'name' => 'Dormitorio',
           'slug' => 'dormitorio',
-          'feature' => '',
+          'feature' => null,
           'color' => '#FFFFFF',
           'image' => 'cat-dorm.png',
           'banner' => 'banner-cat.jpg',
+          'categoryParent_id' => null,
           'status' => 1,
           'created_at' => now(),
           'updated_at' => now(),
@@ -51,22 +55,19 @@ class ProductCategoryTableSeeder extends Seeder
         [
           'name' => 'Novedades',
           'slug' => 'novedades',
-          'feature' => '',
+          'feature' => null,
           'color' => '#FFFFFF',
           'image' => 'cat-noved.png',
           'banner' => 'banner-cat.jpg',
+          'categoryParent_id' => null,
           'status' => 1,
           'created_at' => now(),
           'updated_at' => now(),
         ],
-      ]
-    );
-    ProductCategory::insert(
-      [
         [
           'name' => 'Tiradores y Manijas',
           'slug' => 'tiradores-y-manijas',
-          'feature' => '',
+          'feature' => null,
           'color' => '#666666',
           'image' => 'cat-01.jpg',
           'banner' => 'banner-cat.jpg',
@@ -78,7 +79,7 @@ class ProductCategoryTableSeeder extends Seeder
         [
           'name' => 'Bisagras',
           'slug' => 'bisagras',
-          'feature' => '',
+          'feature' => null,
           'color' => '#444444',
           'image' => 'cat-02.jpg',
           'banner' => 'banner-cat.jpg',
@@ -90,7 +91,7 @@ class ProductCategoryTableSeeder extends Seeder
         [
           'name' => 'Canasteria',
           'slug' => 'canasteria',
-          'feature' => '',
+          'feature' => null,
           'color' => '#444444',
           'image' => 'cat-03.jpg',
           'banner' => 'banner-cat.jpg',
@@ -102,7 +103,7 @@ class ProductCategoryTableSeeder extends Seeder
         [
           'name' => 'Soportes y Unión',
           'slug' => 'soportes-y-union',
-          'feature' => '',
+          'feature' => null,
           'color' => '#777777',
           'image' => 'cat-04.jpg',
           'banner' => 'banner-cat.jpg',

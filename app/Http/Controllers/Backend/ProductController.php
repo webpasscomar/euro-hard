@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Color;
 use App\Models\Product;
-use App\Models\ProductCategory;
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -36,7 +36,7 @@ class ProductController extends Controller
     $edit = false;
     $colors = Color::all();
     $products = Product::where('status', 1)->get();
-    $productCategories = ProductCategory::where('status', 1)->get();
+    $productCategories = Category::where('status', 1)->get();
     return view('backend.products.create', compact('colors', 'products', 'productCategories', 'edit'));
   }
 
@@ -127,6 +127,7 @@ class ProductController extends Controller
         'name' => $request->input('name'),
         'slug' => $request->input('slug'),
         'description' => $request->input('description'),
+        'code' => $request->input('code'),
         'image_main' => $image_main_name,
         'image_1' => $image_1,
         'image_2' => $image_2,
@@ -156,6 +157,11 @@ class ProductController extends Controller
         $product->relatedProducts()->sync($request->input('products'));
       }
 
+      // Se sincronizan las categorias seleccionadas
+      if ($request->input('categories')) {
+        $product->categories()->sync($request->input('categories'));
+      }
+
       toast('Producto creado con éxito', 'success');
       return redirect()->route('admin.products.index');
     } catch (\Throwable $th) {
@@ -169,7 +175,7 @@ class ProductController extends Controller
   public function edit(Product $product): View
   {
     $colors = Color::all();
-    $productCategories = ProductCategory::where('status', 1)->get();
+    $productCategories = Category::where('status', 1)->get();
     $products = Product::where('status', 1)
       ->where('id', '!=', $product->id)
       ->get();
@@ -188,7 +194,7 @@ class ProductController extends Controller
    */
   public function update(ProductRequest $request, Product $product): RedirectResponse
   {
-    $request->validated();
+    // $request->validated();
 
     try {
       // generar nombre de imágen principal y guardarla
@@ -318,6 +324,7 @@ class ProductController extends Controller
         'name' => $request->input('name'),
         'slug' => $request->input('slug'),
         'description' => $request->input('description'),
+        'code' => $request->input('code'),
         'image_main' => $image_main_name,
         'image_1' => $image_1,
         'image_2' => $image_2,
@@ -346,6 +353,11 @@ class ProductController extends Controller
       // Si se asocian productos sincronizar la relación con los productos relacionados
       if ($request->input('products')) {
         $product->relatedProducts()->sync($request->input('products'));
+      }
+
+      // Si se asocian categorias sincronizar la relación con las categorias relacionadas
+      if ($request->input('categories')) {
+        $product->categories()->sync($request->input('categories'));
       }
 
       toast('Producto actualizado con éxito', 'success');

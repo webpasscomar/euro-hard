@@ -16,13 +16,13 @@ return new class extends Migration {
       $table->string('slug')->unique();
       $table->text('description');
       $table->string('image_main');
+      $table->string('code')->nullable();
       $table->string('image_1')->nullable();
       $table->string('image_2')->nullable();
       $table->string('image_3')->nullable();
       $table->string('image_4')->nullable();
       $table->string('image_5')->nullable();
       $table->string('image_6')->nullable();
-      $table->foreignId('productCategory_id')->constrained('product_categories', 'id')->cascadeOnDelete();
       $table->string('video')->nullable();
       $table->boolean('is_new')->default(false);
       $table->text('information')->nullable();

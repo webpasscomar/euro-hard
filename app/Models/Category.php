@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProductCategory extends Model
+class Category extends Model
 {
   use SoftDeletes;
 
-  protected $table = 'product_categories';
+  protected $table = 'categories';
   protected $fillable = [
     'name',
     'slug',
@@ -25,17 +26,18 @@ class ProductCategory extends Model
 
   public function parent(): BelongsTo
   {
-    return $this->belongsTo(ProductCategory::class, 'categoryParent_id');
+    return $this->belongsTo(Category::class, 'categoryParent_id');
   }
 
   public function childrens(): HasMany
   {
-    return $this->hasMany(ProductCategory::class, 'categoryParent_id');
+    return $this->hasMany(Category::class, 'categoryParent_id');
   }
 
-  public function products(): HasMany
+  // Relación productos - muchos a muchos
+  public function products(): BelongsToMany
   {
-    return $this->hasMany(Product::class, 'productCategory_id');
+    return $this->belongsToMany(Product::class, 'category_products', 'category_id', 'product_id');
   }
 
   public function inactiveWithRelations(): void

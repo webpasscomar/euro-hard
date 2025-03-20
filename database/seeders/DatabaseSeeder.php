@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
       UserTableSeeder::class,
       ColorTableSeeder::class,
       GalleryTableSeeder::class,
-      ProductCategoryTableSeeder::class,
+      CategoryTableSeeder::class,
       NoveltyTableSeeder::class,
       ContactSeeder::class,
       ProvinceTableSeeder::class,

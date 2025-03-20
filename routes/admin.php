@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\CatalogController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ColorController;
 use App\Http\Controllers\Backend\CompanyController;
 use App\Http\Controllers\Backend\ContactController;
@@ -9,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\NoveltyController;
-use App\Http\Controllers\Backend\ProductCategoriesController;
 use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\Backend\UserController;
 
@@ -28,7 +28,7 @@ Route::resource('colores', ColorController::class)
   ->names('colors');
 
 // Productos Categoria
-Route::resource('productos-categoria', ProductCategoriesController::class)
+Route::resource('productos-categoria', CategoryController::class)
   ->parameter('productos-categoria', 'productCategory')
   ->names('productCategory');
 
