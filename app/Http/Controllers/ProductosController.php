@@ -20,18 +20,18 @@ class ProductosController extends Controller
       ->where('status', 1)
       ->firstOrFail();
 
-    if ($categoria->childrens()->exists()) {
-      $subcategorias = $categoria->childrens;
-      return view('productos-categorias', compact('categoria', 'subcategorias'));
-    } else {
-      return $this->productos($categoria);
-    }
+    // if ($categoria->childrens()->exists()) {
+    $subcategorias = $categoria->childrens;
+    return view('productos-categorias', compact('categoria', 'subcategorias'));
+    // } else {
+    // return $this->productos($categoria);
+    // }
   }
 
-  public function productos($categoria, $subcategoria = null): View
+  public function productos($categoria = null, $subcategoria = null): View
   {
     // Traemos todos los productos de la categoria correspondiente
-    if ($subcategoria != null) {
+    if ($categoria != 'categoria') {
       $productos = Product::where('status', 1)
         ->whereHas('categories', function ($query) use ($subcategoria) {
           $query->where('slug', $subcategoria);
@@ -41,12 +41,16 @@ class ProductosController extends Controller
       $subcategoria = Category::where('slug', $subcategoria)->firstOrFail();
       return view('productos', compact('categoria', 'subcategoria', 'productos'));
     } else {
+      $subcategoria2 = Category::where('slug', $subcategoria)->firstOrFail();
       $productos = Product::where('status', 1)
-        ->whereHas('category', function ($query) use ($categoria) {
-          $query->where('slug', $categoria->slug);
+        ->whereHas('categories', function ($query) use ($subcategoria) {
+          $query->where('slug', $subcategoria);
         })
         ->get();
-      return view('productos', compact('categoria', 'productos'));
+      return view('productos', [
+        'productos' => $productos,
+        'subcategoria' => $subcategoria2
+      ]);
     }
   }
 
@@ -59,6 +63,8 @@ class ProductosController extends Controller
 
     $subcategoria = Category::where('slug', $subcategoriaSlug)->firstOrFail();
 
+    // dd($categoriaSlug);
+
     return view('producto', [
       'producto' => $producto,
       'categoria' => $categoriaSlug,
@@ -66,8 +72,9 @@ class ProductosController extends Controller
     ]);
   }
 
-  public function productosGeneral(): View
+  public function productosHome(): View
   {
-    return view('productos-general');
+    $subcategorias = Category::where('status', 1)->where('categoryParent_id', '!=', null)->get();
+    return view('productos-home', compact('subcategorias'));
   }
 }

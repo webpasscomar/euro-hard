@@ -2,35 +2,29 @@
 
 @section('content')
     <div class="main-container">
-
-        {{-- Imagen de encabezado --}}
         <div class="container-hero">
             <div class="container-fluid">
                 <div class="container-title-hero">
                     <div class="content-icon-EH-hero">
-                        <img src="{{ asset('images/icono-EH-gris.svg') }}" class="icon-EH-hero">
+                        <img src="images/icono-EH-gris.svg" class="icon-EH-hero">
                     </div>
-                    <h1 class="title-hero">{{ Str::title($categoria->name) }}</h1>
+                    <h1 class="title-hero">Cocina & Lavadero</h1>
                 </div>
             </div>
             <div class="img-hero">
                 <div class="img-overlay"></div>
-                <img
-                    src="{{ $categoria->banner && file_exists(public_path('storage/product_categories/' . $categoria->banner)) ? asset('storage/product_categories/' . $categoria->banner) : asset('img/no_disponible.jpg') }}">
+                <img src="images/slider-home-3.jpg">
             </div>
         </div>
-
-
         <div class="container">
-
             <div class="row">
                 <div class="col">
                     <h5 class="title-category gris">
-                        Categorías - {{ Str::title($categoria->name) }}
+                        <span class="link-breadcrumb">Productos</span>
                     </h5>
                 </div>
             </div>
-
+            {{-- Carousel subcategorias --}}
             <div class="row">
                 <div class="owl-carousel owl-theme">
                     @foreach ($subcategorias as $subcategoria)
@@ -43,7 +37,7 @@
                         @endphp
                         <div class="item item1">
                             <div class="content-cat carrusel-size">
-                                <a href="{{ route('productos.list', [$categoria->slug, $subcategoria->slug]) }}"
+                                <a href="{{ route('productos.subcategoria', [$subcategoria->slug]) }}"
                                     class="link-mas-info">
                                     <div class="img-content-subcat" style="background-image: url({{ $imagePath }})">
                                         <div class="title-cat-column" style="background-color: {{ $subcategoria->color }}">
@@ -62,11 +56,9 @@
                             </div>
                         </div>
                     @endforeach
-
                 </div>
             </div>
         </div>
-
     </div>
 @endsection
 
