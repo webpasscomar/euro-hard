@@ -14,13 +14,21 @@ class ColorTableSeeder extends Seeder
   public function run(): void
   {
     Color::insert([
-      ['color' => '#000000'],
-      ['color' => '#8A9597'],
-      ['color' => '#F4F4F4'],
-      ['color' => '#FFFFFF'],
-      ['color' => '#666666'],
-      ['color' => '#444444'],
-      ['color' => '#777777'],
+      [
+        'color' => '#FF0000',
+        'name' => 'Rojo',
+        'feature' => 'Apoyo',
+      ],
+      [
+        'color' => '#00FF00',
+        'name' => 'Verde',
+        'feature' => 'Estilo',
+      ],
+      [
+        'color' => '#0000FF',
+        'name' => 'Azul',
+        'feature' => 'Puerta',
+      ],
     ]);
   }
 }

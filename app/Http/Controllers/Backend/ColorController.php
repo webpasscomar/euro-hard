@@ -43,6 +43,8 @@ class ColorController extends Controller
     try {
       Color::create([
         'color' => $request->input('color'),
+        'name' => $request->input('name'),
+        'feature' => $request->input('feature'),
       ]);
       toast('Se agregó un nuevo color', 'success');
       return redirect(route('admin.colors.index'));
