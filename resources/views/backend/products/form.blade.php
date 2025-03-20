@@ -310,7 +310,7 @@
                                         old('products', isset($product) ? $product->relatedProducts->pluck('id')->toArray() : [])))>
                             <label class="form-check-label w-100 bg-slate-200 fw-bold px-2 py-1"
                                 for="{{ 'product' . $relatedProduct->id }}" onclick="event.stopPropagation()">
-                                {{ 'COD - ' . $relatedProduct->id }}
+                                {{ Str::upper($relatedProduct->name) }}
                             </label>
                         </div>
                     @empty

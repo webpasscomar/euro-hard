@@ -15,7 +15,7 @@
                 <li class="nav-item"><a href="{{ route('empresa') }}"
                         class="nav-link {{ request()->routeIS('empresa') ? 'active' : '' }}">Empresa</a></li>
                 <li class="nav-item"><a href="{{ route('productos') }}"
-                        class="nav-link {{ request()->routeIS('productos.*') ? 'active' : '' }}"
+                        class="nav-link {{ request()->routeIS('productos*') ? 'active' : '' }}"
                         aria-current="page">Productos</a>
                 </li>
                 <li class="nav-item"><a href="{{ route('catalogo') }}"
