@@ -28,6 +28,8 @@ import {
   Essentials,
   Bold,
   Italic,
+  Underline,
+  Strikethrough,
   Font,
   Paragraph,
   Table,
@@ -35,27 +37,94 @@ import {
   BlockQuote,
   List,
   Heading,
-  Link
+  Link,
+  FindAndReplace,
+  Subscript,
+  Superscript,
+  RemoveFormat,
+  SpecialCharacters,
+  HorizontalLine,
+  Bookmark,
+  Alignment,
+  TodoList,
 } from 'ckeditor5';
 
 
 document.addEventListener('DOMContentLoaded', () => {
 
 
-  ClassicEditor
-    .create(document.querySelector('#editor'), {
-      language: 'es',
-      licenseKey: 'GPL', // Or 'GPL'.
-      plugins: [Essentials, Paragraph, Bold, Italic, Font, Table, Indent, List, BlockQuote, Heading, Link],
-      toolbar: [
-        'undo', 'redo', '|', 'bold', 'italic', '|',
-        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|', 'heading', '|', 'insertTable', '|', 'numberedList', 'bulletedList', '|', 'blockQuote', '|', 'link', '|', 'outdent', '|', 'indent'
-      ]
-    })
-    .then(editor => {
+  ClassicEditor.create(document.querySelector("#editor"), {
+    language: "es",
+    licenseKey: "GPL", // Or 'GPL'.
+    plugins: [
+      Essentials,
+      Paragraph,
+      Bold,
+      Italic,
+      Font,
+      Table,
+      Indent,
+      List,
+      BlockQuote,
+      Heading,
+      Link,
+      FindAndReplace,
+      Underline,
+      Strikethrough,
+      Subscript,
+      Superscript,
+      RemoveFormat,
+      SpecialCharacters,
+      HorizontalLine,
+      Bookmark,
+      Alignment,
+      TodoList,
+    ],
+    toolbar: [
+      "undo",
+      "redo",
+      "|",
+      "FindAndReplace",
+      "bold",
+      "italic",
+      "Underline",
+      "Strikethrough",
+      "Subscript",
+      "Superscript",
+      "RemoveFormat",
+      "|",
+      "fontSize",
+      "fontFamily",
+      "fontColor",
+      "fontBackgroundColor",
+      "|",
+      "SpecialCharacters",
+      "HorizontalLine",
+      "Bookmark",
+      "|",
+      "heading",
+      "|",
+      "insertTable",
+      "|",
+      "Alignment",
+      "|",
+      "numberedList",
+      "bulletedList",
+      "TodoList",
+      "|",
+      "blockQuote",
+      "|",
+      "link",
+      "|",
+      "outdent",
+      "|",
+      "indent",
+    ],
+  })
+    .then((editor) => {
       window.editor = editor;
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error);
     });
 });

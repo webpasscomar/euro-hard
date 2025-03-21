@@ -28,7 +28,7 @@ class ContactRecieveEmail extends Mailable
   {
     return new Envelope(
       subject: 'Nuevo Contacto',
-      to: config('mail.from.address'),
+      to: config('mail.form.contact'),
     );
   }
 

@@ -50,34 +50,45 @@
         </div>
     </div>
 </div>
-{{-- Categoría --}}
+{{-- Categoría/s --}}
 <div class="row">
     <div class="col-md-12">
-        <div class="form-group mb-3">
-            <label for="productCategory_id" class="form-label">Categoria</label><span class="fs-4 text-danger">*</span>
-            <select name="productCategory_id" id="productCategory_id" class="form-select">
-                <option value="">Seleccione una categoria</option>
+        <div class="form-group mb-4">
+            <label for="productCategory_id" class="form-label">Categoria/s</label><span
+                class="fs-4 text-danger">*</span><small class="text-secondary"> - ( seleccione una ó varias )</small>
+            <select name="categories[]" id="categories" class="categories form-select" multiple>
                 @forelse ($productCategories as $category)
-                    <option value="{{ $category->id }}" @selected(old('productCategory_id', $product->productCategory_id ?? '') == $category->id)>{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" @selected(in_array($category->id, old('categories', isset($product) ? $product->categories->pluck('id')->toArray() : [])))>{{ $category->name }}</option>
                 @empty
                     <option class="text-sm text-secondary">No hay ninguna categoria. Ingrese una</option>
                 @endforelse
             </select>
-            @error('productCategory_id')
+            @error('categories')
                 <span class="ms-1 text-danger">{{ $message }}</span>
             @enderror
         </div>
     </div>
 </div>
-{{-- Colores - Nuevo producto --}}
+{{-- Código - Colores - Nuevo producto --}}
 <div class="row">
+    {{-- Código del producto --}}
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="code" class="form-label">Código</label>
+            <input class="form-control" type="text" id="code" name="code"
+                value="{{ old('code', $product->code ?? '') }}">
+            @error('code')
+                <span class="ms-1 text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
     {{-- Colores  --}}
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-group mb-3">
             <label for="image" class="form-label d-flex align-items-center">Colores</label>
             <div class="dropdown">
                 <button
-                    class="d-flex align-items-center justify-content-between btn btn-outline-secondary dropdown-toggle w-100 is-invalid"
+                    class="d-flex align-items-center justify-content-between btn btn-outline-secondary dropdown-toggle w-100 border-1 border-gray-300"
                     type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Seleccione un color
                 </button>
@@ -88,7 +99,7 @@
                                 id="{{ 'color' . $color->id }}" value="{{ $color->id }}"
                                 style="border:1px solid grey;" onclick="event.stopPropagation()"
                                 @checked(in_array($color->id, old('colors', isset($product) ? $product->colors->pluck('id')->toArray() : [])))>
-                            <div style="background-color: {{ $color->color }}">
+                            <div style="border:1px solid grey; background-color: {{ $color->color }}">
                                 <label class="form-check-label w-100" for="{{ 'color' . $color->id }}"
                                     style="opacity: 0;" onclick="event.stopPropagation()">
                                     {{ $color->color }}
@@ -106,7 +117,7 @@
         </div>
     </div>
     {{--  Producto nuevo --}}
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div class="form-group mb-3 text-center mt-3">
             <label for="product_id" class="form-label">Producto nuevo</label>
             <div class="form-check form-switch">
@@ -299,7 +310,7 @@
                                         old('products', isset($product) ? $product->relatedProducts->pluck('id')->toArray() : [])))>
                             <label class="form-check-label w-100 bg-slate-200 fw-bold px-2 py-1"
                                 for="{{ 'product' . $relatedProduct->id }}" onclick="event.stopPropagation()">
-                                {{ 'COD - ' . $relatedProduct->id }}
+                                {{ Str::upper($relatedProduct->name) }}
                             </label>
                         </div>
                     @empty
@@ -432,7 +443,6 @@
     </div>
 </div>
 
-
 {{-- Imágenes previas - muetra de colores previos --}}
 @push('js')
     <script>
@@ -500,5 +510,12 @@
             const slug = document.querySelector('#slug');
             slug.value = generateSlug(name.value);
         }
+
+        // Implementación de select multiple con Select2 para elegir las categorias
+        $(document).ready(function() {
+            $('.categories').select2({
+                theme: "classic",
+            });
+        });
     </script>
 @endpush

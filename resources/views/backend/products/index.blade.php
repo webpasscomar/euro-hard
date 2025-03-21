@@ -17,7 +17,7 @@
                         <tr>
                             <th class="text-left">Cod.</th>
                             <th class="text-left align-middle">Producto</th>
-                            <th class="text-left align-middle">Categoría</th>
+                            <th class="text-left align-middle">Categoría/s</th>
                             <th class="text-left align-middle">Imágen</th>
                             <th class="text-left align-middle">Publicado</th>
                             <th class="text-left align-middle">Acciones</th>
@@ -28,7 +28,11 @@
                             <tr>
                                 <td class="align-middle text-left">{{ $product->id }}</td>
                                 <td class="align-middle text-left">{{ $product->name }}</td>
-                                <td class="align-middle text-left">{{ $product->category->name }}</td>
+                                <td class="align-middle text-left">
+                                    @foreach ($product->categories->pluck('name')->toArray() as $category)
+                                        <span>{{ $loop->last ? Str::title($category) : Str::title($category) . ' | ' }}</span>
+                                    @endforeach
+                                </td>
                                 <td class="align-middle text-left">
                                     <img src="{{ isset($product->image_main) && file_exists(public_path('storage/products/' . $product->image_main)) ? asset('storage/products/' . $product->image_main) : asset('img/Imagen-no-disponible.png') }}"
                                         alt="{{ $product->name }}" class="img-fluid" width="40" height="40">

@@ -17,13 +17,13 @@ class Product extends Model
     'slug',
     'description',
     'image_main',
+    'code',
     'image_1',
     'image_2',
     'image_3',
     'image_4',
     'image_5',
     'image_6',
-    'productCategory_id',
     'video',
     'is_new',
     'information',
@@ -41,10 +41,10 @@ class Product extends Model
     return $this->belongsToMany(Color::class, 'color_products', 'product_id', 'color_id');
   }
 
-  // Relación Categoria
-  public function category(): BelongsTo
+  // Relación Categoria/s
+  public function categories(): BelongsToMany
   {
-    return $this->belongsTo(ProductCategory::class, 'productCategory_id');
+    return $this->belongsToMany(Category::class, 'category_products', 'product_id', 'category_id');
   }
 
   // Relación otros productos

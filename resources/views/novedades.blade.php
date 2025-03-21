@@ -39,9 +39,9 @@
                                 <div class="col-lg-6 col-md-6 p-3 content-product">
                                     <div id="carouselNove1" class="carousel slide carousel-fade" data-bs-ride="carousel">
                                         <!--<div class="carousel-indicators">
-                                                                                                                                <button type="button" data-bs-target="#carouselNove1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                                                                                                <button type="button" data-bs-target="#carouselNove1" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                                                                                            </div>-->
+                                                                                                                                    <button type="button" data-bs-target="#carouselNove1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                                                                                                                    <button type="button" data-bs-target="#carouselNove1" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                                                                                                                </div>-->
                                         <div class="carousel-inner carrusel-product">
                                             <div class="carousel-item active">
                                                 <img src="{{ $novedad->image_path }}" class="d-block w-100"
@@ -182,7 +182,7 @@
 @push('js')
     <script>
         $('.owl-carousel').owlCarousel({
-            loop: true,
+            loop: false,
             margin: 20,
             nav: true,
             responsive: {

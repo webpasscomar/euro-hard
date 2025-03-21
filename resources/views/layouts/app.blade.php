@@ -55,8 +55,8 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" crossorigin="anonymous"> --}}
     </script>
     <!-- Scripts -->
-    @vite(['resources/css/style.css', 'resources/js/app.js'])
     @stack('head')
+    @vite(['resources/css/style.css', 'resources/js/app.js'])
 
 </head>
 
@@ -78,6 +78,28 @@
     @include('layouts.partials.footer')
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('vendor/owlCarousel/dist/owl.carousel.min.js') }}"></script>
+    <script src={{ 'https://www.google.com/recaptcha/api.js?render=' . config('services.recaptcha.site_key') }}></script>
+    <script>
+        document.addEventListener('submit', (e) => {
+            e.preventDefault();
+            grecaptcha.ready(function() {
+                grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', {
+                    action: 'submit'
+                }).then(function(token) {
+                    let form = e.target;
+                    let input = document.createElement('input');
+                    input.type = "hidden";
+                    input.name = "g-recaptcha-response";
+                    input.value = token;
+
+                    form.appendChild(input);
+                    form.submit();
+                });
+            });
+        });
+    </script>
+
+
     @stack('js')
 </body>
 
