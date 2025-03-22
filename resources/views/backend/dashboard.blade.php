@@ -83,12 +83,12 @@
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-            {{--      categorias --}}
+            {{--  categorias - ( Ambientes y Capítulos ) --}}
             <div class="col-md-3 col-12">
                 <div class="small-box bg-pink-500 text-white">
                     <div class="inner">
                         <h3>0</h3>
-                        <h5>Categorías</h5>
+                        <h5>Ambientes & Capítulos</h5>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>

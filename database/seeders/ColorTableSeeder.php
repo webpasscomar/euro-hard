@@ -29,6 +29,31 @@ class ColorTableSeeder extends Seeder
         'name' => 'Azul',
         'feature' => 'Puerta',
       ],
+      [
+        'color' => '#339966',
+        'name' => 'Teal',
+        'feature' => 'Ventana',
+      ],
+      [
+        'color' => '#663399',
+        'name' => 'Purple',
+        'feature' => 'Piso',
+      ],
+      [
+        'color' => '#993380',
+        'name' => 'Fucsia',
+        'feature' => 'Puerta',
+      ],
+      [
+        'color' => '#339999',
+        'name' => 'Cyan',
+        'feature' => 'ventana',
+      ],
+      [
+        'color' => '#996633',
+        'name' => 'Naranja',
+        'feature' => 'Detalle',
+      ],
     ]);
   }
 }

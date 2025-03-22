@@ -329,7 +329,7 @@ return [
       'icon' => 'fas fa-fw fa-palette',
     ],
     [
-      'text' => 'Categorias',
+      'text' => 'Ambientes & Capítulos',
       'route' => 'admin.productCategory.index',
       'icon' => 'fas fa-fw fa-sitemap',
     ],

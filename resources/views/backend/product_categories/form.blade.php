@@ -40,7 +40,7 @@
 
 
     {{-- Color --}}
-    <div class="col-md-4">
+    <div class="col-md-2">
         <div class="form-group mb-3">
             <label for="image" class="form-label d-flex align-items-center mb-1">Color <span
                     class="fs-4 text-danger flex-1">*</span>
@@ -81,20 +81,19 @@
         </div>
     </div>
 
-    {{-- categoria padre --}}
-    <div class="col-md-4 mt-2">
+    {{-- categoria/s padre (Ambientes) --}}
+    <div class="col-md-6 mt-2">
         <div class="form-group mb-3">
-            <label for="categoryParent_id" class="form-label">Categoria Padre</label>
-            <select name="categoryParent_id" id="categoryParent_id" class="form-select">
-                <option value="">Seleccione una categoria</option>
+            <label for="categoryParent" class="form-label">Ambientes</label><small class="text-secondary"> - (
+                seleccione uno ó varios )</small>
+            <select name="categories[]" id="categoryParent" class="categories form-select" multiple>
                 @forelse ($productCategories as $category)
-                    <option value="{{ $category->id }}" @selected(old('categoryParent_id', $productCategory->categoryParent_id ?? '') == $category->id)>
-                        {{ $category->name }}</option>
+                    <option value="{{ $category->id }}" @selected(in_array($category->id, old('categories', isset($productCategory) ? $productCategory->parents->pluck('id')->toArray() : [])))>{{ $category->name }}</option>
                 @empty
                     <option class="text-sm text-secondary">No hay ninguna categoria. Ingrese una</option>
                 @endforelse
             </select>
-            @error('categoryParent_id')
+            @error('categories')
                 <span class="ms-1 text-danger">{{ $message }}</span>
             @enderror
         </div>
@@ -235,5 +234,12 @@
             const slug = document.querySelector('#slug');
             slug.value = generateSlug(name.value);
         }
+
+        // Implementación de select multiple con Select2 para elegir las categorias
+        $(document).ready(function() {
+            $('.categories').select2({
+                theme: "classic",
+            });
+        });
     </script>
 @endpush

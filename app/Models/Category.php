@@ -21,17 +21,17 @@ class Category extends Model
     'image',
     'banner',
     'status',
-    'categoryParent_id'
   ];
 
-  public function parent(): BelongsTo
+  // Relación entre categorias padres e hijas de muchos a muchos
+  public function parents(): BelongsToMany
   {
-    return $this->belongsTo(Category::class, 'categoryParent_id');
+    return $this->belongsToMany(Category::class, 'category_categories', 'child_id', 'parent_id');
   }
 
-  public function childrens(): HasMany
+  public function children(): BelongsToMany
   {
-    return $this->hasMany(Category::class, 'categoryParent_id');
+    return $this->belongsToMany(Category::class, 'category_categories', 'parent_id', 'child_id');
   }
 
   // Relación productos - muchos a muchos
@@ -44,7 +44,7 @@ class Category extends Model
   {
     $this->update(['status' => 0]);
 
-    foreach ($this->childrens as $child) {
+    foreach ($this->children as $child) {
       $child->inactiveWithRelations();
     }
 
@@ -57,7 +57,7 @@ class Category extends Model
   {
     $this->update(['status' => 1]);
 
-    foreach ($this->childrens as $child) {
+    foreach ($this->children as $child) {
       $child->activeWithRelations();
     }
 

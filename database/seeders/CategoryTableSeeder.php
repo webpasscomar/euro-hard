@@ -20,10 +20,9 @@ class CategoryTableSeeder extends Seeder
           'name' => 'Cocina y Lavadero',
           'slug' => 'cocina-y-lavadero',
           'feature' => null,
-          'color' => '#FFFFFF',
+          'color' => '#FF0000',
           'image' => 'cat-coc-lav.png',
           'banner' => '1_product_category_banner_banner_cocina.jpg',
-          'categoryParent_id' => null,
           'status' => 1,
           'created_at' => now(),
           'updated_at' => now(),
@@ -32,10 +31,9 @@ class CategoryTableSeeder extends Seeder
           'name' => 'Living',
           'slug' => 'living',
           'feature' => null,
-          'color' => '#FFFFFF',
+          'color' => '#00FF00',
           'image' => 'cat-liv.png',
           'banner' => 'banner-cat.jpg',
-          'categoryParent_id' => null,
           'status' => 1,
           'created_at' => now(),
           'updated_at' => now(),
@@ -44,10 +42,9 @@ class CategoryTableSeeder extends Seeder
           'name' => 'Dormitorio',
           'slug' => 'dormitorio',
           'feature' => null,
-          'color' => '#FFFFFF',
+          'color' => '#0000FF',
           'image' => 'cat-dorm.png',
           'banner' => 'banner-cat.jpg',
-          'categoryParent_id' => null,
           'status' => 1,
           'created_at' => now(),
           'updated_at' => now(),
@@ -56,10 +53,9 @@ class CategoryTableSeeder extends Seeder
           'name' => 'Novedades',
           'slug' => 'novedades',
           'feature' => null,
-          'color' => '#FFFFFF',
+          'color' => '#996633',
           'image' => 'cat-noved.png',
           'banner' => 'banner-cat.jpg',
-          'categoryParent_id' => null,
           'status' => 1,
           'created_at' => now(),
           'updated_at' => now(),
@@ -68,11 +64,10 @@ class CategoryTableSeeder extends Seeder
           'name' => 'Tiradores y Manijas',
           'slug' => 'tiradores-y-manijas',
           'feature' => null,
-          'color' => '#666666',
+          'color' => '#339999',
           'image' => 'cat-01.jpg',
           'banner' => 'banner-cat.jpg',
           'status' => 1,
-          'categoryParent_id' => 1,
           'created_at' => now(),
           'updated_at' => now(),
         ],
@@ -80,11 +75,10 @@ class CategoryTableSeeder extends Seeder
           'name' => 'Bisagras',
           'slug' => 'bisagras',
           'feature' => null,
-          'color' => '#444444',
+          'color' => '#663399',
           'image' => 'cat-02.jpg',
           'banner' => 'banner-cat.jpg',
           'status' => 1,
-          'categoryParent_id' => 1,
           'created_at' => now(),
           'updated_at' => now(),
         ],
@@ -92,11 +86,10 @@ class CategoryTableSeeder extends Seeder
           'name' => 'Canasteria',
           'slug' => 'canasteria',
           'feature' => null,
-          'color' => '#444444',
+          'color' => '#339966',
           'image' => 'cat-03.jpg',
           'banner' => 'banner-cat.jpg',
           'status' => 1,
-          'categoryParent_id' => 1,
           'created_at' => now(),
           'updated_at' => now(),
         ],
@@ -104,15 +97,27 @@ class CategoryTableSeeder extends Seeder
           'name' => 'Soportes y Unión',
           'slug' => 'soportes-y-union',
           'feature' => null,
-          'color' => '#777777',
+          'color' => '#993380',
           'image' => 'cat-04.jpg',
           'banner' => 'banner-cat.jpg',
           'status' => 1,
-          'categoryParent_id' => 1,
           'created_at' => now(),
           'updated_at' => now(),
         ],
       ]
     );
+
+    // Relacionar las categorías con las subcategorías - Relación entre padres e hijas
+    $cocina = Category::findORFail(1);
+    $living = Category::findORFail(2);
+    $dormitorio = Category::findORFail(3);
+    $novedades = Category::findORFail(4);
+    $tiradores = Category::findORFail(5);
+    $bisagras = Category::findORFail(6);
+    $canasteria = Category::findORFail(7);
+    $soportes = Category::findORFail(8);
+
+    // Le asignamos las subcategorías a la categoría Cocina y Lavadero
+    $cocina->children()->attach([$tiradores->id, $bisagras->id, $canasteria->id, $soportes->id]);
   }
 }
