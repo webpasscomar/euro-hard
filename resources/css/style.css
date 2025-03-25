@@ -600,7 +600,7 @@ h1.title-carrusel {
 }
 
 .title-cat-column {
-  background: var(--eurohard);
+  /* background: var(--eurohard); */
   color: var(--blanco);
   text-align: center;
   font-size: 24px;
@@ -610,7 +610,8 @@ h1.title-carrusel {
 }
 
 .content-cat:hover .title-cat-column {
-  background: var(--negro);
+  /* background: var(--negro); */
+  background: #333333 !important;
 }
 
 .footer-content-cat-home {
@@ -644,6 +645,12 @@ h1.title-carrusel {
   height: 5px;
   width: calc(100% - 70px);
   display: flex;
+}
+
+/* Estilo linea de color de subcategorias en las card de categoria */
+.cat-color-line{
+  width: calc(100% / 6);
+  margin: 0 2px 0 0;
 }
 
 .cat-color-line-soporte {

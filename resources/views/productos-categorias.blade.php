@@ -26,7 +26,8 @@
             <div class="row">
                 <div class="col">
                     <h5 class="title-category gris">
-                        Categorías - {{ Str::title($categoria->name) }}
+                        <a href="{{ route('home') }}" class="link-breadcrumb">Categorias</a> - <span
+                            class="negro">{{ Str::title($categoria->name) }}</span>
                     </h5>
                 </div>
             </div>
@@ -52,7 +53,7 @@
                                     </div>
                                     <div class="footer-content-cat-home">
                                         <div class="cat-capitulo">
-                                            <span class="estilo">{{ $subcategoria->feature }}</span>
+                                            <span class="estilo">{{ Str::ucfirst($subcategoria->feature) }}</span>
                                         </div>
                                         <div class="btn-mas-info">
                                             + info

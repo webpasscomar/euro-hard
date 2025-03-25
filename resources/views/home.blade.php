@@ -99,13 +99,13 @@
                     @endforeach
                 </div>
                 <!--<button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                                                                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                                          <span class="visually-hidden">Previous</span>
-                                                                      </button>
-                                                                      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                                                                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                                          <span class="visually-hidden">Next</span>
-                                                                      </button>-->
+                                                                                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                          <span class="visually-hidden">Previous</span>
+                                                                                      </button>
+                                                                                      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                                                                                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                          <span class="visually-hidden">Next</span>
+                                                                                      </button>-->
             </div>
         </div>
         <div class="container">
@@ -130,15 +130,18 @@
                             {{-- {{ route('noticia.show', [$noticia->categoria->slug, $noticia->slug]) }} --}}
                             <a href="{{ route('productos.categorias', [$categoria->slug]) }}" class="link-mas-info">
                                 <div class="img-content-cat" style="background-image: url({{ $categoriaImage }})">
-                                    <div class="title-cat-column" style="background-color: {{ $categoria->color }}">
+                                    <div class="title-cat-column" style="background: {{ $categoria->color }}">
                                         {{ $categoria->name }}
                                     </div>
                                 </div>
                                 <div class="footer-content-cat-home">
                                     <div class="color-cat">
-                                        <div class="cat-color-line-soporte"></div>
+                                        @foreach ($categoria->children as $categoria)
+                                            <div class="cat-color-line" style="background: {{ $categoria->color }}"></div>
+                                        @endforeach
+                                        {{-- <div class="cat-color-line-soporte"></div>
                                         <div class="cat-color-line-conexion"></div>
-                                        <div class="cat-color-line-productividad"></div>
+                                        <div class="cat-color-line-productividad"></div> --}}
                                     </div>
                                     <div class="btn-mas-info">
                                         + info

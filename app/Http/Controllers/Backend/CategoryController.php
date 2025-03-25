@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Color;
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -27,7 +28,9 @@ class CategoryController extends Controller
   public function create(): View
   {
     $edit = false;
-    $productCategories = Category::where('status', 1)->get();
+    $productCategories = Category::where('status', 1)
+      ->whereDoesntHave(('parents'))
+      ->get();
     $colors = Color::all();
     return view('backend.product_categories.create', compact('colors', 'productCategories', 'edit'));
   }
@@ -35,7 +38,7 @@ class CategoryController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(CategoryRequest $request)
+  public function store(CategoryRequest $request): RedirectResponse
   {
     // $request->validated();
     try {
@@ -56,7 +59,7 @@ class CategoryController extends Controller
         $banner_name = '';
       }
       // Crear categoria
-      Category::create([
+      $productCategory = Category::create([
         'name' => $request->input('name'),
         'color' => $request->input('color'),
         'slug' => $request->input('slug'),
@@ -66,6 +69,12 @@ class CategoryController extends Controller
         'status' => 1,
         'categoryParent_id' => $request->input('categoryParent_id'),
       ]);
+
+      // Sincronizar las categorias padres
+      if ($request->input('categories')) {
+        $productCategory->parents()->sync($request->input('categories'));
+      };
+
       toast('Se agregó una nueva categoría', 'success');
       return redirect()->route('admin.productCategory.index');
     } catch (\Throwable $th) {
@@ -88,9 +97,10 @@ class CategoryController extends Controller
    */
   public function edit(Category $productCategory): View
   {
+    // dd($productCategory->parents);
     $colors = Color::all();
     $productCategories = Category::where('status', 1)
-      ->where('id', '!=', $productCategory->id)
+      ->whereDoesntHave(('parents'))
       ->get();
     $edit = true;
     return view('backend.product_categories.edit', compact('productCategory', 'colors', 'productCategories', 'edit'));
@@ -101,6 +111,7 @@ class CategoryController extends Controller
    */
   public function update(CategoryRequest $request, Category $productCategory)
   {
+
     $request->validated();
     // dd($request->all());
     try {
@@ -138,6 +149,13 @@ class CategoryController extends Controller
         'banner' => $banner_name,
         'categoryParent_id' => $request->input('categoryParent_id'),
       ]);
+
+      // Sincronizar las categorias padres
+      if ($request->input('categories')) {
+        $productCategory->parents()->sync($request->input('categories'));
+      };
+
+
       toast('La categoría se actualizo correctamente', 'success');
       return redirect()->route('admin.productCategory.index');
     } catch (\Throwable $th) {

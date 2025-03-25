@@ -21,8 +21,8 @@ class HomeController extends Controller
       ->orderBy('order', 'asc')
       ->get();
     // $categoriasPadre = ProductCategory::get();
-    $categoriasPadre = Category::whereNull('categoryParent_id')
-      ->where('status', 1)
+    $categoriasPadre = Category::where('status', 1)
+      ->whereDoesntHave('parents')
       ->get();
 
     return view('home', compact('sliders', 'categoriasPadre'));

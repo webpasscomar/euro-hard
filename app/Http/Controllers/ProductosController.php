@@ -21,7 +21,7 @@ class ProductosController extends Controller
       ->firstOrFail();
 
     // if ($categoria->childrens()->exists()) {
-    $subcategorias = $categoria->childrens;
+    $subcategorias = $categoria->children;
     return view('productos-categorias', compact('categoria', 'subcategorias'));
     // } else {
     // return $this->productos($categoria);
@@ -74,7 +74,9 @@ class ProductosController extends Controller
 
   public function productosHome(): View
   {
-    $subcategorias = Category::where('status', 1)->where('categoryParent_id', '!=', null)->get();
+    $subcategorias = Category::where('status', 1)
+      ->whereHas('parents')
+      ->get();
     return view('productos-home', compact('subcategorias'));
   }
 }

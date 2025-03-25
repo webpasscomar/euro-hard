@@ -47,6 +47,9 @@ import {
   Bookmark,
   Alignment,
   TodoList,
+  TableToolbar,
+  TableProperties,
+  TableCellProperties
 } from 'ckeditor5';
 
 
@@ -79,6 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
       Bookmark,
       Alignment,
       TodoList,
+      TableToolbar,
+      TableProperties,
+      TableCellProperties
     ],
     toolbar: [
       "undo",
@@ -120,6 +126,15 @@ document.addEventListener('DOMContentLoaded', () => {
       "|",
       "indent",
     ],
+    table: {
+      contentToolbar: [
+        "tableColumn",
+        "tableRow",
+        "mergeTableCells",
+        "tableCellProperties",
+        "tableProperties",
+      ],
+    },
   })
     .then((editor) => {
       window.editor = editor;
