@@ -31,6 +31,8 @@ return new class extends Migration {
       $table->boolean('instruction_button')->default(false);
       $table->string('keywordsSEO')->nullable();
       $table->string('descriptionSEO')->nullable();
+      $table->string('material')->nullable();
+      $table->integer('orderNumber')->default(0);
       $table->tinyInteger('status')->default(1);
       $table->timestamps();
       $table->softDeletes();

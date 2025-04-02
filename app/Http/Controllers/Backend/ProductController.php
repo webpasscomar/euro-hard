@@ -46,6 +46,8 @@ class ProductController extends Controller
   public function store(ProductRequest $request): RedirectResponse
   {
     $request->validated();
+
+    // dd($request);
     try {
       //      generar nombre de imágen principal y guardarla
       if ($request->hasFile('image_main')) {
@@ -144,6 +146,8 @@ class ProductController extends Controller
         'instruction_button' => (bool)$request->input('instruction_button'),
         'keywordsSEO' => $request->input('keywordsSEO'),
         'descriptionSEO' => $request->input('descriptionSEO'),
+        'material' => $request->input('material'),
+        'orderNumber' => $request->input('orderNumber'),
         'status' => 1
       ]);
 
@@ -341,6 +345,8 @@ class ProductController extends Controller
         'instruction_button' => (bool)$request->input('instruction_button'),
         'keywordsSEO' => $request->input('keywordsSEO'),
         'descriptionSEO' => $request->input('descriptionSEO'),
+        'material' => $request->input('material'),
+        'orderNumber' => $request->input('orderNumber'),
         'status' => $product->status,
       ]);
 

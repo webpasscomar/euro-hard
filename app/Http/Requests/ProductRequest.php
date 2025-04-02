@@ -53,7 +53,9 @@ class ProductRequest extends FormRequest
       'datasheet_file' => 'mimes:pdf|max:2048',
       'instruction_file' => 'mimes:pdf|max:2048',
       'keywordsSEO' => 'max:255',
-      'descriptionSEO' => 'max:255'
+      'descriptionSEO' => 'max:255',
+      'material' => 'nullable',
+      'orderNumber' => 'integer',
     ];
   }
 
@@ -111,6 +113,7 @@ class ProductRequest extends FormRequest
       'instruction_file.max' => 'Tamaño no permitido. Máximo 2mb',
       'keywordSEO.max' => 'Máximo permitido 255 caracteres',
       'descriptionSEO.max' => 'Máximo permitido 255 caracteres',
+      'orderNumber.integer' => 'El valor debe ser un número entero',
     ];
   }
 }
