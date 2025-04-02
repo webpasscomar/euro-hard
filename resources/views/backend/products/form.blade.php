@@ -427,6 +427,7 @@
   {{-- Imágenes - Mostrar la vista previa y en el modo editar --}}
   @if ($edit)
     <h6 class="fw-bold fs-5 mb-4">Imágenes</h6>
+<<<<<<< HEAD
   @endif
   <div class="d-sm-flex flex-wrap gap-y-5">
     {{--  Vista previa imágen principal --}}
@@ -505,12 +506,104 @@
             alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
         @endisset
       @endif
+=======
+@endif
+<div class="d-sm-flex flex-wrap gap-3">
+    {{--  Vista previa imágen principal --}}
+    <div id="imgMainPreview">
+        @if ($edit)
+            @isset($product->image_main)
+                <h6 class="fw-bold my-2">Imágen principal</h6>
+                <img src="{{ file_exists(public_path('storage/products/' . $product->image_main)) ? asset('storage/products/' . $product->image_main) : asset('img/no_disponible.jpg') }}"
+                    alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
+            @endisset
+        @endif
+    </div>
+    {{--  Vista previa imágen  1 --}}
+    <div id="img1Preview" class="mt-3 mt-sm-0">
+        @if ($edit)
+            @isset($product->image_1)
+                <div class="d-flex mb-1 align-items-center">
+                    <h6 class="fw-bold flex-grow-1">Imágen 1</h6>
+                    <livewire:components.delete-image field="image_1" :product="$product" />
+                </div>
+                <img src="{{ file_exists(public_path('storage/products/' . $product->image_1)) ? asset('storage/products/' . $product->image_1) : asset('img/no_disponible.jpg') }}"
+                    alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
+            @endisset
+        @endif
+    </div>
+    {{--  Vista previa imágen  2 --}}
+    <div id="img2Preview" class="mt-3 mt-sm-0">
+        @if ($edit)
+            @isset($product->image_2)
+                <div class="d-flex mb-1 align-items-center">
+                    <h6 class="fw-bold flex-grow-1">Imágen 2</h6>
+                    <livewire:components.delete-image field="image_2" :product="$product" />
+                </div>
+                <img src="{{ file_exists(public_path('storage/products/' . $product->image_2)) ? asset('storage/products/' . $product->image_2) : asset('img/no_disponible.jpg') }}"
+                    alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
+            @endisset
+        @endif
+    </div>
+    {{--  Vista previa imágen  3 --}}
+    <div id="img3Preview" class="mt-3 mt-sm-0">
+        @if ($edit)
+            @isset($product->image_3)
+                <div class="d-flex mb-1 align-items-center">
+                    <h6 class="fw-bold flex-grow-1">Imágen 3</h6>
+                    <livewire:components.delete-image field="image_3" :product="$product" />
+                </div>
+                <img src="{{ file_exists(public_path('storage/products/' . $product->image_3)) ? asset('storage/products/' . $product->image_3) : asset('img/no_disponible.jpg') }}"
+                    alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
+            @endisset
+        @endif
+    </div>
+    {{--  Vista previa imágen  4 --}}
+    <div id="img4Preview" class="mt-3 mt-sm-0">
+        @if ($edit)
+            @isset($product->image_4)
+                <div class="d-flex mb-1 align-items-center">
+                    <h6 class="fw-bold flex-grow-1">Imágen 4</h6>
+                    <livewire:components.delete-image field="image_4" :product="$product" />
+                </div>
+                <img src="{{ file_exists(public_path('storage/products/' . $product->image_4)) ? asset('storage/products/' . $product->image_4) : asset('img/no_disponible.jpg') }}"
+                    alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
+            @endisset
+        @endif
+    </div>
+    {{--  Vista previa imágen  5 --}}
+    <div id="img5Preview" class="mt-3 mt-sm-0">
+        @if ($edit)
+            @isset($product->image_5)
+                <div class="d-flex mb-1 align-items-center">
+                    <h6 class="fw-bold flex-grow-1">Imágen 5</h6>
+                    <livewire:components.delete-image field="image_5" :product="$product" />
+                </div>
+                <img src="{{ file_exists(public_path('storage/products/' . $product->image_5)) ? asset('storage/products/' . $product->image_5) : asset('img/no_disponible.jpg') }}"
+                    alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
+            @endisset
+        @endif
+    </div>
+    {{--  Vista previa imágen  6 --}}
+    <div id="img6Preview" class="mt-3 mt-sm-0">
+        @if ($edit)
+            @isset($product->image_6)
+                <div class="d-flex mb-1 align-items-center">
+                    <h6 class="fw-bold flex-grow-1">Imágen 6</h6>
+                    <livewire:components.delete-image field="image_6" :product="$product" />
+                </div>
+                <img src="{{ file_exists(public_path('storage/products/' . $product->image_6)) ? asset('storage/products/' . $product->image_6) : asset('img/no_disponible.jpg') }}"
+                    alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
+            @endisset
+        @endif
+>>>>>>> EH-36
     </div>
   </div>
 
   {{-- Imágenes previas - muetra de colores previos --}}
   @push('js')
     <script>
+<<<<<<< HEAD
       //  Vista previa de la imágen
       const imageMainPreview = (event) => {
         const containerPreview = document.querySelector('#imgMainPreview');
@@ -530,6 +623,73 @@
             `object-fit:cover; width:200px; max-width:200px; min-width:200px;height:120px; min-height:120px; max-height:120px;`
           );
           containerPreview.appendChild(image);
+=======
+        //  Vista previa de la imágen
+        const imageMainPreview = (event) => {
+            const containerPreview = document.querySelector('#imgMainPreview');
+            containerPreview.innerHTML = '';
+            const title = document.createElement('h6');
+            title.style.fontWeight = 'bold';
+            title.textContent = 'Vista Previa Imágen';
+            title.className = 'my-2';
+            containerPreview.appendChild(title);
+            let reader = new FileReader();
+
+            reader.onload = (event) => {
+                const image = document.createElement('img');
+                image.src = event.target.result;
+                image.alt = 'vista previa imágen principal';
+                image.className = 'img-thumbnail';
+                image.setAttribute('style',
+                    `object-fit:cover; width:200px; max-width:200px; min-width:200px;height:120px; min-height:120px; max-height:120px;`
+                );
+                containerPreview.appendChild(image);
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        };
+        // //  Vista previa imágen banner
+        const imageGalleryPreview = (event, number) => {
+            const containerBannerPreview = document.querySelector(`#img${number}Preview`);
+            containerBannerPreview.innerHTML = '';
+            const title = document.createElement('h6');
+            title.style.fontWeight = 'bold';
+            title.textContent = 'Vista Previa Imágen ' + number;
+            title.className = 'my-2';
+            containerBannerPreview.appendChild(title);
+            let reader = new FileReader();
+
+            reader.onload = (event) => {
+                const imageBanner = document.createElement('img');
+                imageBanner.src = event.target.result;
+                imageBanner.alt = 'vista previa banner';
+                imageBanner.className = 'img-thumbnail';
+                imageBanner.setAttribute('style',
+                    `object-fit:cover; width:200px; max-width:200px; min-width:200px;height:120px; min-height:120px; max-height:120px;`
+                );
+                containerBannerPreview.appendChild(imageBanner);
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        };
+        // Generar slug desde el nombre
+        const generateSlug = (name) => {
+            // Convierte a minúsculas
+            let slug = name.toLowerCase();
+
+            // Elimina caracteres especiales y espacios
+            slug = slug.replace(/[^a-z0-9\s-]/g, '');
+            slug = slug.replace(/\s+/g, '-');
+
+            // Ajusta la longitud máxima (opcional)
+            slug = slug.substring(0, 100);
+
+            return slug;
+        }
+        // Escribir el slug automáticamente
+        function autocompleteSlug() {
+            const name = document.querySelector('#name');
+            const slug = document.querySelector('#slug');
+            slug.value = generateSlug(name.value);
+>>>>>>> EH-36
         }
         reader.readAsDataURL(event.target.files[0]);
       };
@@ -581,6 +741,29 @@
         $('.categories').select2({
           theme: "classic",
         });
+<<<<<<< HEAD
       });
+=======
+
+        Livewire.on('delete-image', (field) => {
+            Swal.fire({
+                title: "Eliminar imágen?",
+                text: "Esta acción no se podrá revertir!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Cancelar",
+                confirmButtonText: "Si, Eliminar!"
+            }).then((result) => {
+                // alert('ELiminar: ' + field);
+                if (result.isConfirmed) {
+                    Livewire.dispatch('delete', {
+                        field: field,
+                    });
+                }
+            });
+        });
+>>>>>>> EH-36
     </script>
   @endpush
