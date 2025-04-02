@@ -733,7 +733,8 @@ h1.title-carrusel {
 /* --HERO CATEGORIA */
 .container-hero {
   width: 100%;
-  height: 480px;
+  /* height: 100%; */
+  /* height: 480px; */
   overflow: hidden;
   position: relative;
   margin: 0 0 24px 0;
