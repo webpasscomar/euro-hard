@@ -66,12 +66,12 @@
                                             class="d-block w-100" alt="{{ $producto->name }}">
                                     </div>
                                     @for ($i = 1; $i <= 6; $i++)
-                                        @if (!empty($producto->{'image_' . $i}))
-                                            <div class="carousel-item">
-                                                <img src="{{ $producto->{'image_' . $i} && file_exists(public_path('storage/products/' . $producto->{'image_' . $i})) ? asset('storage/products/' . $producto->{'image_' . $i}) : asset('img/no_disponible.jpg') }}"
-                                                    class="d-block w-100" alt="{{ $producto->name }}">
-                                            </div>
-                                        @endif
+                                        {{-- @if (!empty($producto->{'image_' . $i})) --}}
+                                        <div class="carousel-item">
+                                            <img src="{{ $producto->{'image_' . $i} && file_exists(public_path('storage/products/' . $producto->{'image_' . $i})) ? asset('storage/products/' . $producto->{'image_' . $i}) : asset('img/no_disponible.jpg') }}"
+                                                class="d-block w-100" alt="{{ $producto->name }}">
+                                        </div>
+                                        {{-- @endif --}}
                                     @endfor
                                 </div>
                             </div>

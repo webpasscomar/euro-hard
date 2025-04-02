@@ -370,12 +370,12 @@
 @if ($edit)
     <h6 class="fw-bold fs-5 mb-4">Imágenes</h6>
 @endif
-<div class="d-sm-flex flex-wrap gap-y-5">
+<div class="d-sm-flex flex-wrap gap-3">
     {{--  Vista previa imágen principal --}}
     <div id="imgMainPreview">
         @if ($edit)
             @isset($product->image_main)
-                <h6 class="fw-bold">Imágen principal</h6>
+                <h6 class="fw-bold my-2">Imágen principal</h6>
                 <img src="{{ file_exists(public_path('storage/products/' . $product->image_main)) ? asset('storage/products/' . $product->image_main) : asset('img/no_disponible.jpg') }}"
                     alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
             @endisset
@@ -385,7 +385,10 @@
     <div id="img1Preview" class="mt-3 mt-sm-0">
         @if ($edit)
             @isset($product->image_1)
-                <h6 class="fw-bold">Imágen 1</h6>
+                <div class="d-flex mb-1 align-items-center">
+                    <h6 class="fw-bold flex-grow-1">Imágen 1</h6>
+                    <livewire:components.delete-image field="image_1" :product="$product" />
+                </div>
                 <img src="{{ file_exists(public_path('storage/products/' . $product->image_1)) ? asset('storage/products/' . $product->image_1) : asset('img/no_disponible.jpg') }}"
                     alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
             @endisset
@@ -395,7 +398,10 @@
     <div id="img2Preview" class="mt-3 mt-sm-0">
         @if ($edit)
             @isset($product->image_2)
-                <h6 class="fw-bold">Imágen 2</h6>
+                <div class="d-flex mb-1 align-items-center">
+                    <h6 class="fw-bold flex-grow-1">Imágen 2</h6>
+                    <livewire:components.delete-image field="image_2" :product="$product" />
+                </div>
                 <img src="{{ file_exists(public_path('storage/products/' . $product->image_2)) ? asset('storage/products/' . $product->image_2) : asset('img/no_disponible.jpg') }}"
                     alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
             @endisset
@@ -405,7 +411,10 @@
     <div id="img3Preview" class="mt-3 mt-sm-0">
         @if ($edit)
             @isset($product->image_3)
-                <h6 class="fw-bold">Imágen 3</h6>
+                <div class="d-flex mb-1 align-items-center">
+                    <h6 class="fw-bold flex-grow-1">Imágen 3</h6>
+                    <livewire:components.delete-image field="image_3" :product="$product" />
+                </div>
                 <img src="{{ file_exists(public_path('storage/products/' . $product->image_3)) ? asset('storage/products/' . $product->image_3) : asset('img/no_disponible.jpg') }}"
                     alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
             @endisset
@@ -415,7 +424,10 @@
     <div id="img4Preview" class="mt-3 mt-sm-0">
         @if ($edit)
             @isset($product->image_4)
-                <h6 class="fw-bold">Imágen 4</h6>
+                <div class="d-flex mb-1 align-items-center">
+                    <h6 class="fw-bold flex-grow-1">Imágen 4</h6>
+                    <livewire:components.delete-image field="image_4" :product="$product" />
+                </div>
                 <img src="{{ file_exists(public_path('storage/products/' . $product->image_4)) ? asset('storage/products/' . $product->image_4) : asset('img/no_disponible.jpg') }}"
                     alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
             @endisset
@@ -425,7 +437,10 @@
     <div id="img5Preview" class="mt-3 mt-sm-0">
         @if ($edit)
             @isset($product->image_5)
-                <h6 class="fw-bold">Imágen 5</h6>
+                <div class="d-flex mb-1 align-items-center">
+                    <h6 class="fw-bold flex-grow-1">Imágen 5</h6>
+                    <livewire:components.delete-image field="image_5" :product="$product" />
+                </div>
                 <img src="{{ file_exists(public_path('storage/products/' . $product->image_5)) ? asset('storage/products/' . $product->image_5) : asset('img/no_disponible.jpg') }}"
                     alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
             @endisset
@@ -435,7 +450,10 @@
     <div id="img6Preview" class="mt-3 mt-sm-0">
         @if ($edit)
             @isset($product->image_6)
-                <h6 class="fw-bold">Imágen 6</h6>
+                <div class="d-flex mb-1 align-items-center">
+                    <h6 class="fw-bold flex-grow-1">Imágen 6</h6>
+                    <livewire:components.delete-image field="image_6" :product="$product" />
+                </div>
                 <img src="{{ file_exists(public_path('storage/products/' . $product->image_6)) ? asset('storage/products/' . $product->image_6) : asset('img/no_disponible.jpg') }}"
                     alt="{{ $product->name }}" class="img-thumbnail img_view_edit">
             @endisset
@@ -452,7 +470,8 @@
             containerPreview.innerHTML = '';
             const title = document.createElement('h6');
             title.style.fontWeight = 'bold';
-            title.textContent = 'Vista Previa Imágen Principal';
+            title.textContent = 'Vista Previa Imágen';
+            title.className = 'my-2';
             containerPreview.appendChild(title);
             let reader = new FileReader();
 
@@ -475,6 +494,7 @@
             const title = document.createElement('h6');
             title.style.fontWeight = 'bold';
             title.textContent = 'Vista Previa Imágen ' + number;
+            title.className = 'my-2';
             containerBannerPreview.appendChild(title);
             let reader = new FileReader();
 
@@ -515,6 +535,26 @@
         $(document).ready(function() {
             $('.categories').select2({
                 theme: "classic",
+            });
+        });
+
+        Livewire.on('delete-image', (field) => {
+            Swal.fire({
+                title: "Eliminar imágen?",
+                text: "Esta acción no se podrá revertir!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                cancelButtonText: "Cancelar",
+                confirmButtonText: "Si, Eliminar!"
+            }).then((result) => {
+                // alert('ELiminar: ' + field);
+                if (result.isConfirmed) {
+                    Livewire.dispatch('delete', {
+                        field: field,
+                    });
+                }
             });
         });
     </script>
