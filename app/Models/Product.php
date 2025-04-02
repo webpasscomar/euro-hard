@@ -32,6 +32,8 @@ class Product extends Model
     'instruction_button',
     'keywordsSEO',
     'descriptionSEO',
+    'material',
+    'orderNumber',
     'status'
   ];
 
