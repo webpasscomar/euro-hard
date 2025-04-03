@@ -5,8 +5,8 @@
                 class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none link-logo">
                 <img src="{{ asset('images/logo-eurohard.svg') }}" alt="EuroHard" class="logo-header" />
             </a>
-            <form class="form-search mobile" role="search">
-                <input type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar">
+            <form action="{{ route('productos.buscar') }}" class="form-search mobile" role="search">
+                <input type="search" class="form-control" name="buscar" placeholder="Buscar..." aria-label="Buscar">
             </form>
         </div>
 
@@ -124,8 +124,9 @@
                             <hr class="divider">
                         </li>
                     </ul>
-                    <form class="d-flex mt-3" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
+                    <form action="{{ route('productos.buscar') }}" class="d-flex mt-3" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar"
+                            name="buscar">
                         <button class="btn btn-EH-primary" type="submit">Buscar</button>
                     </form>
                 </div>

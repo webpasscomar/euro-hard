@@ -79,4 +79,17 @@ class ProductosController extends Controller
       ->get();
     return view('productos-home', compact('subcategorias'));
   }
+
+  public function buscarProductos(Request $request): View
+  {
+    // dd($request->input('buscar'));
+    $query = $request->input('buscar');
+    $productos = Product::where('status', 1)
+      ->when($query, function ($q) use ($query) {
+        $q->where('name', 'LIKE', "%$query%")
+          ->orWhere('description', 'LIKE', "%$query%")
+          ->orWhere('code', 'LIKE', "%$query%");
+      })->get();
+    return view('productos', compact('productos', 'query'));
+  }
 }
