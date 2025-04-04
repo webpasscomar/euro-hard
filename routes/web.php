@@ -22,6 +22,8 @@ Route::get('/productos/{categoriaSlug}', [ProductosController::class, 'categoria
 Route::get('/productos', [ProductosController::class, 'productosHome'])->name('productos');
 // Ruta para mostrar los productos de las subcategorias que vienen de productos en el home
 Route::get('/productos/categoria/{subcategoria}', [ProductosController::class, 'productos'])->name('productos.subcategoria');
+// Buscar productos por código, nombre y descripcion
+Route::get('/buscar-producto', [ProductosController::class, 'buscarProductos'])->name('productos.buscar');
 
 Route::get('/catalogo', [CatalogoController::class, 'index'])->name('catalogo');
 
