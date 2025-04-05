@@ -4,7 +4,7 @@
 
     <div class="main-container">
 
-        <div class="container-hero" style="height: 320px;">
+        <div class="container-hero" style="height: 320px !important;">
             <div class="container-fluid">
                 <div class="container-title-hero">
                     <div class="content-icon-EH-hero">

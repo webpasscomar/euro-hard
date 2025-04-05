@@ -17,6 +17,11 @@ class UserController extends Controller
 
     public function index()
     {
+        // Modal confirmación de eliminación de Usuarios
+        $title = 'Eliminar usuario?';
+        $text = "Está acción no se podrá revertir";
+        confirmDelete($title, $text);
+
         // Obtiene todos los usuarios con sus roles
         $users = User::get();
 

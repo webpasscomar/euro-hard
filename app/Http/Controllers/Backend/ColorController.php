@@ -66,17 +66,29 @@ class ColorController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(Color $color)
+  public function edit(Color $color): View
   {
-    //
+    return view('backend.colors.edit', compact('color'));
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, Color $color)
+  public function update(ColorRequest $request, Color $color): RedirectResponse
   {
-    //
+    try {
+      $color->update([
+        'color' => $request->input('color'),
+        'name' => $request->input('name'),
+        'feature' => $request->input('feature'),
+      ]);
+      toast('El color se actualizó correctamente', 'success');
+      return redirect(route('admin.colors.index'));
+    } catch (\Throwable $th) {
+      //dd($th);
+      toast('No se pudo actualizar el color', 'error');
+      return redirect(route('admin.colors.index'));
+    }
   }
 
   /**
