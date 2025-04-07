@@ -4,7 +4,7 @@
 
     <div class="main-container">
 
-        <div class="container-hero" style="height: 320px;">
+        <div class="container-hero" style="height: 320px !important;">
             <div class="container-fluid">
                 <div class="container-title-hero">
                     <div class="content-icon-EH-hero">
@@ -29,11 +29,11 @@
             {{-- No mostrar si se muestran los productos a traves de la búsqueda --}}
             @if (!Route::is('productos.buscar'))
             @empty($subcategoria)
-                <img
-                    src="{{ $categoria->image && file_exists(public_path('storage/product_categories/' . $categoria->banner)) ? asset('storage/product_categories/' . $categoria->banner) : asset('img/Imagen-no-disponible.png') }}">
+                <img src="{{ $categoria->banner && file_exists(public_path('storage/product_categories/' . $categoria->banner)) ? asset('storage/product_categories/' . $categoria->banner) : asset('img/Imagen-no-disponible.png') }}"
+                    class="w-100 h-100">
             @else
-                <img
-                    src="{{ $subcategoria->image && file_exists(public_path('storage/product_categories/' . $subcategoria->banner)) ? asset('storage/product_categories/' . $subcategoria->banner) : asset('img/Imagen-no-disponible.png') }}">
+                <img src="{{ $subcategoria->banner && file_exists(public_path('storage/product_categories/' . $subcategoria->banner)) ? asset('storage/product_categories/' . $subcategoria->banner) : asset('img/Imagen-no-disponible.png') }}"
+                    class="w-100 h-100">
             @endempty
         @else
             <img src="{{ asset('images/slider-home-2.jpg') }}" alt="Búsqueda de productos" class="img-fluid">

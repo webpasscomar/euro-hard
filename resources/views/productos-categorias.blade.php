@@ -15,8 +15,8 @@
             </div>
             <div class="img-hero">
                 <div class="img-overlay"></div>
-                <img
-                    src="{{ $categoria->banner && file_exists(public_path('storage/product_categories/' . $categoria->banner)) ? asset('storage/product_categories/' . $categoria->banner) : asset('img/no_disponible.jpg') }}">
+                <img src="{{ $categoria->banner && file_exists(public_path('storage/product_categories/' . $categoria->banner)) ? asset('storage/product_categories/' . $categoria->banner) : asset('img/no_disponible.jpg') }}"
+                    class="w-100 h-100">
             </div>
         </div>
 
@@ -35,33 +35,33 @@
             <div class="row">
                 <div class="owl-carousel owl-theme">
                     @foreach ($subcategorias as $subcategoria)
-                                    @php
-                                        $imagePath =
-                                            $subcategoria->image &&
-                                            file_exists(public_path('storage/product_categories/' . $subcategoria->image))
-                                            ? asset('storage/product_categories/' . $subcategoria->image)
-                                            : asset('img/no_disponible.jpg');
-                                    @endphp
-                                    <div class="item item1">
-                                        <div class="content-cat carrusel-size">
-                                            <a href="{{ route('productos.list', [$categoria->slug, $subcategoria->slug]) }}"
-                                                class="link-mas-info">
-                                                <div class="img-content-subcat" style="background-image: url({{ $imagePath }})">
-                                                    <div class="title-cat-column" style="background-color: {{ $subcategoria->color }}">
-                                                        {{ $subcategoria->name }}
-                                                    </div>
-                                                </div>
-                                                <div class="footer-content-cat-home">
-                                                    <div class="cat-capitulo">
-                                                        <span class="estilo">{{ Str::ucfirst($subcategoria->feature) }}</span>
-                                                    </div>
-                                                    <div class="btn-mas-info">
-                                                        + info
-                                                    </div>
-                                                </div>
-                                            </a>
+                        @php
+                            $imagePath =
+                                $subcategoria->image &&
+                                file_exists(public_path('storage/product_categories/' . $subcategoria->image))
+                                    ? asset('storage/product_categories/' . $subcategoria->image)
+                                    : asset('img/no_disponible.jpg');
+                        @endphp
+                        <div class="item item1">
+                            <div class="content-cat carrusel-size">
+                                <a href="{{ route('productos.list', [$categoria->slug, $subcategoria->slug]) }}"
+                                    class="link-mas-info">
+                                    <div class="img-content-subcat" style="background-image: url({{ $imagePath }})">
+                                        <div class="title-cat-column" style="background-color: {{ $subcategoria->color }}">
+                                            {{ $subcategoria->name }}
                                         </div>
                                     </div>
+                                    <div class="footer-content-cat-home">
+                                        <div class="cat-capitulo">
+                                            <span class="estilo">{{ Str::ucfirst($subcategoria->feature) }}</span>
+                                        </div>
+                                        <div class="btn-mas-info">
+                                            + info
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     @endforeach
 
                 </div>

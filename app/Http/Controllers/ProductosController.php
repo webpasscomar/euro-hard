@@ -30,29 +30,36 @@ class ProductosController extends Controller
 
   public function productos($categoria = null, $subcategoria = null): View
   {
-    // Traemos todos los productos de la categoria correspondiente
+    // Traemos todos los productos de la categoría correspondiente
     if ($categoria != 'categoria') {
       $productos = Product::where('status', 1)
         ->whereHas('categories', function ($query) use ($subcategoria) {
           $query->where('slug', $subcategoria);
         })
+        ->orderBy('orderNumber', 'asc') // Orden ASC por orderNumber
         ->get();
+
       $categoria = Category::where('slug', $categoria)->firstOrFail();
       $subcategoria = Category::where('slug', $subcategoria)->firstOrFail();
+
       return view('productos', compact('categoria', 'subcategoria', 'productos'));
     } else {
       $subcategoria2 = Category::where('slug', $subcategoria)->firstOrFail();
+
       $productos = Product::where('status', 1)
         ->whereHas('categories', function ($query) use ($subcategoria) {
           $query->where('slug', $subcategoria);
         })
+        ->orderBy('orderNumber', 'asc') // Orden ASC por orderNumber
         ->get();
+
       return view('productos', [
         'productos' => $productos,
         'subcategoria' => $subcategoria2
       ]);
     }
   }
+
 
   // Detalle del producto
   public function productoDetalle($categoriaSlug, $subcategoriaSlug, $productoSlug): View
