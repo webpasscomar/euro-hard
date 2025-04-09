@@ -1387,6 +1387,44 @@ button.btn.btn-primary.btn-form:hover {
 }
 
 
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.carrusel-product .carousel-item {
+  height: auto;
+  min-height: 300px;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-indicators {
+  bottom: -50px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  z-index: 2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -fin de FORMULARIOS */
 /* RESPONSIVE CSS
 -------------------------------------------------- */
@@ -1487,7 +1525,8 @@ button.btn.btn-primary.btn-form:hover {
   }
 
   .carousel-item {
-    height: 280px;
+    /* height: 280px; */
+    /* height: auto; */
   }
 
   .carousel-caption {
@@ -1550,7 +1589,8 @@ button.btn.btn-primary.btn-form:hover {
   }
 
   .carousel-item {
-    height: 220px;
+    /* height: 220px; */
+    /* height: auto; */
   }
 
   .container-hero {
