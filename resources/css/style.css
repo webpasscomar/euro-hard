@@ -1105,6 +1105,20 @@ img.icon-EH-hero {
   position: relative;
 }
 
+.content-product table {
+  width: 100% !important;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border: 1px solid #000;
+}
+
+.content-product th,
+.content-product td {
+  border: 1px solid #000;
+  padding: 8px;
+  word-break: break-word;
+}
+
 .card-new {
   position: absolute;
   width: 72px;
