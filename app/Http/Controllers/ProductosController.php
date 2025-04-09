@@ -9,10 +9,13 @@ use Illuminate\View\View;
 
 class ProductosController extends Controller
 {
+
+
   public function index()
   {
     return view('productos');
   }
+
 
   public function categorias($categoriaSlug): View
   {
@@ -20,13 +23,10 @@ class ProductosController extends Controller
       ->where('status', 1)
       ->firstOrFail();
 
-    // if ($categoria->childrens()->exists()) {
     $subcategorias = $categoria->children;
     return view('productos-categorias', compact('categoria', 'subcategorias'));
-    // } else {
-    // return $this->productos($categoria);
-    // }
   }
+
 
   public function productos($categoria = null, $subcategoria = null): View
   {
@@ -64,13 +64,12 @@ class ProductosController extends Controller
   // Detalle del producto
   public function productoDetalle($categoriaSlug, $subcategoriaSlug, $productoSlug): View
   {
-    $producto = Product::where('slug', $productoSlug)
+    $producto = Product::with('colors')
+      ->where('slug', $productoSlug)
       ->where('status', 1)
       ->firstOrFail();
 
     $subcategoria = Category::where('slug', $subcategoriaSlug)->firstOrFail();
-
-    // dd($categoriaSlug);
 
     return view('producto', [
       'producto' => $producto,
@@ -79,6 +78,7 @@ class ProductosController extends Controller
     ]);
   }
 
+
   public function productosHome(): View
   {
     $subcategorias = Category::where('status', 1)
@@ -86,6 +86,7 @@ class ProductosController extends Controller
       ->get();
     return view('productos-home', compact('subcategorias'));
   }
+
 
   public function buscarProductos(Request $request): View
   {
