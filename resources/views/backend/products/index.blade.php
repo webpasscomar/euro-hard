@@ -16,11 +16,12 @@
           <thead>
             <tr>
               <th class="text-left">ID.</th>
+              <th class="text-left align-middle">Foto</th>
               <th class="text-left align-middle">Codigo</th>
               <th class="text-left align-middle">Producto</th>
               <th class="text-left align-middle">Categoría/s</th>
-              <th class="text-left align-middle">Imágen</th>
-              <th class="text-left align-middle">Publicado</th>
+              <th class="text-left align-middle">Orden</th>
+              <th class="text-left align-middle">Estado</th>
               <th class="text-left align-middle">Acciones</th>
             </tr>
           </thead>
@@ -28,6 +29,11 @@
             @foreach ($products as $product)
               <tr>
                 <td class="align-middle text-left">{{ $product->id }}</td>
+                <td class="align-middle text-left">
+                  <img
+                    src="{{ isset($product->image_main) && file_exists(public_path('storage/products/' . $product->image_main)) ? asset('storage/products/' . $product->image_main) : asset('img/Imagen-no-disponible.png') }}"
+                    alt="{{ $product->name }}" class="img-fluid" width="40" height="40">
+                </td>
                 <td class="align-middle text-left">{{ $product->code }}</td>
                 <td class="align-middle text-left">{{ $product->name }}</td>
                 <td class="align-middle text-left">
@@ -35,11 +41,7 @@
                     <span>{{ $loop->last ? Str::title($category) : Str::title($category) . ' | ' }}</span>
                   @endforeach
                 </td>
-                <td class="align-middle text-left">
-                  <img
-                    src="{{ isset($product->image_main) && file_exists(public_path('storage/products/' . $product->image_main)) ? asset('storage/products/' . $product->image_main) : asset('img/Imagen-no-disponible.png') }}"
-                    alt="{{ $product->name }}" class="img-fluid" width="40" height="40">
-                </td>
+                <td class="align-middle text-left">{{ $product->orderNumber }}</td>
                 <td class="text-center align-middle">
                   <livewire:components.toggle-button :model="$product" field="status" wire:key="{{ $product->id }}" />
                 </td>
