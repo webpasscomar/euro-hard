@@ -1,20 +1,22 @@
 <?php
 
-  namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 
-  use App\Models\Product;
-  use Illuminate\Http\Request;
+use App\Models\Product;
+use Illuminate\Http\Request;
 
-  class InstructivosController extends Controller
+class InstructivosController extends Controller
+{
+  public function index()
   {
-    public function index()
-    {
-      $products = Product::where('instruction_file', '!=', null)
-        ->where('status', 1)
-        ->where ('instruction_button', 1)
-        ->get();
+    $products = Product::where('status', 1)
+      ->where(function ($query) {
+        $query->whereNotNull('instruction_file')
+          ->orWhereNotNull('video');
+      })
+      ->get();
 
-//      dd($products);
-      return view('instructivos', compact('products'));
-    }
+    //      dd($products);
+    return view('instructivos', compact('products'));
   }
+}

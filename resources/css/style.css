@@ -1433,7 +1433,18 @@ button.btn.btn-primary.btn-form:hover {
 @media (max-width: 1400px) {}
 
 /* X-Large devices (large desktops, 1200px) */
-@media (max-width: 1200px) {}
+@media (max-width: 1200px) {
+   /* Botones de detalle del producto */
+  .content-btn-detalle-products {
+    position: relative;
+    bottom: 0;
+    gap:10px;
+    width: 100%;
+  }
+  .content-product-plano {
+    padding: 1.5rem !important;
+  }
+}
 
 /* Large devices (desktops, 992px) */
 @media (max-width: 992px) {}
@@ -1580,6 +1591,37 @@ button.btn.btn-primary.btn-form:hover {
     padding: 0 64px;
   }
 
+  /* Botón de ficha técnica en cards de listado de productos */
+
+  .content-btn-products {
+    position: relative;
+    margin: 24px 0 0 0;
+    bottom: 0;
+  }
+
+  a.btn-rojo {
+    margin: 4px;
+    display: block;
+    width: 100%;
+  }
+
+  /* Botón ver video */
+  a.btn-gris {
+    margin: 4px;
+    display: block;
+    width: 100%;
+  }
+
+  /* Botones de detalle del producto */
+  .content-btn-detalle-products {
+    position: relative;
+    bottom: 0;
+    gap:0px;
+    width: 100%;
+  }
+  .content-product-plano {
+    padding: 1.5rem !important;
+  }
 }
 
 /* Small devices (landscape phones, 576px) */
@@ -1622,11 +1664,11 @@ button.btn.btn-primary.btn-form:hover {
     height: 60px;
   }
 
-  .content-btn-products {
+  /* .content-btn-products {
     position: relative;
     margin: 24px 0 0 0;
     bottom: 0;
-  }
+  } */
 
   .content-product-plano {
     padding: 1.5rem !important;
@@ -1637,17 +1679,17 @@ button.btn.btn-primary.btn-form:hover {
     word-break: break-word;
   }
 
-  .content-btn-detalle-products {
+  /* .content-btn-detalle-products {
     position: relative;
     bottom: 0;
     width: 100%;
-  }
+  } */
 
-  a.btn-rojo {
+  /* a.btn-rojo {
     margin: 4px;
     display: block;
     width: 100%;
-  }
+  } */
 
   a.btn-gris {
     margin: 4px;
