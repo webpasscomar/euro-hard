@@ -6,7 +6,7 @@
             <div class="container-fluid">
                 <div class="container-title-hero">
                     <div class="content-icon-EH-hero">
-                        <img src="images/icono-EH.svg" class="icon-EH-hero">
+                        <img src="{{ asset('images/icono-EH.svg') }}" class="icon-EH-hero">
                     </div>
                     <h1 class="title-hero">Novedades</h1>
                 </div>
@@ -39,9 +39,9 @@
                                 <div class="col-lg-6 col-md-6 p-3 content-product">
                                     <div id="carouselNove1" class="carousel slide carousel-fade" data-bs-ride="carousel">
                                         <!--<div class="carousel-indicators">
-                                                                                                                                        <button type="button" data-bs-target="#carouselNove1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                                                                                                        <button type="button" data-bs-target="#carouselNove1" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                                                                                                    </div>-->
+                                                                                                                                                <button type="button" data-bs-target="#carouselNove1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                                                                                                                                <button type="button" data-bs-target="#carouselNove1" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                                                                                                                            </div>-->
                                         <div class="carousel-inner carrusel-product">
                                             <div class="carousel-item active">
                                                 <img src="{{ $novedad->image_path }}" class="d-block w-100"

@@ -23,7 +23,7 @@ return new class extends Migration {
       $table->string('image_4')->nullable();
       $table->string('image_5')->nullable();
       $table->string('image_6')->nullable();
-      $table->string('video')->nullable();
+      $table->text('video')->nullable();
       $table->boolean('is_new')->default(false);
       $table->text('information')->nullable();
       $table->string('datasheet_file')->nullable();

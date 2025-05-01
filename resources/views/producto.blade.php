@@ -123,10 +123,14 @@
                                     <a class="btn-gris" href="#">Instructivo</a>
                                     {{-- Mostrar boton de video solo si el producto tiene una url de video --}}
                                     @if ($producto->video)
-                                        <a role="button" class="btn-rojo" data-bs-toggle="modal"
-                                            data-bs-target="#modalVideo{{ $producto->id }}">Video
-                                        </a>
-                                        <x-modal-youtube :id="$producto->id" :video-url="$producto->video" />
+                                        @if (Str::contains($producto->video, ['youtube', 'youtu.be']))
+                                            <a role="button" class="btn-rojo" data-bs-toggle="modal"
+                                                data-bs-target="#modalVideo{{ $producto->id }}">Video
+                                            </a>
+                                            <x-modal-youtube :id="$producto->id" :video-url="$producto->video" />
+                                        @elseif(Str::contains($producto->video, 'instagram'))
+                                            <a href="{{ $producto->video }}" class="btn-rojo" target="_blank">Video</a>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
