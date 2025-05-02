@@ -37,7 +37,8 @@
               </div>
               <div class="col-lg-6 col-md-6 p-3 content-product">
                 <div class="title-product">
-                  {{ Str::title($product->name) }}
+                  {{-- {{ Str::title($product->name) }} --}}
+                  {{ Str::ucfirst($product->name) }}
                 </div>
                 <div class="description-product">
                   {{ Str::ucfirst($product->description) }}
