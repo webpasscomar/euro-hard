@@ -31,25 +31,39 @@
               <div class="col-lg-6 col-md-6 p-3 content-product">
                 <div class="content-img-instructivo">
                   <img
-                    src="{{$product->image_main && file_exists(public_path('storage/products/'.$product->image_main)) ? asset('storage/products/'. $product->image_main):asset('img/no_disponible.jpg')}}"
+                    src="{{ $product->image_main && file_exists(public_path('storage/products/' . $product->image_main)) ? asset('storage/products/' . $product->image_main) : asset('img/no_disponible.jpg') }}"
                     class="d-block w-100" alt="...">
                 </div>
               </div>
               <div class="col-lg-6 col-md-6 p-3 content-product">
                 <div class="title-product">
-                  {{ Str::title($product->name)}}
+                  {{-- {{ Str::title($product->name) }} --}}
+                  {{ Str::ucfirst($product->name) }}
                 </div>
                 <div class="description-product">
-                  {{ Str::ucfirst($product->description)}}
+                  {{ Str::ucfirst($product->description) }}
                 </div>
                 <div class="content-btn-products">
-                  <a class="btn-rojo" href="{{asset('storage/products/'.$product->instruction_file)}}" download>PDF</a>
-                  @unless($product->video == null)
-                    <button type="button" class="btn-gris" data-bs-toggle="modal"
-                            data-bs-target="#modalVideo{{$product->id}}">
+                  @unless ($product->instruction_file == null)
+                    <a class="btn-rojo" href="{{ asset('storage/products/' . $product->instruction_file) }}" download><i
+                        class="fas fa-download"></i> PDF</a>
+                  @endunless
+                  @unless ($product->video == null)
+                    {{-- <button type="button" class="btn-gris" data-bs-toggle="modal"
+                      data-bs-target="#modalVideo{{ $product->id }}">
                       Video
                     </button>
-                    <x-modal-youtube :id="$product->id" :video-url="$product->video"/>
+                    <x-modal-youtube :id="$product->id" :video-url="$product->video" /> --}}
+
+
+                    @if (Str::contains($product->video, ['youtube', 'youtu.be']))
+                      <a role="button" class="btn-rojo" data-bs-toggle="modal"
+                        data-bs-target="#modalVideo{{ $product->id }}">Video
+                      </a>
+                      <x-modal-youtube :id="$product->id" :video-url="$product->video" />
+                    @elseif(Str::contains($product->video, 'instagram'))
+                      <a href="{{ $product->video }}" class="btn-gris" target="_blank">Video</a>
+                    @endif
                   @endunless
                 </div>
               </div>
