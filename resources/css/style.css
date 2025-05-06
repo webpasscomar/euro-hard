@@ -1160,7 +1160,6 @@ img.icon-EH-hero {
   bottom: 2rem;
 }
 
-button.btn-rojo,
 a.btn-rojo {
   background: var(--eurohard);
   color: var(--blanco);
@@ -1194,7 +1193,6 @@ button.btn-gris {
   text-align: center;
 }
 
-button.btn-rojo:hover,
 a.btn-rojo:hover,
 a.btn-gris:hover {
   background: var(--negro);

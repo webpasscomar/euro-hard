@@ -36,21 +36,33 @@
                             </div>
                             <div class="col-lg-6 col-md-6 p-3 content-product">
                                 <div class="title-product">
-                                    {{ Str::title($product->name) }}
+                                    {{-- {{ Str::title($product->name) }} --}}
+                                    {{ Str::ucfirst($product->name) }}
                                 </div>
                                 <div class="description-product">
                                     {{ Str::ucfirst($product->description) }}
                                 </div>
                                 <div class="content-btn-products">
-                                    <a class="btn-rojo instructivo"
-                                        href="{{ asset('storage/products/' . $product->instruction_file) }}"
-                                        download>PDF</a>
+                                    @unless ($product->instruction_file == null)
+                                        <a class="btn-rojo" href="{{ asset('storage/products/' . $product->instruction_file) }}"
+                                            download><i class="fas fa-download"></i> PDF</a>
+                                    @endunless
                                     @unless ($product->video == null)
-                                        <button type="button" class="btn-rojo" data-bs-toggle="modal"
-                                            data-bs-target="#modalVideo{{ $product->id }}">
-                                            Video
-                                        </button>
-                                        <x-modal-youtube :id="$product->id" :video-url="$product->video" />
+                                        {{-- <button type="button" class="btn-gris" data-bs-toggle="modal"
+                      data-bs-target="#modalVideo{{ $product->id }}">
+                      Video
+                    </button>
+                    <x-modal-youtube :id="$product->id" :video-url="$product->video" /> --}}
+
+
+                                        @if (Str::contains($product->video, ['instagram']))
+                                            <a href="{{ $product->video }}" class="btn-rojo" target="_blank">Video</a>
+                                        @else
+                                            <a role="button" class="btn-rojo" data-bs-toggle="modal"
+                                                data-bs-target="#modalVideo{{ $product->id }}">Video
+                                            </a>
+                                            <x-modal-youtube :id="$product->id" :video-url="$product->video" />
+                                        @endif
                                     @endunless
                                 </div>
                             </div>
