@@ -146,7 +146,7 @@ body {
 }
 
 .estilo {
-  color: var(--estilo);
+  color: var(--gris);
 }
 
 .movimiento {
@@ -1154,10 +1154,12 @@ img.icon-EH-hero {
 }
 
 .content-btn-products {
-  position: absolute;
-  bottom: 2rem;
+  /* position: absolute; */
+  margin:2rem 0;
+  /* bottom: 2rem; */
 }
 
+button.btn-rojo,
 a.btn-rojo {
   background: var(--eurohard);
   color: var(--blanco);
@@ -1191,6 +1193,7 @@ button.btn-gris {
   text-align: center;
 }
 
+button.btn-rojo:hover,
 a.btn-rojo:hover,
 a.btn-gris:hover {
   background: var(--negro);
@@ -1443,6 +1446,19 @@ button.btn.btn-primary.btn-form:hover {
   }
   .content-product-plano {
     padding: 1.5rem !important;
+  }
+
+  /* Botón video instructivo */
+  .content-btn-products button{
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* Botón instructivo de pdf */
+  a.btn-rojo {
+    margin: 4px;
+    display: block;
+    width: 100%;
   }
 }
 
