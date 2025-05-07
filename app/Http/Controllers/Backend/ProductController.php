@@ -17,6 +17,12 @@ class ProductController extends Controller
   /**
    * Display a listing of the resource.
    */
+  // funcion para obtener el id del video de youtube
+  protected function getYoutubeVideoId($url)
+  {
+    preg_match('/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([a-zA-Z0-9_-]+)/', $url, $matches);
+    return $matches[1] ?? null;
+  }
   public function index(): View
   {
     // Modal para confirmar la eliminación del producto
@@ -46,6 +52,7 @@ class ProductController extends Controller
   public function store(ProductRequest $request): RedirectResponse
   {
     $request->validated();
+
 
     // dd($request);
     try {
@@ -139,7 +146,7 @@ class ProductController extends Controller
         'image_6' => $image_6,
         'productCategory_id' => $request->input('productCategory_id'),
         'information' => $request->input('information'),
-        'video' => htmlentities($request->input('video')),
+        'video' => $this->getYoutubeVideoId($request->input('video')), //guardamos solo el id del video
         'is_new' => (bool)$request->input('is_new'),
         'datasheet_file' => $datasheet_file_name,
         'instruction_file' => $instructions_file_name,
@@ -198,7 +205,7 @@ class ProductController extends Controller
    */
   public function update(ProductRequest $request, Product $product): RedirectResponse
   {
-    // $request->validated();
+    $request->validated();
 
     try {
       // generar nombre de imágen principal y guardarla
@@ -338,7 +345,7 @@ class ProductController extends Controller
         'image_6' => $image_6,
         'productCategory_id' => $request->input('productCategory_id'),
         'information' => $request->input('information'),
-        'video' => htmlentities($request->input('video')),
+        'video' => $this->getYoutubeVideoId($request->input('video')), //guardamos solo el id del video
         'is_new' => (bool)$request->input('is_new'),
         'datasheet_file' => $datasheet_file_name,
         'instruction_file' => $instructions_file_name,
