@@ -338,7 +338,7 @@ class ProductController extends Controller
         'image_6' => $image_6,
         'productCategory_id' => $request->input('productCategory_id'),
         'information' => $request->input('information'),
-        'video' => base64_encode($request->input('video')), //codificar video para permitir guardar sin errores en hostinger
+        'video' => base64_encode($request->input('video')),
         'is_new' => (bool)$request->input('is_new'),
         'datasheet_file' => $datasheet_file_name,
         'instruction_file' => $instructions_file_name,
