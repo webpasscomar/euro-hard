@@ -139,7 +139,7 @@ class ProductController extends Controller
         'image_6' => $image_6,
         'productCategory_id' => $request->input('productCategory_id'),
         'information' => $request->input('information'),
-        'video' => $request->input('video'),
+        'video' => htmlentities($request->input('video')),
         'is_new' => (bool)$request->input('is_new'),
         'datasheet_file' => $datasheet_file_name,
         'instruction_file' => $instructions_file_name,
@@ -169,7 +169,7 @@ class ProductController extends Controller
       toast('Producto creado con éxito', 'success');
       return redirect()->route('admin.products.index');
     } catch (\Throwable $th) {
-      dd($th);
+      // dd($th);
       toast('No se pudo crear el producto', 'error');
       return redirect()->route('admin.products.index');
     };
@@ -338,7 +338,7 @@ class ProductController extends Controller
         'image_6' => $image_6,
         'productCategory_id' => $request->input('productCategory_id'),
         'information' => $request->input('information'),
-        'video' => base64_encode($request->input('video')),
+        'video' => htmlentities($request->input('video')),
         'is_new' => (bool)$request->input('is_new'),
         'datasheet_file' => $datasheet_file_name,
         'instruction_file' => $instructions_file_name,
@@ -369,7 +369,7 @@ class ProductController extends Controller
       toast('Producto actualizado con éxito', 'success');
       return redirect()->route('admin.products.index');
     } catch (\Throwable $th) {
-      dd($th);
+      // dd($th);
       toast('No se pudo actualizar el producto', 'error');
       return redirect()->route('admin.products.index');
     };

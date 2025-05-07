@@ -17,7 +17,7 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </iframe> --}}
-                    {!! base64_decode($videoUrl) !!}
+                    {!! html_entity_decode($videoUrl) !!}
 
                 </div>
             </div>
