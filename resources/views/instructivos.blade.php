@@ -6,14 +6,14 @@
       <div class="container-fluid">
         <div class="container-title-hero">
           <div class="content-icon-EH-hero">
-            <img src="images/icono-EH-gris.svg" class="icon-EH-hero">
+            <img src="{{ asset('images/icono-EH-gris.svg') }}" class="icon-EH-hero">
           </div>
           <h1 class="title-hero">Instructivos</h1>
         </div>
       </div>
       <div class="img-hero">
         <div class="img-overlay"></div>
-        <img src="{{ asset('img/instructivos.jpg') }}" alt="Instructivos" class="img-fluid">
+        <img src="{{ asset('img/instructivos.jpg') }}">
       </div>
     </div>
     <div class="container">
@@ -56,13 +56,13 @@
                     <x-modal-youtube :id="$product->id" :video-url="$product->video" /> --}}
 
 
-                    @if (Str::contains($product->video, ['youtube', 'youtu.be']))
+                    @if (Str::contains($product->video, ['instagram']))
+                      <a href="{{ $product->video }}" class="btn-rojo" target="_blank">Video</a>
+                    @else
                       <a role="button" class="btn-rojo" data-bs-toggle="modal"
                         data-bs-target="#modalVideo{{ $product->id }}">Video
                       </a>
                       <x-modal-youtube :id="$product->id" :video-url="$product->video" />
-                    @elseif(Str::contains($product->video, 'instagram'))
-                      <a href="{{ $product->video }}" class="btn-gris" target="_blank">Video</a>
                     @endif
                   @endunless
                 </div>
