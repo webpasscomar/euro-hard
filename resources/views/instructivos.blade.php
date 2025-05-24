@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="main-container">
-    <div class="container-hero">
+    <div class="container-hero" style="height: 320px !important;">
       <div class="container-fluid">
         <div class="container-title-hero">
           <div class="content-icon-EH-hero">
@@ -13,7 +13,7 @@
       </div>
       <div class="img-hero">
         <div class="img-overlay"></div>
-        <img src="images/slider-home-2.jpg">
+        <img src="{{ asset('img/instructivos.jpg') }}" alt="Instructivos" class="img-fluid">
       </div>
     </div>
     <div class="container">
