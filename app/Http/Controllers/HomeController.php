@@ -28,6 +28,6 @@ class HomeController extends Controller
     $metaTitle = "Herrajes y accesorios";
     $metaDescription = "EuroHard";
 
-    return view('home', compact('sliders', 'categoriasPadre', 'title', 'metaDescription'));
+    return view('home', compact('sliders', 'categoriasPadre', 'metaTitle', 'metaDescription'));
   }
 }

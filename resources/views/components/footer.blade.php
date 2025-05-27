@@ -15,6 +15,8 @@
         <div class="txt-phone content-phone">
           <br>
           {{ $contact->phone }}
+          <br>
+          {{ $contact->phone2 }}
         </div>
         <div class="subtitle1 blanco bold">
           HORARIOS
