@@ -9,10 +9,10 @@
           {{-- Av. H. Yrigoyen 15750 (1852)<br>
                     Burzaco, Buenos Aires, Argentina --}}
           {{ $contact->address }}
+          <br>
+          {{ $contact->email }}
         </div>
         <div class="txt-phone content-phone">
-          {{-- (5411) 4002-4400 | <br>
-                    2206-4000 --}}
           <br>
           {{ $contact->phone }}
         </div>

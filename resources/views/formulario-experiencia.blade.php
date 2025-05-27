@@ -13,7 +13,7 @@
             </div>
             <div class="img-hero">
                 <div class="img-overlay-contacto"></div>
-                <img src="{{ asset('images/slider-home-6.jpg') }}">
+                <img src="{{ asset('img/headers/form-experiencia.jpg') }}" alt="Experiencia">
             </div>
         </div>
         <div class="container">

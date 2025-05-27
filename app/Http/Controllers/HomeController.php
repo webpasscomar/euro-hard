@@ -25,6 +25,9 @@ class HomeController extends Controller
       ->whereDoesntHave('parents')
       ->get();
 
-    return view('home', compact('sliders', 'categoriasPadre'));
+    $metaTitle = "Herrajes y accesorios";
+    $metaDescription = "EuroHard";
+
+    return view('home', compact('sliders', 'categoriasPadre', 'title', 'metaDescription'));
   }
 }
