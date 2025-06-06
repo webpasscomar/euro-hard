@@ -34,22 +34,14 @@
         @endunless
         <div class="owl-carousel owl-theme">
           @foreach ($novedades as $novedad)
-            <div class="item item1">
+          <div class="item">
               <div class="row p-4">
                 <div class="col-lg-6 col-md-6 p-3 content-product">
                   <div id="carouselNove1" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                    <!--<div class="carousel-indicators">
-                                                                                                                                                      <button type="button" data-bs-target="#carouselNove1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                                                                                                                      <button type="button" data-bs-target="#carouselNove1" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                                                                                                                  </div>-->
                     <div class="carousel-inner carrusel-product">
                       <div class="carousel-item active">
                         <img src="{{ $novedad->image_path }}" class="d-block w-100" alt="{{ $novedad->title }}">
                       </div>
-                      {{-- <div class="carousel-item">
-                                                <img src="{{ $novedad->image_path }}" class="d-block w-100"
-                                                    alt="{{ $novedad->title }}">
-                                            </div> --}}
                     </div>
                   </div>
                 </div>
@@ -60,118 +52,21 @@
                   <div class="description-nove">
                     {{ Str::ucfirst(Str::limit($novedad->description, 200)) }}
                   </div>
-                  {{-- <div class="content-btn-nove">
-                                        <a class="btn-rojo" href="#">Ver más</a>
-                                    </div> --}}
+                  <div class="content-btn-nove">
+                      <a class="btn-gris2" data-bs-toggle="modal" data-bs-target="#modalNovedades{{ $novedad->id }}">Ver más</a>
+                  </div>
                 </div>
               </div>
+
             </div>
           @endforeach
+        </div>
+        
+        {{-- Utilizar el componente modal para mostrar el detalle de las novedades según sea necesario --}}
+        @foreach ($novedades as $novedad)
+          <x-modal-novedades  id="{{$novedad->id}}" title="{{ $novedad->title }}" description="{{ $novedad->description }}" image="{{ $novedad->image_path }}"/>
+        @endforeach
 
-          {{-- <div class="item item2">
-                        <div class="row p-4">
-                            <div class="col-lg-6 col-md-6 p-3 content-product">
-                                <div id="carouselNove2" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                                    <!--<div class="carousel-indicators">
-                                              <button type="button" data-bs-target="#carouselNove2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                              <button type="button" data-bs-target="#carouselNove2" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                          </div>-->
-                                    <div class="carousel-inner carrusel-product">
-                                        <div class="carousel-item active">
-                                            <img src="images/nove-02.jpg" class="d-block w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img src="images/nove-04.jpg" class="d-block w-100" alt="...">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 p-3 content-product">
-                                <div class="title-product">
-                                    Particinamos en Fitecma
-                                </div>
-                                <div class="description-nove">
-                                    Lorem iosum dolor Sit amet. consecte. tuer adipiscing elit, sed diam nonummy non euismod
-                                    tincidunt ut laoreel colore magna allquam erat volutoat Ut wisi enm ad mnm venam. aus
-                                    nostuo exerci tauon ullamcomer sus cibit obortis nis ut aliquio ex ea com Ut WISI enIm
-                                    ad minim veniam, quis nostrud exerci tation ullamcorper
-                                </div>
-                                <div class="content-btn-nove">
-                                    <a class="btn-rojo" href="#">Ver más</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--[fin de Item 2]--> --}}
-
-          {{-- <div class="item item3">
-                        <div class="row p-4">
-                            <div class="col-lg-6 col-md-6 p-3 content-product">
-                                <div id="carouselNove3" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                                    <!--<div class="carousel-indicators">
-                                              <button type="button" data-bs-target="#carouselNove3" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                              <button type="button" data-bs-target="#carouselNove3" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                          </div>-->
-                                    <div class="carousel-inner carrusel-product">
-                                        <div class="carousel-item active">
-                                            <img src="images/nove-01.jpg" class="d-block w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img src="images/nove-03.jpg" class="d-block w-100" alt="...">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 p-3 content-product">
-                                <div class="title-product">
-                                    Linea NEGRA de productos
-                                </div>
-                                <div class="description-nove">
-                                    Lorem iosum dolor Sit amet. consecte. tuer adipiscing elit, sed diam nonummy non euismod
-                                    tincidunt ut laoreel colore magna allquam erat volutoat Ut wisi enm ad mnm venam. aus
-                                    nostuo exerci tauon ullamcomer sus cibit obortis nis ut aliquio ex ea com Ut WISI enIm
-                                    ad minim veniam, quis nostrud exerci tation ullamcorper
-                                </div>
-                                <div class="content-btn-nove">
-                                    <a class="btn-rojo" href="#">Ver más</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--[fin de Item 3]--> --}}
-
-          {{-- <div class="item item4">
-                        <div class="row p-4">
-                            <div class="col-lg-6 col-md-6 p-3 content-product">
-                                <div id="carouselNove4" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                                    <!--<div class="carousel-indicators">
-                                              <button type="button" data-bs-target="#carouselNove4" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                              <button type="button" data-bs-target="#carouselNove4" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                          </div>-->
-                                    <div class="carousel-inner carrusel-product">
-                                        <div class="carousel-item active">
-                                            <img src="images/nove-02.jpg" class="d-block w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img src="images/nove-04.jpg" class="d-block w-100" alt="...">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 p-3 content-product">
-                                <div class="title-product">
-                                    Particinamos en Fitecma
-                                </div>
-                                <div class="description-nove">
-                                    Lorem iosum dolor Sit amet. consecte. tuer adipiscing elit, sed diam nonummy non euismod
-                                    tincidunt ut laoreel colore magna allquam erat volutoat Ut wisi enm ad mnm venam. aus
-                                    nostuo exerci tauon ullamcomer sus cibit obortis nis ut aliquio ex ea com Ut WISI enIm
-                                    ad minim veniam, quis nostrud exerci tation ullamcorper
-                                </div>
-                                <div class="content-btn-nove">
-                                    <a class="btn-rojo" href="#">Ver más</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--[fin de Item 4]--> --}}
 
         </div>
       </div>

@@ -138,16 +138,16 @@
                             <div class="content-btn-products">
                                 @if (!Route::is('productos.buscar'))
                                     @isset($categoria)
-                                        <a class="btn-rojo"
+                                        <a class="btn-gris2"
                                             href="{{ route('productos.detalle', [$categoria, $subcategoria, $producto]) }}">Ficha
                                             técnica</a>
                                     @else
-                                        <a class="btn-rojo"
+                                        <a class="btn-gris2"
                                             href="{{ route('productos.detalle', ['categoria', $subcategoria, $producto]) }}">Ficha
                                             técnica</a>
                                     @endisset
                                 @else
-                                    <a class="btn-rojo"
+                                    <a class="btn-gris2"
                                         href="{{ route('productos.detalle', ['categoria', $producto->categories()->latest()->first()->slug, $producto]) }}">Ficha
                                         técnica</a>
                                 @endif

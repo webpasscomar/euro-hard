@@ -102,7 +102,7 @@
                                 <div class="d-flex align-items-center gap-2 flex-wrap my-3">
                                     @foreach ($producto->colors as $color)
                                         <div class="rounded-circle"
-                                            style="width:30px; height:30px; background-color: {{ $color->color }}">
+                                            style="width:30px; height:30px; background-color: {{ $color->color }}; border: 2px solid #000;">
 
                                         </div>
                                     @endforeach

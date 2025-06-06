@@ -76,8 +76,7 @@
             En EUROHARD estamos en constante análisis de los avances de la industria y de las últimas tendencias en el
             sector global, para así estar en la vanguardia del diseño de herrajes para muebles y construcción.</p>
 
-          <p>Gracias a este trabajo, en 2025 lanzamos cinco nuevas líneas de productos que ampliarán nuestra presencia en
-            la industria nacional y nos abrirán camino a más alianzas estratégicas.</p>
+          <p>Gracias a este trabajo, en 2025 lanzamos seis nuevas líneas de productos: cocina, vestidor, cestos de basura, oficina, iluminación y obra. que ampliarán nuestra presencia en la industria nacional y nos abrirán camino a más alianzas estratégicas.</p>
 
           <p>EUROHARD es innovación, compromiso y evolución constante.</p>
 

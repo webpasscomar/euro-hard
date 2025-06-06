@@ -42,7 +42,7 @@
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3274.7017215509363!2d-58.40766033952137!3d-34.83859134914625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcd491284448c7%3A0xb78807c351c8daaf!2sPlacaSur%20S.A.!5e0!3m2!1ses!2sar!4v1737387616197!5m2!1ses!2sar"
                     width="100%" height="480" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    referrerpolicy="no-referrer-when-downgrade" class="iframe-contacto"></iframe>
             </div>
         </div>
         <div class="container">

@@ -492,8 +492,10 @@ h1.title-carrusel {
   height: 100%;
 }
 
+
 .carousel-indicators [data-bs-target] {
-  background-color: #D1D1D1;
+  /* background-color: #D1D1D1; */
+  background-color: #808080;
 }
 
 .carousel-indicators .active {
@@ -762,6 +764,16 @@ h1.title-carrusel {
   align-items: center;
   height: 100%;
   padding: 0 10%;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Poner por encima el mapa al pasar el mouse por encima del encabezado de contacto */
+.container-hero:hover .iframe-contacto {
+  z-index: 3;
+}
+
+.iframe-contacto:hover{
+  z-index: 3;
 }
 
 .content-icon-EH-hero {
@@ -1182,6 +1194,18 @@ a.btn-gris {
   text-align: center;
 }
 
+/* Color de botón de ficha técnica */
+a.btn-gris2{
+  background:#808080;
+  color: var(--blanco);
+  border: none;
+  padding: 8px 28px;
+  font-size: 18px;
+  margin: 0 4px;
+  text-decoration: none;
+  text-align: center;
+}
+
 button.btn-gris {
   background: var(--gris);
   color: var(--blanco);
@@ -1194,7 +1218,8 @@ button.btn-gris {
 }
 
 a.btn-rojo:hover,
-a.btn-gris:hover {
+a.btn-gris:hover,
+a.btn-gris2:hover {
   background: var(--negro);
 }
 
@@ -1284,6 +1309,7 @@ table.table.table-details {
   top: 0;
   height: 100%;
 }
+
 
 .contact-content {
   margin: 0 0 16px;
