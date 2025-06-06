@@ -83,6 +83,7 @@ class ProductosController extends Controller
   {
     $subcategorias = Category::where('status', 1)
       ->whereHas('parents')
+      ->orderBy('unit')
       ->get();
     return view('productos-home', compact('subcategorias'));
   }
