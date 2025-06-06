@@ -54,7 +54,7 @@
                                     <div class="footer-content-cat-home">
                                         <div class="cat-capitulo">
                                             <span class="estilo">{{ Str::ucfirst($subcategoria->feature) }}</span>
-                                            <span class="estilo">{{$subcategoria->unit}}</span>
+                                            {{-- <span class="estilo">{{$subcategoria->unit}}</span> --}}
                                         </div>
                                         <div class="btn-mas-info">
                                             + info
