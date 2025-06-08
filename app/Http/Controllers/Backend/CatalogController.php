@@ -14,7 +14,8 @@ class CatalogController extends Controller
    */
   public function index(): View
   {
-    return view('backend.catalogs.index');
+    $catalog = Catalog::first();
+    return view('backend.catalogs.index', compact('catalog'));
   }
 
   /**
@@ -44,9 +45,9 @@ class CatalogController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(Catalog $catalog)
+  public function edit(Catalog $catalog): View
   {
-    //
+    return view('backend.catalogs.edit', compact('catalog'));
   }
 
   /**

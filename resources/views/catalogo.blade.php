@@ -12,7 +12,8 @@
         <span class="d-none d-md-inline">Siguiente ▶</span>
         <span class="d-md-none">➡</span>
       </button>
-      <a href="{{ asset('pdfs/catalogo.pdf') }}" download class="btn btn-danger ms-2"><i
+      {{-- @dump($catalog->pdf) --}}
+      <a href="{{ asset('storage/pdfs/'. $catalog->pdf) }}" download class="btn btn-danger ms-2"><i
           class="fa-solid fa-download"></i></a>
       <br><br>
       <input type="number" id="page-input" min="1" placeholder="Ir a página"
@@ -74,7 +75,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      const pdfUrl = @json(asset('pdfs/catalogo.pdf'));
+      const pdfUrl = @json(asset('storage/pdfs/' . $catalog->pdf));
       const flipContainer = document.getElementById('page-flip');
       const spinner = document.getElementById('loading-spinner');
       let pageFlip;

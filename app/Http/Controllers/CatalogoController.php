@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Catalog;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CatalogoController extends Controller
 {
-    public function index()
+    public function index(): View
     {
-        return view('catalogo');
+        $catalog = Catalog::first();
+        return view('catalogo', compact('catalog'));
     }
 }
