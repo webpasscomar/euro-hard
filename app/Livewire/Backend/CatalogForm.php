@@ -68,11 +68,11 @@ class CatalogForm extends Component
                 toast('No se pudo actualizar el catálogo', 'error');
                 $this->redirect(route('admin.catalogs.index'));
             }
-        } else{
+        }else{
             toast('No hubo cambios en el catálogo', 'success');
             $this->redirect(route('admin.catalogs.index'));
         }
 
-
+        
     }
 }
