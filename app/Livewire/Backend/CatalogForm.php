@@ -27,6 +27,7 @@ class CatalogForm extends Component
     {
         return [
             'pdf.mimes' => 'El archivo debe ser un PDF.',
+            'pdf.file' => 'El archivo debe ser un archivo válido.',
             'pdf.max' => 'El archivo no debe exceder los 30 MB.',
         ];
     }
@@ -67,9 +68,11 @@ class CatalogForm extends Component
                 toast('No se pudo actualizar el catálogo', 'error');
                 $this->redirect(route('admin.catalogs.index'));
             }
+        } else{
+            toast('No hubo cambios en el catálogo', 'success');
+            $this->redirect(route('admin.catalogs.index'));
         }
 
-        toast('No hubo cambios en el catálogo', 'success');
-        $this->redirect(route('admin.catalogs.index'));
+
     }
 }
