@@ -164,23 +164,29 @@
 
             {{-- Productos relacionados si los tiene --}}
             @if (count($producto->relatedProducts) > 0)
-                <div class="p-3">
+                <div>
                     <h5 class="fw-bold my-4">Productos Relacionados</h5>
-                    <table class="table table-details">
+                    <table class="table table-details table-hover table-bordered" style="border-collapse:collapse;">
                         <thead>
                             <tr>
-                                <th>Código</th>
-                                <th>Descripción</th>
+                                <th class="text-start align-middle">Código</th>
+                                <th class="text-start align-middle">Descripción</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($producto->relatedProducts as $productoRelacionado)
-                                <tr>
-                                    <td>
-                                        <p class="soporte">{{ $productoRelacionado->code }}</p>
-                                    </td>
-                                    <td>{{ $productoRelacionado->name }}</td>
-                                </tr>
+                            <tr class="related-row">
+                                <td class="align-middle">
+                                    <a href="{{ route('productos.detalle', [$categoria, $subcategoria->slug, $productoRelacionado->slug]) }}" class="d-block w-100 text-decoration-none">
+                                        <span class="soporte">{{ $productoRelacionado->code }}</span>
+                                    </a>
+                                </td>
+                                <td class="align-middle">
+                                    <a href="{{ route('productos.detalle', [$categoria, $subcategoria->slug, $productoRelacionado->slug]) }}" class="d-block w-100 text-decoration-none text-black">
+                                        <span>{{ $productoRelacionado->name }}</span>
+                                    </a>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
