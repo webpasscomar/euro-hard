@@ -11,7 +11,14 @@ use App\Http\Controllers\NovedadesController;
 use App\Http\Controllers\FormulariosController;
 use App\Http\Controllers\ContactoController;
 
-Auth::routes();
+// Deshabilitar el registro de usuarios
+Auth::routes(['register' => false]); 
+
+Route::match(['get', 'post','put','path','delete'], '/register', function () {
+    return redirect()->route('login');
+});
+
+// ****************************************************
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/empresa', [EmpresaController::class, 'index'])->name('empresa');
