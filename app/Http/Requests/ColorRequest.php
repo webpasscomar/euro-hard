@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ColorRequest extends FormRequest
 {
@@ -22,7 +23,7 @@ class ColorRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'color' => 'unique:colors,color'
+      'color' => Rule::unique('colors', 'color')->ignore($this->route('color')),
     ];
   }
 

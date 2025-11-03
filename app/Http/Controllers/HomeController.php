@@ -3,28 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery;
-use App\Models\ProductCategory;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
 
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        $sliders = Gallery::where('status', 1)  
-        ->orderBy('order', 'asc')  
-        ->get();
-        // $categoriasPadre = ProductCategory::get();
-        $categoriasPadre = ProductCategory::whereNull('categoryParent_id')
-        ->where('status', 1)
-        ->get();
+  /**
+   * Show the application dashboard.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+  public function index()
+  {
+    $sliders = Gallery::where('status', 1)
+      ->orderBy('order', 'asc')
+      ->get();
+    // $categoriasPadre = ProductCategory::get();
+    $categoriasPadre = Category::where('status', 1)
+      ->whereDoesntHave('parents')
+      ->get();
 
-        return view('home', compact('sliders', 'categoriasPadre'));
-    }
+    $metaTitle = "Herrajes y accesorios";
+    $metaDescription = "EuroHard";
+
+    return view('home', compact('sliders', 'categoriasPadre', 'metaTitle', 'metaDescription'));
+  }
 }

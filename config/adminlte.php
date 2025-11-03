@@ -329,7 +329,7 @@ return [
       'icon' => 'fas fa-fw fa-palette',
     ],
     [
-      'text' => 'Categorias',
+      'text' => 'Ambientes & Capítulos',
       'route' => 'admin.productCategory.index',
       'icon' => 'fas fa-fw fa-sitemap',
     ],
@@ -413,17 +413,17 @@ return [
       ],
     ],
     'Select2' => [
-      'active' => false,
+      'active' => true,
       'files' => [
         [
           'type' => 'js',
           'asset' => false,
-          'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
+          'location' => '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
         ],
         [
           'type' => 'css',
           'asset' => false,
-          'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
+          'location' => '//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
         ],
       ],
     ],
@@ -438,12 +438,12 @@ return [
       ],
     ],
     'Sweetalert2' => [
-      'active' => false,
+      'active' => true,
       'files' => [
         [
           'type' => 'js',
           'asset' => false,
-          'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+          'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
         ],
       ],
     ],

@@ -13,6 +13,7 @@
             @enderror
         </div>
     </div>
+
     {{-- Slug --}}
     <div class="col-md-6">
         <div class="form-group mb-3">
@@ -25,6 +26,81 @@
         </div>
     </div>
 </div>
+
+{{-- Caracteristica - Feature --}}
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="form-group mb-3">
+            <label for="feature" class="form-label">Característica</label><span class="fs-4 text-danger"></span>
+            <input type="text" id="feature" name="feature" class="form-control"
+                value="{{ old('feature', $productCategory->feature ?? '') }}">
+        </div>
+    </div>
+
+
+    {{-- Color --}}
+    <div class="col-md-2">
+        <div class="form-group mb-3">
+            <label for="image" class="form-label d-flex align-items-center mb-1">Color <span
+                    class="fs-4 text-danger flex-1">*</span>
+
+                <div id="previewColor"
+                    @isset($productCategory)
+                        style="width:25px; border-radius:50% ;height:25px; border:1px solid black; background-color:{{ old('color', $productCategory->color ?? '') }}" @endisset>
+                </div>
+            </label>
+            <div class="dropdown">
+                <button
+                    class="d-flex align-items-center justify-content-between btn btn-outline-secondary border-1 border-gray-300 dropdown-toggle w-100"
+                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Seleccione un color
+                </button>
+                <ul class="dropdown-menu w-100 p-2">
+                    @forelse ($colors as $color)
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="radio" name="color"
+                                id="{{ 'color' . $color->id }}" value="{{ $color->color }}"
+                                onclick="previewColor(event)" @checked(old('color', $productCategory->color ?? '') == $color->color)>
+                            <div
+                                style="border:1px solid; border-radius: 5px; black; background-color: {{ $color->color }}">
+                                <label class="form-check-label w-100" for="{{ 'color' . $color->id }}"
+                                    style="opacity: 0;" onclick="previewColor(event)">
+                                    color
+                                </label>
+                            </div>
+                        </div>
+                    @empty
+                        <p>colores no disponibles</p>
+                    @endforelse
+                </ul>
+            </div>
+            @error('color')
+                <span class="ms-1 text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+
+    {{-- categoria/s padre (Ambientes) --}}
+    <div class="col-md-6 mt-2">
+        <div class="form-group mb-3">
+            <label for="categoryParent" class="form-label">Ambientes</label><small class="text-secondary"> - (
+                seleccione uno ó varios )</small>
+            <select name="categories[]" id="categoryParent" class="categories form-select" multiple>
+                @forelse ($productCategories as $category)
+                    <option value="{{ $category->id }}" @selected(in_array($category->id, old('categories', isset($productCategory) ? $productCategory->parents->pluck('id')->toArray() : [])))>{{ $category->name }}</option>
+                @empty
+                    <option class="text-sm text-secondary">No hay ninguna categoria. Ingrese una</option>
+                @endforelse
+            </select>
+            @error('categories')
+                <span class="ms-1 text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+</div>
+
+
 {{-- Imágen / Banner --}}
 <div class="row">
     {{-- Imágen --}}
@@ -42,6 +118,7 @@
             @enderror
         </div>
     </div>
+
     {{-- Banner --}}
     <div class="col-md-6 mt-2">
         <div class="form-group mb-3">
@@ -49,7 +126,7 @@
             <input type="file" id="banner" name="banner" class="form-control" accept=".png, .jpeg, .jpg, .svg"
                 onchange="imageBannerPreview(event)">
             <p class="ml-1">
-                <small class="text-secondary">Recomendaciones: jpg , png ó svg de 512px x 512px - tamaño máximo de 1mb
+                <small class="text-secondary">Recomendaciones: jpg , png ó svg de 1600px x 900px - tamaño máximo de 1mb
                 </small>
             </p>
             @error('banner')
@@ -58,64 +135,8 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <div class="form-group mb-3">
-            <label for="image" class="form-label d-flex align-items-center">Color <span
-                    class="fs-4 text-danger flex-1">*</span>
-                <div id="previewColor"
-                    style="width:25px; border-radius:50% ;height:25px; background-color:{{ old('color', $productCategory->color ?? '') }}">
-                </div>
-            </label>
 
-            <div class="dropdown">
-                <button
-                    class="d-flex align-items-center justify-content-between btn btn-outline-secondary dropdown-toggle w-100"
-                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Seleccione un color
-                </button>
-                <ul class="dropdown-menu w-100 p-2">
-                    @forelse ($colors as $color)
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="color"
-                                id="{{ 'color' . $color->id }}" value="{{ $color->color }}"
-                                style="border:1px solid grey;" onclick="previewColor(event)"
-                                {{ old('color', $productCategory->color ?? '') == $color->color ? 'checked' : '' }}>
-                            <div style="background-color: {{ $color->color }}">
-                                <label class="form-check-label w-100" for="{{ 'color' . $color->id }}"
-                                    style="opacity: 0;" onclick="previewColor(event)">
-                                    color
-                                </label>
-                            </div>
-                        </div>
-                    @empty
-                        <p>colores no disponibles</p>
-                    @endforelse
-                </ul>
-            </div>
-            @error('color')
-                <span class="ms-1 text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-    </div>
-    <div class="col-md-8 mt-2">
-        <div class="form-group mb-3">
-            <label for="categoryParent_id" class="form-label">Categoria Padre</label>
-            <select name="categoryParent_id" id="categoryParent_id" class="form-select">
-                <option value="">Seleccione una categoria</option>
-                @forelse ($productCategories as $category)
-                    <option value="{{ $category->id }}" @selected(old('categoryParent_id', $productCategory->categoryParent_id ?? '') == $category->id)>
-                        {{ $category->name }}</option>
-                @empty
-                    <option class="text-sm text-secondary">No hay ninguna categoria. Ingrese una</option>
-                @endforelse
-            </select>
-            @error('categoryParent_id')
-                <span class="ms-1 text-danger">{{ $message }}</span>
-            @enderror
-        </div>
-    </div>
-</div>
+
 
 <p class="text-right"><span class="fs-4 text-danger">*</span><small> Campos requeridos</small></p>
 <div class="d-sm-flex gap-3">
@@ -146,8 +167,8 @@
             event.stopPropagation();
             const previewColor = document.querySelector('#previewColor');
             previewColor.setAttribute('style',
-                `width:25px; height:25px ;border-radius:50%; background-color: ${event.target.value}`);
-            console.log(event.target.value);
+                `width:25px; height:25px ;border-radius:50%; border:1px solid black; background-color: ${event.target.value}`
+            );
         };
         //  Vista previa de la imágen
         const imageCategoryPreview = (event) => {
@@ -213,5 +234,12 @@
             const slug = document.querySelector('#slug');
             slug.value = generateSlug(name.value);
         }
+
+        // Implementación de select multiple con Select2 para elegir las categorias
+        $(document).ready(function() {
+            $('.categories').select2({
+                theme: "classic",
+            });
+        });
     </script>
 @endpush

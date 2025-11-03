@@ -1,7 +1,7 @@
 @extends('layouts.adminlte')
-@section('subtitle', 'Categoria Productos')
+@section('subtitle', 'Ambientes & Capítulos')
 @section('content_header_title', 'Admin')
-@section('content_header_subtitle', 'Categoria Productos')
+@section('content_header_subtitle', 'Ambientes & Capítulos')
 @section('content_header_detail', 'Nuevo')
 
 @section('content_body')

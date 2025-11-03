@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Color;
 use App\Models\Product;
-use App\Models\ProductCategory;
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,6 +17,12 @@ class ProductController extends Controller
   /**
    * Display a listing of the resource.
    */
+  // funcion para obtener el id del video de youtube
+  protected function getYoutubeVideoId($url)
+  {
+    preg_match('/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([a-zA-Z0-9_-]+)/', $url, $matches);
+    return $matches[1] ?? null;
+  }
   public function index(): View
   {
     // Modal para confirmar la eliminación del producto
@@ -36,7 +42,7 @@ class ProductController extends Controller
     $edit = false;
     $colors = Color::all();
     $products = Product::where('status', 1)->get();
-    $productCategories = ProductCategory::where('status', 1)->get();
+    $productCategories = Category::where('status', 1)->get();
     return view('backend.products.create', compact('colors', 'products', 'productCategories', 'edit'));
   }
 
@@ -46,6 +52,9 @@ class ProductController extends Controller
   public function store(ProductRequest $request): RedirectResponse
   {
     $request->validated();
+
+
+    // dd($request);
     try {
       //      generar nombre de imágen principal y guardarla
       if ($request->hasFile('image_main')) {
@@ -127,6 +136,7 @@ class ProductController extends Controller
         'name' => $request->input('name'),
         'slug' => $request->input('slug'),
         'description' => $request->input('description'),
+        'code' => $request->input('code'),
         'image_main' => $image_main_name,
         'image_1' => $image_1,
         'image_2' => $image_2,
@@ -136,13 +146,15 @@ class ProductController extends Controller
         'image_6' => $image_6,
         'productCategory_id' => $request->input('productCategory_id'),
         'information' => $request->input('information'),
-        'video' => $request->input('video'),
+        'video' => $this->getYoutubeVideoId($request->input('video')), //guardamos solo el id del video
         'is_new' => (bool)$request->input('is_new'),
         'datasheet_file' => $datasheet_file_name,
         'instruction_file' => $instructions_file_name,
         'instruction_button' => (bool)$request->input('instruction_button'),
         'keywordsSEO' => $request->input('keywordsSEO'),
         'descriptionSEO' => $request->input('descriptionSEO'),
+        'material' => $request->input('material'),
+        'orderNumber' => $request->input('orderNumber'),
         'status' => 1
       ]);
 
@@ -156,10 +168,15 @@ class ProductController extends Controller
         $product->relatedProducts()->sync($request->input('products'));
       }
 
+      // Se sincronizan las categorias seleccionadas
+      if ($request->input('categories')) {
+        $product->categories()->sync($request->input('categories'));
+      }
+
       toast('Producto creado con éxito', 'success');
       return redirect()->route('admin.products.index');
     } catch (\Throwable $th) {
-      dd($th);
+      // dd($th);
       toast('No se pudo crear el producto', 'error');
       return redirect()->route('admin.products.index');
     };
@@ -169,7 +186,7 @@ class ProductController extends Controller
   public function edit(Product $product): View
   {
     $colors = Color::all();
-    $productCategories = ProductCategory::where('status', 1)->get();
+    $productCategories = Category::where('status', 1)->get();
     $products = Product::where('status', 1)
       ->where('id', '!=', $product->id)
       ->get();
@@ -318,6 +335,7 @@ class ProductController extends Controller
         'name' => $request->input('name'),
         'slug' => $request->input('slug'),
         'description' => $request->input('description'),
+        'code' => $request->input('code'),
         'image_main' => $image_main_name,
         'image_1' => $image_1,
         'image_2' => $image_2,
@@ -327,13 +345,15 @@ class ProductController extends Controller
         'image_6' => $image_6,
         'productCategory_id' => $request->input('productCategory_id'),
         'information' => $request->input('information'),
-        'video' => $request->input('video'),
+        'video' => $this->getYoutubeVideoId($request->input('video')), //guardamos solo el id del video
         'is_new' => (bool)$request->input('is_new'),
         'datasheet_file' => $datasheet_file_name,
         'instruction_file' => $instructions_file_name,
         'instruction_button' => (bool)$request->input('instruction_button'),
         'keywordsSEO' => $request->input('keywordsSEO'),
         'descriptionSEO' => $request->input('descriptionSEO'),
+        'material' => $request->input('material'),
+        'orderNumber' => $request->input('orderNumber'),
         'status' => $product->status,
       ]);
 
@@ -348,10 +368,15 @@ class ProductController extends Controller
         $product->relatedProducts()->sync($request->input('products'));
       }
 
+      // Si se asocian categorias sincronizar la relación con las categorias relacionadas
+      if ($request->input('categories')) {
+        $product->categories()->sync($request->input('categories'));
+      }
+
       toast('Producto actualizado con éxito', 'success');
       return redirect()->route('admin.products.index');
     } catch (\Throwable $th) {
-      dd($th);
+      // dd($th);
       toast('No se pudo actualizar el producto', 'error');
       return redirect()->route('admin.products.index');
     };

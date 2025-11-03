@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('catalogs', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('pdf');
-            $table->integer('order');
+            $table->integer('order')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

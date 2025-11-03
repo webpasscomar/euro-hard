@@ -41,8 +41,9 @@ class ProductRequest extends FormRequest
       ],
       'description' => 'required|min:10|string',
       'image_main' =>  $put ? 'image|mimes:png,jpg,jpeg,svg|max:1024' : 'required|image|mimes:png,jpg,jpeg,svg|max:1024',
-      'productCategory_id' => 'required',
-      'video' => 'nullable|url',
+      'categories' => 'required|array',
+      'categories.*' => 'exists:categories,id',
+      'video' => 'nullable',
       'image_1' => 'nullable|image|mimes:png,jpg,jpeg,svg|max:1024',
       'image_2' => $put ? (!request()->hasFile('image_1') && $product->image_1 == null ? 'prohibited' : 'nullable|image|mimes:png,jpg,jpeg,svg|max:1024') : (request()->hasFile('image_1') ? 'nullable|image|mimes:png,jpg,jpeg,svg|max:1024' : 'prohibited'),
       'image_3' => $put ? (!request()->hasFile('image_2') && $product->image_2 == null ? 'prohibited' : 'nullable|image|mimes:png,jpg,jpeg,svg|max:1024') : (request()->hasFile('image_2') ? 'nullable|image|mimes:png,jpg,jpeg,svg|max:1024' : 'prohibited'),
@@ -52,7 +53,9 @@ class ProductRequest extends FormRequest
       'datasheet_file' => 'mimes:pdf|max:2048',
       'instruction_file' => 'mimes:pdf|max:2048',
       'keywordsSEO' => 'max:255',
-      'descriptionSEO' => 'max:255'
+      'descriptionSEO' => 'max:255',
+      'material' => 'nullable',
+      'orderNumber' => 'integer',
     ];
   }
 
@@ -77,8 +80,10 @@ class ProductRequest extends FormRequest
       'image_main.image' => 'Formato no permitido',
       'image_main.mimes' => 'Formato no permitido',
       'image_main.max' => 'Tamaño no permitido. Máximo 1mb',
-      'productCategory_id.required' => 'Seleccione una categoría',
-      'video.url' => 'Ingrese una URL válida',
+      'categories.required' => 'Seleccione al menos una categoría',
+      'categories.array' => 'Seleccione una categoria válida',
+      'categories.*.exists' => 'Seleccione una categoria válida',
+      // 'video.url' => 'Ingrese una URL válida',
       'image_1.image' => 'Formato no permitido',
       'image_1.mimes' => 'Formato no permitido',
       'image_1.max' => 'Tamaño no permitido. Máximo 1mb',
@@ -108,6 +113,7 @@ class ProductRequest extends FormRequest
       'instruction_file.max' => 'Tamaño no permitido. Máximo 2mb',
       'keywordSEO.max' => 'Máximo permitido 255 caracteres',
       'descriptionSEO.max' => 'Máximo permitido 255 caracteres',
+      'orderNumber.integer' => 'El valor debe ser un número entero',
     ];
   }
 }

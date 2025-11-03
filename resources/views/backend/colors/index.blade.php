@@ -17,7 +17,9 @@
                     <thead>
                         <tr>
                             <th class="text-left">Cod.</th>
+                            <th class="text-left align-middle"></th>
                             <th class="text-left align-middle">Color</th>
+                            <th class="text-left align-middle">Característica</th>
                             <th class="text-left align-middle">Acciones</th>
                         </tr>
                     </thead>
@@ -26,9 +28,21 @@
                             <tr>
                                 <td class="align-middle text-left">{{ $color->id }}</td>
                                 <td class="align-middle text-left">
-                                    <div class="w-8 h-8 rounded-full" style="background-color: {{ $color->color }}"></div>
+                                    <div class="w-8 h-8 rounded-full border-1 border-black"
+                                        style="background-color: {{ $color->color }}">
+                                    </div>
+                                </td>
+                                <td>
+                                    {{ $color->name }}
+                                </td>
+                                <td>
+                                    {{ $color->feature }}
                                 </td>
                                 <td class="text-right align-middle">
+                                    <a href="{{ route('admin.colors.edit', $color) }}"
+                                        class="btn btn-sm btn-outline-secondary" title="Editar">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
                                     <a href="{{ route('admin.colors.destroy', $color) }}"
                                         class="btn btn-sm btn-outline-danger" data-confirm-delete="true" title="Eliminar">
                                         <i class="fas fa-trash"></i>

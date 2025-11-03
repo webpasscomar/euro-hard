@@ -91,7 +91,8 @@ h6 {
 
 
 /* GENERAL */
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -145,7 +146,7 @@ body {
 }
 
 .estilo {
-  color: var(--estilo);
+  color: var(--gris);
 }
 
 .movimiento {
@@ -385,7 +386,8 @@ input.form-control::placeholder {
   font-size: 22px;
   display: block;
   text-align: center;
-  padding: 11px 0 0; /* Posiciona el alto de los iconos redes sociales para que quede centrado */
+  padding: 11px 0 0;
+  /* Posiciona el alto de los iconos redes sociales para que quede centrado */
 }
 
 .icon-WA {
@@ -490,8 +492,10 @@ h1.title-carrusel {
   height: 100%;
 }
 
+
 .carousel-indicators [data-bs-target] {
-  background-color: #D1D1D1;
+  /* background-color: #D1D1D1; */
+  background-color: #808080;
 }
 
 .carousel-indicators .active {
@@ -600,7 +604,7 @@ h1.title-carrusel {
 }
 
 .title-cat-column {
-  background: var(--eurohard);
+  /* background: var(--eurohard); */
   color: var(--blanco);
   text-align: center;
   font-size: 24px;
@@ -610,7 +614,8 @@ h1.title-carrusel {
 }
 
 .content-cat:hover .title-cat-column {
-  background: var(--negro);
+  /* background: var(--negro); */
+  background: #333333 !important;
 }
 
 .footer-content-cat-home {
@@ -644,6 +649,12 @@ h1.title-carrusel {
   height: 5px;
   width: calc(100% - 70px);
   display: flex;
+}
+
+/* Estilo linea de color de subcategorias en las card de categoria */
+.cat-color-line {
+  width: calc(100% / 6);
+  margin: 0 2px 0 0;
 }
 
 .cat-color-line-soporte {
@@ -726,6 +737,7 @@ h1.title-carrusel {
 /* --HERO CATEGORIA */
 .container-hero {
   width: 100%;
+  /* height: 100%; */
   height: 480px;
   overflow: hidden;
   position: relative;
@@ -752,6 +764,16 @@ h1.title-carrusel {
   align-items: center;
   height: 100%;
   padding: 0 10%;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Poner por encima el mapa al pasar el mouse por encima del encabezado de contacto */
+.container-hero:hover .iframe-contacto {
+  z-index: 3;
+}
+
+.iframe-contacto:hover{
+  z-index: 3;
 }
 
 .content-icon-EH-hero {
@@ -768,7 +790,7 @@ h1.title-hero {
 }
 
 img.icon-EH-hero {
-  width: 52px;
+  width: 52px !important;
 }
 
 /* --fin de HERO CATEGORIA */
@@ -806,7 +828,8 @@ img.icon-EH-hero {
 
 
 .owl-carousel .owl-nav button.owl-next::before {
-  content: ''; /*unicode for arrow-right*/
+  content: '';
+  /*unicode for arrow-right*/
   background: url('../../public/images/angle-der.svg');
   margin-right: 5px;
   background-size: 100%;
@@ -819,7 +842,8 @@ img.icon-EH-hero {
 }
 
 .owl-carousel .owl-nav button.owl-prev::before {
-  content: ''; /*unicode for arrow-right*/
+  content: '';
+  /*unicode for arrow-right*/
   background: url(../../public/images/angle-izq.svg);
   margin-right: 5px;
   background-size: 100%;
@@ -834,13 +858,14 @@ img.icon-EH-hero {
 .owl-carousel .owl-nav button.owl-next:hover,
 .owl-carousel .owl-nav button.owl-prev:hover {
   opacity: 0.5;
-  background-color:transparent;
+  background-color: transparent;
 }
 
 
 .owl-carousel .owl-nav .owl-next [aria-label="Next"],
 .owl-carousel .owl-nav .owl-prev [aria-label="Previous"] {
-  visibility: hidden /*The Span element*/
+  visibility: hidden
+    /*The Span element*/
 }
 
 .owl-theme .owl-nav .disabled {
@@ -1000,6 +1025,7 @@ img.icon-EH-hero {
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
@@ -1091,6 +1117,20 @@ img.icon-EH-hero {
   position: relative;
 }
 
+.content-product table {
+  width: 100% !important;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border: 1px solid #000;
+}
+
+.content-product th,
+.content-product td {
+  border: 1px solid #000;
+  padding: 8px;
+  word-break: break-word;
+}
+
 .card-new {
   position: absolute;
   width: 72px;
@@ -1111,22 +1151,24 @@ img.icon-EH-hero {
 }
 
 .title-product {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: var(--FWBold);
   line-height: var(--LHExpandSmall);
   color: var(--negro);
-  margin: 0 0 32px 0;
+  margin: 0 0 24px 0;
 }
 
 .description-product {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: var(--FWLight);
   line-height: var(--LHExpandSmall);
   color: var(--negro);
+  margin: 0 0 16px 0;
+  
 }
 
 .content-btn-products {
-  position: absolute;
+  /* position: absolute; */
   bottom: 2rem;
 }
 
@@ -1152,11 +1194,23 @@ a.btn-gris {
   text-align: center;
 }
 
+/* Color de botón de ficha técnica */
+a.btn-gris2{
+  background:#808080;
+  color: var(--blanco);
+  border: none;
+  padding: 8px 28px;
+  font-size: 18px;
+  margin: 0 4px;
+  text-decoration: none;
+  text-align: center;
+}
+
 button.btn-gris {
   background: var(--gris);
   color: var(--blanco);
   border: none;
-  padding: 5px 28px;
+  padding: 8px 28px;
   font-size: 18px;
   margin: 0 4px;
   text-decoration: none;
@@ -1164,7 +1218,8 @@ button.btn-gris {
 }
 
 a.btn-rojo:hover,
-a.btn-gris:hover {
+a.btn-gris:hover,
+a.btn-gris2:hover {
   background: var(--negro);
 }
 
@@ -1255,6 +1310,7 @@ table.table.table-details {
   height: 100%;
 }
 
+
 .contact-content {
   margin: 0 0 16px;
   padding: 16px 8px;
@@ -1317,6 +1373,7 @@ label.label-forms {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin: 10px 0;
 }
 
 .myinput.large {
@@ -1357,21 +1414,83 @@ button.btn.btn-primary.btn-form:hover {
   margin-top: 16px !important;
 }
 
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+
+.carrusel-product .carousel-item {
+  height: auto;
+  min-height: 300px;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-indicators {
+  bottom: -50px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  z-index: 2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* -fin de FORMULARIOS */
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 
 /* XX-Large devices (larger desktops, 1400px) */
-@media (max-width: 1400px) {
-}
+@media (max-width: 1400px) {}
 
 /* X-Large devices (large desktops, 1200px) */
 @media (max-width: 1200px) {
+
+  /* Botones de detalle del producto */
+  .content-btn-detalle-products {
+    position: relative;
+    bottom: 0;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .content-product-plano {
+    padding: 1.5rem !important;
+  }
+
+  /* Botón video instructivo */
+  .content-btn-products button{
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* Botón instructivo de pdf */
+  a.btn-rojo {
+    margin: 4px;
+    display: block;
+    width: 100%;
+  }
 }
 
 /* Large devices (desktops, 992px) */
-@media (max-width: 992px) {
-}
+@media (max-width: 992px) {}
 
 /* Medium devices (tablets, 768px) */
 @media (max-width: 768px) {
@@ -1460,7 +1579,8 @@ button.btn.btn-primary.btn-form:hover {
   }
 
   .carousel-item {
-    height: 280px;
+    /* height: 280px; */
+    /* height: auto; */
   }
 
   .carousel-caption {
@@ -1514,6 +1634,38 @@ button.btn.btn-primary.btn-form:hover {
     padding: 0 64px;
   }
 
+  /* Botón de ficha técnica en cards de listado de productos */
+
+  .content-btn-products {
+    position: relative;
+    margin: 24px 0 0 0;
+    bottom: 0;
+  }
+
+  a.btn-rojo {
+    margin: 4px;
+    display: block;
+    width: 100%;
+  }
+
+  /* Botón ver video */
+  a.btn-gris {
+    margin: 4px;
+    display: block;
+    width: 100%;
+  }
+
+  /* Botones de detalle del producto */
+  .content-btn-detalle-products {
+    position: relative;
+    bottom: 0;
+    gap: 0px;
+    width: 100%;
+  }
+
+  .content-product-plano {
+    padding: 1.5rem !important;
+  }
 }
 
 /* Small devices (landscape phones, 576px) */
@@ -1523,7 +1675,8 @@ button.btn.btn-primary.btn-form:hover {
   }
 
   .carousel-item {
-    height: 220px;
+    /* height: 220px; */
+    /* height: auto; */
   }
 
   .container-hero {
@@ -1555,11 +1708,11 @@ button.btn.btn-primary.btn-form:hover {
     height: 60px;
   }
 
-  .content-btn-products {
+  /* .content-btn-products {
     position: relative;
     margin: 24px 0 0 0;
     bottom: 0;
-  }
+  } */
 
   .content-product-plano {
     padding: 1.5rem !important;
@@ -1570,17 +1723,17 @@ button.btn.btn-primary.btn-form:hover {
     word-break: break-word;
   }
 
-  .content-btn-detalle-products {
+  /* .content-btn-detalle-products {
     position: relative;
     bottom: 0;
     width: 100%;
-  }
+  } */
 
-  a.btn-rojo {
+  /* a.btn-rojo {
     margin: 4px;
     display: block;
     width: 100%;
-  }
+  } */
 
   a.btn-gris {
     margin: 4px;

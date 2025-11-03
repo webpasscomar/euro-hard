@@ -5,8 +5,8 @@
         class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none link-logo">
         <img src="{{ asset('images/logo-eurohard.svg') }}" alt="EuroHard" class="logo-header" />
       </a>
-      <form class="form-search mobile" role="search">
-        <input type="search" class="form-control" placeholder="Buscar..." aria-label="Buscar">
+      <form action="{{ route('productos.buscar') }}" class="form-search mobile" role="search">
+        <input type="search" class="form-control" name="buscar" placeholder="Buscar..." aria-label="Buscar">
       </form>
     </div>
 
@@ -15,7 +15,7 @@
         <li class="nav-item"><a href="{{ route('empresa') }}"
             class="nav-link {{ request()->routeIS('empresa') ? 'active' : '' }}">Empresa</a></li>
         <li class="nav-item"><a href="{{ route('productos') }}"
-            class="nav-link {{ request()->routeIS('productos') ? 'active' : '' }}" aria-current="page">Productos</a>
+            class="nav-link {{ request()->routeIS('productos*') ? 'active' : '' }}" aria-current="page">Productos</a>
         </li>
         <li class="nav-item"><a href="{{ route('catalogo') }}"
             class="nav-link {{ request()->routeIS('catalogo') ? 'active' : '' }}">Catálogo</a></li>
@@ -23,8 +23,6 @@
             class="nav-link {{ request()->routeIS('instructivos') ? 'active' : '' }}">Instructivos</a></li>
         <li class="nav-item"><a href="{{ route('novedades') }}"
             class="nav-link {{ request()->routeIS('novedades') ? 'active' : '' }}">Novedades</a></li>
-        {{-- <li class="nav-item"><a href="{{ route('formularios') }}"
-            class="nav-link {{ request()->routeIS('formularios') ? 'active' : '' }}">Formularios</a></li> --}}
         <!-- Dropdown para Formularios -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle {{ request()->routeIS('formularios') ? 'active' : '' }}" href="#"
@@ -39,8 +37,11 @@
         </li>
         <li class="nav-item"><a href="{{ route('contacto') }}"
             class="nav-link {{ request()->routeIS('contacto') ? 'active' : '' }}">Contacto</a></li>
+        {{-- 
         <li class="nav-item"><a href="#" class="nav-link btn-icon-cart"><img
-              src="{{ asset('images/icon-cart.svg') }}" alt="Carrito de Compras" class="icon-cart" /></a></li>
+                            src="{{ asset('images/icon-cart.svg') }}" alt="Carrito de Compras" class="icon-cart" /></a>
+        </li> 
+        --}}
       </ul>
     </div>
   </div>
@@ -61,66 +62,57 @@
         <div class="offcanvas-body">
           <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('home') }}">Empresa</a>
+              <a class="nav-link" {{ request()->routeIS('empresa') ? 'active' : '' }}"
+                href="{{ route('empresa') }}">Empresa</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" {{ request()->routeIS('productos') ? 'active' : '' }}"
+                href="{{ route('productos') }}">Productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ request()->routeIS('catalogo') ? 'active' : '' }}"
+                href="{{ route('catalogo') }}">Catálogo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ request()->routeIS('instructivos') ? 'active' : '' }}"
+                href="{{ route('instructivos') }}">Instructivos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {{ request()->routeIS('novedades') ? 'active' : '' }}"
+                href="{{ route('novedades') }}">Novedades</a>
+            </li>
+
             <li class="nav-item dropdown">
-              <a class="nav-link active dropdown-toggle" href="{{ route('home') }}" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false" aria-current="page">
-                Productos
+              <a class="nav-link dropdown-toggle {{ request()->routeIS('formularios') ? 'active' : '' }}"
+                href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-current="page">
+                Formularios
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="{{ route('home') }}">
-                    Cocina & Lavadero
+                  <a class="dropdown-item" href="{{ route('formularios.experiencia') }}">
+                    Experiencia
                   </a>
                 </li>
                 <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li>
-                  <a class="dropdown-item" href="{{ route('home') }}">
-                    Living
+                  <a class="dropdown-item" href="{{ route('formularios.distribuidores') }}">
+                    Distribuidores
                   </a>
                 </li>
                 <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li>
-                  <a class="dropdown-item" href="{{ route('home') }}">
-                    Dormitorio
+                  <a class="dropdown-item" href="{{ route('formularios.productos') }}">
+                    Productos
                   </a>
-                </li>
-                <li>
-                  <hr class="dropdown-divider">
                 </li>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{ request()->routeIS('home') ? 'active' : '' }}"
-                href="{{ route('home') }}">Catálogo</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link {{ request()->routeIS('home') ? 'active' : '' }}"
-                href="{{ route('home') }}">Instructivos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link {{ request()->routeIS('home') ? 'active' : '' }}"
-                href="{{ route('home') }}">Novedades</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link {{ request()->routeIS('home') ? 'active' : '' }}"
-                href="{{ route('home') }}">Formularios</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link {{ request()->routeIS('home') ? 'active' : '' }}"
-                href="{{ route('home') }}">Contacto</a>
-            </li>
-            <li>
-              <hr class="divider">
+              <a class="nav-link {{ request()->routeIS('contacto') ? 'active' : '' }}"
+                href="{{ route('contacto') }}">Contacto</a>
             </li>
           </ul>
-          <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
+          <form action="{{ route('productos.buscar') }}" class="d-flex mt-3" role="search">
+            <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar"
+              name="buscar">
             <button class="btn btn-EH-primary" type="submit">Buscar</button>
           </form>
         </div>
