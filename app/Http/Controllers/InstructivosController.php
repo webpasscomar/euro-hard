@@ -13,7 +13,8 @@ class InstructivosController extends Controller
       ->where(function ($query) {
         $query->whereNotNull('instruction_file')
           ->orWhereNotNull('video');
-      })
+      })          
+      ->orderby ('orderNumber')
       ->get();
 
     //      dd($products);

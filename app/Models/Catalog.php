@@ -10,7 +10,10 @@ class Catalog extends Model
     
     protected $fillable = [
         'title',
+        'slug',
         'pdf',
         'status',
+        'image',
+        'order',
     ];  
 }

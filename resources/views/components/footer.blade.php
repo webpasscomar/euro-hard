@@ -37,8 +37,8 @@
             <li class="nav-item-menu-footer"><a href="{{ route('productos') }}"
                 class="nav-link-menu-footer {{ request()->routeIS('productos') ? 'active-menu-footer' : '' }}"
                 aria-current="page">Productos</a></li>
-            <li class="nav-item-menu-footer"><a href="{{ route('catalogo') }}"
-                class="nav-link-menu-footer {{ request()->routeIS('catalogo') ? 'active-menu-footer' : '' }}">Catálogo</a>
+            <li class="nav-item-menu-footer"><a href="{{ route('catalogos') }}"
+                class="nav-link-menu-footer {{ request()->routeIS('catalogos') ? 'active-menu-footer' : '' }}">Catálogo</a>
             </li>
             <li class="nav-item-menu-footer"><a href="{{ route('instructivos') }}"
                 class="nav-link-menu-footer {{ request()->routeIS('instructivos') ? 'active-menu-footer' : '' }}">Instructivos</a>
@@ -73,6 +73,19 @@
           <a href="{{ $contact->instagram }}" class="icon-rrss-link" target="_blank">
             <i class="fab fa-instagram"></i>
           </a>
+        </div>
+        <div class="txt-information">
+          <p>
+           <small class="text-white">
+              Sitio desarrollado por Webpass
+              <a href="https://webpass.com.ar" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="text-white ms-1">
+                  <i class="fa-solid fa-globe" style="font-size: 14px;"></i>
+              </a>
+            </small>
+          </p>
         </div>
       </div>
     </div>

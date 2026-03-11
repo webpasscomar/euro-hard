@@ -1,168 +1,228 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container mt-4">
-    <div class="controls text-center mb-3">
-      <button id="prev-page" class="btn btn-secondary d-inline-flex align-items-center">
-        <span class="d-none d-md-inline">◀ Anterior</span>
-        <span class="d-md-none">⬅</span>
-      </button>
-      <span id="page-num" class="mx-3">Página: <span id="current-page">1</span> / <span id="total-pages">--</span></span>
-      <button id="next-page" class="btn btn-secondary d-inline-flex align-items-center">
-        <span class="d-none d-md-inline">Siguiente ▶</span>
-        <span class="d-md-none">➡</span>
-      </button>
-      {{-- @dump($catalog->pdf) --}}
-      <a href="{{ asset('storage/pdfs/'. $catalog->pdf) }}" download class="btn btn-danger ms-2"><i
-          class="fa-solid fa-download"></i></a>
-      <br><br>
-      <input type="number" id="page-input" min="1" placeholder="Ir a página"
-        class="form-control d-inline w-auto mx-2" style="width: 100px;">
-      <button id="go-to-page" class="btn btn-secondary">Ir</button>
+<div class="container-fluid position-relative d-flex justify-content-center align-items-center"
+     style="height: 100vh; background:#f5f5f5; overflow:hidden;">
+
+    <!-- LOADER -->
+    <div id="loader" class="d-flex flex-column align-items-center">
+        <div class="spinner"></div>
+        <p id="progressText" class="mt-3">Cargando 0%</p>
+        <div class="progress-bar-container">
+            <div id="progressBar" class="progress-bar-fill"></div>
+        </div>
     </div>
 
-    <div id="loading-spinner" class="d-flex flex-column justify-content-center align-items-center" style="height: 300px;">
-      <div class="spinner-border text-primary" role="status"></div>
-      <p class="mt-3 text-muted">Aguarde unos segundos, estamos cargando el catálogo...</p>
+    <!-- TOOLBAR -->
+    <div id="controls" class="toolbar" style="display:none;">
+        <button id="prev">⟨</button>
+        <span id="pageInfo">1 / 1</span>
+        <button id="next">⟩</button>
+
+        <div class="separator"></div>
+
+        <button id="zoomOut">−</button>
+        <button id="zoomIn">+</button>
+        <button id="resetZoom">Reset</button>
+
+        <div class="separator"></div>
+
+        <button id="fullscreen">⛶</button>
     </div>
 
-    <div class="d-flex justify-content-center">
-      <div id="page-flip"></div>
-    </div>
-  </div>
+    <!-- LIBRO -->
+    <div id="book" style="display:none;"></div>
+
+</div>
 @endsection
 
-@push('head')
-  <style>
-    #page-flip {
-      width: 100%;
-      max-width: 100vw;
-      height: 60vh;
-      max-height: 600px;
-      background: white;
-      border: 2px solid #ddd;
-      display: none;
-      /* Oculto hasta que cargue */
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto;
-      overflow: hidden;
-      box-sizing: border-box;
-    }
-
-    canvas {
-      width: 100%;
-      height: auto;
-    }
-
-    @media (max-width: 768px) {
-      #page-flip {
-        height: 50vh;
-      }
-    }
-
-    @media (max-width: 480px) {
-      #page-flip {
-        height: 45vh;
-      }
-    }
-  </style>
-@endpush
 
 @push('js')
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.min.js"></script>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const pdfUrl = @json(asset('storage/pdfs/' . $catalog->pdf));
-      const flipContainer = document.getElementById('page-flip');
-      const spinner = document.getElementById('loading-spinner');
-      let pageFlip;
-      let totalPages = 0;
+<!-- PDF.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
-      pdfjsLib.GlobalWorkerOptions.workerSrc =
-        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js";
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+</script>
+<!-- StPageFlip -->
+<script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
 
-      pdfjsLib.getDocument(pdfUrl).promise
-        .then(pdf => {
-          console.log("✅ Documento PDF cargado correctamente.");
+<style>
+#book {
+    width: 1000px;
+    height: 700px;
+}
+#loader{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ddd;
+    border-top: 5px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
 
-          totalPages = pdf.numPages;
-          document.getElementById('total-pages').textContent = totalPages;
-          const pages = [];
+.progress-bar-container {
+    width: 200px;
+    height: 6px;
+    background: #ddd;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: #333;
+    transition: width 0.3s ease;
+}
 
-          const loadPage = (num) => {
-            return new Promise((resolve) => {
-              console.log("📄 Cargando página:", num);
-              pdf.getPage(num).then(page => {
-                const canvas = document.createElement("canvas");
-                const ctx = canvas.getContext("2d");
-                const viewport = page.getViewport({
-                  scale: 2
-                });
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
+.toolbar {
+    position:absolute;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:rgba(0,0,0,0.7);
+    padding:8px 15px;
+    border-radius:30px;
+    color:white;
+    z-index:20;
+}
+.toolbar button {
+    background:none;
+    border:none;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+.toolbar button:hover {
+    opacity:0.7;
+}
+.separator {
+    width:1px;
+    height:18px;
+    background:rgba(255,255,255,0.4);
+}
+</style>
 
-                page.render({
-                  canvasContext: ctx,
-                  viewport
-                }).promise.then(() => {
-                  console.log("✅ Página renderizada:", num);
-                  pages.push(canvas);
-                  resolve();
-                });
-              });
-            });
-          };
+<script>
+document.addEventListener("DOMContentLoaded", async function () {
 
-          const loadAllPages = async () => {
-            for (let i = 1; i <= totalPages; i++) {
-              await loadPage(i);
-            }
+    const loader = document.getElementById("loader");
+    const bookEl = document.getElementById("book");
+    const controls = document.getElementById("controls");
 
-            console.log("✅ Todas las páginas cargadas.");
+    const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
 
-            pageFlip = new St.PageFlip(flipContainer, {
-              width: pages[0].width,
-              height: pages[0].height,
-              showCover: true,
-              maxShadowOpacity: 0.3,
-              mobileScrollSupport: false,
-            });
+    const pdfUrl = "{{ asset('storage/pdfs/' . $catalog->pdf) }}";
 
-            pageFlip.loadFromImages(pages.map(canvas => canvas.toDataURL()));
+    let zoomLevel = 0.8;
+    const zoomStep = 0.1;
 
-            pageFlip.on("flip", (e) => {
-              document.getElementById('current-page').textContent = e.data + 1;
-            });
+    const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
 
-            console.log("✅ PDF cargado, ocultando spinner.");
-            spinner.classList.add('d-none');
-            flipContainer.style.display = "flex";
-          };
-
-          loadAllPages();
-        })
-        .catch(error => {
-          console.error("❌ Error al cargar el documento PDF:", error);
-          spinner.innerHTML = '<p>Error al cargar el PDF.</p>';
-        });
-
-
-      document.getElementById("prev-page").addEventListener("click", () => pageFlip?.flipPrev());
-      document.getElementById("next-page").addEventListener("click", () => pageFlip?.flipNext());
-
-      document.getElementById("go-to-page").addEventListener("click", () => {
-        const pageNumberInput = document.getElementById("page-input").value;
-        const pageNumber = parseInt(pageNumberInput);
-
-        if (pageNumber >= 1 && pageNumber <= totalPages) {
-          pageFlip?.flip(pageNumber - 1);
-        } else {
-          alert("Número de página inválido.");
-        }
-      });
+    const pageFlip = new St.PageFlip(bookEl, {
+        width: 500,
+        height: 700,
+        showCover: true,
+        size: "fixed",
+        usePortrait: true,
+        showPageCorners: true,
+        maxShadowOpacity: 0.5
     });
-  </script>
+
+    let images = [];
+
+    for (let i = 1; i <= pdf.numPages; i++) {
+
+        const page = await pdf.getPage(i);
+        const viewport = page.getViewport({ scale: 1.5 });
+
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        await page.render({
+            canvasContext: context,
+            viewport: viewport
+        }).promise;
+
+        images.push(canvas.toDataURL());
+
+        // actualizar progreso real
+        let percent = Math.round((i / pdf.numPages) * 100);
+        progressBar.style.width = percent + "%";
+        progressText.innerText = "Cargando " + percent + "%";
+    }
+
+    pageFlip.loadFromImages(images);
+
+    // Mostrar libro
+    setTimeout(() => {
+        loader.style.display = "none";
+        bookEl.style.display = "block";
+        controls.style.display = "flex";
+        bookEl.style.transform = `scale(${zoomLevel})`;
+        document.getElementById("pageInfo").innerText = "1 / " + pdf.numPages;
+    }, 400);
+
+    // Navegación
+    document.getElementById("next").addEventListener("click", () => {
+        pageFlip.flipNext();
+    });
+
+    document.getElementById("prev").addEventListener("click", () => {
+        pageFlip.flipPrev();
+    });
+
+    pageFlip.on("flip", (e) => {
+        document.getElementById("pageInfo").innerText =
+            (e.data + 1) + " / " + pdf.numPages;
+    });
+
+    // Zoom
+    document.getElementById("zoomIn").addEventListener("click", () => {
+        zoomLevel += zoomStep;
+        bookEl.style.transform = `scale(${zoomLevel})`;
+    });
+
+    document.getElementById("zoomOut").addEventListener("click", () => {
+        if (zoomLevel > 0.4) {
+            zoomLevel -= zoomStep;
+            bookEl.style.transform = `scale(${zoomLevel})`;
+        }
+    });
+
+    document.getElementById("resetZoom").addEventListener("click", () => {
+        zoomLevel = 0.8;
+        bookEl.style.transform = `scale(${zoomLevel})`;
+    });
+
+    // Fullscreen
+    document.getElementById("fullscreen").addEventListener("click", () => {
+        if (!document.fullscreenElement) {
+            bookEl.requestFullscreen();
+        } else {
+            document.exitFullscreen();
+        }
+    });
+
+});
+</script>
+
 @endpush

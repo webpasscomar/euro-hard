@@ -17,8 +17,8 @@
         <li class="nav-item"><a href="{{ route('productos') }}"
             class="nav-link {{ request()->routeIS('productos*') ? 'active' : '' }}" aria-current="page">Productos</a>
         </li>
-        <li class="nav-item"><a href="{{ route('catalogo') }}"
-            class="nav-link {{ request()->routeIS('catalogo') ? 'active' : '' }}">Catálogo</a></li>
+        <li class="nav-item"><a href="{{ route('catalogos') }}"
+            class="nav-link {{ request()->routeIS('catalogos') ? 'active' : '' }}">Catálogos</a></li>
         <li class="nav-item"><a href="{{ route('instructivos') }}"
             class="nav-link {{ request()->routeIS('instructivos') ? 'active' : '' }}">Instructivos</a></li>
         <li class="nav-item"><a href="{{ route('novedades') }}"
@@ -70,8 +70,8 @@
                 href="{{ route('productos') }}">Productos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link {{ request()->routeIS('catalogo') ? 'active' : '' }}"
-                href="{{ route('catalogo') }}">Catálogo</a>
+              <a class="nav-link {{ request()->routeIS('catalogos') ? 'active' : '' }}"
+                href="{{ route('catalogos') }}">Catálogo</a>
             </li>
             <li class="nav-item">
               <a class="nav-link {{ request()->routeIS('instructivos') ? 'active' : '' }}"

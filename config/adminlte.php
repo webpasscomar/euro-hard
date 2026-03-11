@@ -340,7 +340,7 @@ return [
     ],
     ['header' => 'DIFUSION'],
     [
-      'text' => 'Cátalogo',
+      'text' => 'Catálogos',
       'route' => 'admin.catalogs.index',
       'icon' => 'fas fa-fw fa-book-open',
     ],

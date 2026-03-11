@@ -148,7 +148,7 @@
         <div class="small-box bg-orange-500 text-white">
           <div class="inner">
             <h3>0</h3>
-            <h5>Cátalogo</h5>
+            <h5>Catálogos</h5>
           </div>
           <div class="icon">
             <i class="ion ion-bag"></i>
