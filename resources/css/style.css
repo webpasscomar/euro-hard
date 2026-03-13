@@ -731,7 +731,46 @@ h1.title-carrusel {
 
 /* --fin de CATEGORIAS HOME */
 /* -fin de HOME */
+/* catalogo */
 
+.catalogo-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.catalogo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.catalogo-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.catalogo-img-wrapper:hover .catalogo-overlay {
+  opacity: 1;
+}
+
+.catalogo-img {
+  transition: transform .3s ease;
+}
+
+.catalogo-img-wrapper:hover .catalogo-img {
+  transform: scale(1.05);
+}
+
+/* fin catalogo  */
 
 /* -CATEGORIA */
 /* --HERO CATEGORIA */

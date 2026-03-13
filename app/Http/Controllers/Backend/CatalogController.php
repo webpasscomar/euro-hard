@@ -38,7 +38,7 @@ class CatalogController extends Controller
       'slug' => 'nullable|string|unique:catalogs,slug', // puede generarse automáticamente
       'status' => 'required|boolean',
       'order' => 'required|integer',
-      'pdf' => 'required|file|mimes:pdf|max:10240',      // obligatorio y tipo PDF
+      'pdf' => 'required|file|mimes:pdf|max:20240',      // obligatorio y tipo PDF
       'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:5120', // obligatorio
     ]);
 
@@ -56,12 +56,15 @@ class CatalogController extends Controller
     if ($request->hasFile('pdf')) {
       $pdfFile = $request->file('pdf');
       $pdfName = $catalog->slug . '.' . $pdfFile->getClientOriginalExtension();
-      $catalog->pdf = $pdfFile->storeAs('pdfs', $pdfName, 'public');
+      $catalog->pdf = $pdfFile->storeAs('/catalogs/pdfs', $pdfName, 'public');
     }
 
     // 5️⃣ Guardar imagen normalmente
     if ($request->hasFile('image')) {
-      $catalog->image = $request->file('image')->store('catalogs', 'public');
+      // ===== Guardar Imagen con el mismo nombre =====
+      $imageFile = $request->file('image');
+      $imageName = $catalog->slug . '.' . $imageFile->getClientOriginalExtension();
+      $catalog->image = $imageFile->storeAs('/catalogs/images', $imageName, 'public');
     }
 
     // 6️⃣ Guardar en la base de datos
@@ -96,7 +99,7 @@ class CatalogController extends Controller
       'slug' => 'nullable|string|unique:catalogs,slug,' . $catalog->id,
       'status' => 'required|boolean',
       'order' => 'required|integer',
-      'pdf' => 'nullable|file|mimes:pdf|max:10240',         // opcional en edición
+      'pdf' => 'nullable|file|mimes:pdf|max:20240',         // opcional en edición
       'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:5120', // opcional
     ]);
 
@@ -107,15 +110,18 @@ class CatalogController extends Controller
     $catalog->status = $validated['status'];
 
     // 3️⃣ Reemplazar PDF si suben uno nuevo
-    if ($request->hasFile('pdf')) {
+   if ($request->hasFile('pdf')) {
       $pdfFile = $request->file('pdf');
       $pdfName = $catalog->slug . '.' . $pdfFile->getClientOriginalExtension();
-      $catalog->pdf = $pdfFile->storeAs('pdfs', $pdfName, 'public');
+      $catalog->pdf = $pdfFile->storeAs('/catalogs/pdfs', $pdfName, 'public');
     }
 
-    // 4️⃣ Reemplazar imagen si suben una nueva
+    // 5️⃣ Guardar imagen normalmente
     if ($request->hasFile('image')) {
-      $catalog->image = $request->file('image')->store('catalogs', 'public');
+      // ===== Guardar Imagen con el mismo nombre =====
+      $imageFile = $request->file('image');
+      $imageName = $catalog->slug . '.' . $imageFile->getClientOriginalExtension();
+      $catalog->image = $imageFile->storeAs('/catalogs/images', $imageName, 'public');
     }
 
     // 5️⃣ Guardar cambios

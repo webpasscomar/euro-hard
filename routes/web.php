@@ -33,7 +33,7 @@ Route::get('/productos/categoria/{subcategoria}', [ProductosController::class, '
 Route::get('/buscar-producto', [ProductosController::class, 'buscarProductos'])->name('productos.buscar');
 
 Route::get('/catalogos', [CatalogoController::class, 'index'])->name('catalogos');
-Route::get('/catalogos/{id}', [CatalogoController::class, 'show'])->name('catalogos.show');
+Route::get('/catalogos/{slug}', [CatalogoController::class, 'show'])->name('catalogos.show');
 
 Route::get('/instructivos', [InstructivosController::class, 'index'])->name('instructivos');
 
