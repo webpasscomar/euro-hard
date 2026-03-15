@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid position-relative d-flex justify-content-center align-items-center"
-     style="height: 100vh; background:#f5f5f5; overflow:hidden;">
+     style="height:100vh;background:#f5f5f5;overflow:hidden;">
 
     <!-- LOADER -->
     <div id="loader" class="d-flex flex-column align-items-center">
@@ -36,10 +36,10 @@
 
     </div>
 
-    <!-- LIBRO -->
+    <!-- BOOK -->
     <div id="book" style="display:none;"></div>
 
-    <!-- MINIATURAS -->
+    <!-- THUMBNAILS -->
     <div id="thumbnails"></div>
 
 </div>
@@ -48,10 +48,8 @@
 
 @push('js')
 
-<!-- Bootstrap Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-<!-- PDF.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 
 <script>
@@ -59,106 +57,103 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 </script>
 
-<!-- StPageFlip -->
 <script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
-
 
 <style>
 
-#book {
-    width: 1000px;
-    height: 700px;
+#book{
+width:1000px;
+height:700px;
 }
 
 #loader{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
 }
 
-.spinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #ddd;
-    border-top: 5px solid #333;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
+.spinner{
+width:50px;
+height:50px;
+border:5px solid #ddd;
+border-top:5px solid #333;
+border-radius:50%;
+animation:spin 1s linear infinite;
 }
 
-@keyframes spin {
-    100% { transform: rotate(360deg); }
+@keyframes spin{
+100%{transform:rotate(360deg);}
 }
 
-.progress-bar-container {
-    width: 200px;
-    height: 6px;
-    background: #ddd;
-    border-radius: 3px;
-    overflow: hidden;
+.progress-bar-container{
+width:200px;
+height:6px;
+background:#ddd;
+border-radius:3px;
+overflow:hidden;
 }
 
-.progress-bar-fill {
-    height: 100%;
-    width: 0%;
-    background: #333;
-    transition: width 0.3s ease;
+.progress-bar-fill{
+height:100%;
+width:0%;
+background:#333;
+transition:width .3s ease;
 }
 
-.toolbar {
-    position:absolute;
-    top:15px;
-    left:50%;
-    transform:translateX(-50%);
-    display:flex;
-    align-items:center;
-    gap:10px;
-    background:rgba(0,0,0,0.7);
-    padding:8px 15px;
-    border-radius:30px;
-    color:white;
-    z-index:20;
+.toolbar{
+position:absolute;
+top:15px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+align-items:center;
+gap:10px;
+background:rgba(0,0,0,.7);
+padding:8px 15px;
+border-radius:30px;
+color:white;
+z-index:20;
 }
 
-.toolbar button {
-    background:none;
-    border:none;
-    color:white;
-    font-size:18px;
-    cursor:pointer;
+.toolbar button{
+background:none;
+border:none;
+color:white;
+font-size:18px;
+cursor:pointer;
 }
 
-.toolbar button:hover {
-    opacity:0.7;
+.toolbar button:hover{
+opacity:.7;
 }
 
-.separator {
-    width:1px;
-    height:18px;
-    background:rgba(255,255,255,0.4);
+.separator{
+width:1px;
+height:18px;
+background:rgba(255,255,255,.4);
 }
 
 #thumbnails{
-    position:absolute;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    display:flex;
-    gap:6px;
-    overflow-x:auto;
-    max-width:90%;
+position:absolute;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:6px;
+overflow-x:auto;
+max-width:90%;
 }
 
 #thumbnails img{
-    width:60px;
-    height:auto;
-    cursor:pointer;
-    opacity:0.6;
-    border-radius:4px;
+width:60px;
+cursor:pointer;
+opacity:.6;
+border-radius:4px;
 }
 
 #thumbnails img:hover{
-    opacity:1;
+opacity:1;
 }
 
 </style>
@@ -166,187 +161,236 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 
 <script>
 
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", async function(){
 
-    const loader = document.getElementById("loader");
-    const bookEl = document.getElementById("book");
-    const controls = document.getElementById("controls");
+const loader = document.getElementById("loader");
+const bookEl = document.getElementById("book");
+const controls = document.getElementById("controls");
 
-    const progressBar = document.getElementById("progressBar");
-    const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+const progressText = document.getElementById("progressText");
 
-    const pdfUrl = "{{ asset('storage/' . $catalog->pdf) }}";
+const pdfUrl = "{{ asset('storage/' . $catalog->pdf) }}";
 
-    let zoomLevel = 0.8;
-    const zoomStep = 0.1;
+let zoomLevel = .8;
+const zoomStep = .1;
 
-    const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
+const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
 
-    const pageFlip = new St.PageFlip(bookEl, {
-        width: 500,
-        height: 700,
-        showCover: true,
-        size: "fixed",
-        usePortrait: true,
-        showPageCorners: true,
-        maxShadowOpacity: 0.5
-    });
+const totalPages = pdf.numPages;
 
-    let images = [];
+const pageFlip = new St.PageFlip(bookEl,{
+width:500,
+height:700,
+showCover:true,
+size:"fixed",
+usePortrait:true
+});
 
-    for (let i = 1; i <= pdf.numPages; i++) {
+const renderedPages = {};
 
-        const page = await pdf.getPage(i);
-        const viewport = page.getViewport({ scale: 1.5 });
 
-        const canvas = document.createElement("canvas");
-        const context = canvas.getContext("2d");
+// ---------- THUMBNAILS ----------
+async function renderThumbnail(pageNumber){
 
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
+const page = await pdf.getPage(pageNumber);
 
-        await page.render({
-            canvasContext: context,
-            viewport: viewport
-        }).promise;
+const viewport = page.getViewport({scale:.25});
 
-        images.push(canvas.toDataURL());
+const canvas = document.createElement("canvas");
+const context = canvas.getContext("2d");
 
-        // Miniatura
-        const thumb = document.createElement("img");
-        thumb.src = canvas.toDataURL();
+canvas.width = viewport.width;
+canvas.height = viewport.height;
 
-        thumb.addEventListener("click", () => {
-            pageFlip.flip(i - 1);
-        });
+await page.render({
+canvasContext:context,
+viewport:viewport
+}).promise;
 
-        document.getElementById("thumbnails").appendChild(thumb);
+const thumb = document.createElement("img");
 
-        // Progreso
-        let percent = Math.round((i / pdf.numPages) * 100);
-        progressBar.style.width = percent + "%";
-        progressText.innerText = "Cargando " + percent + "%";
-    }
+thumb.src = canvas.toDataURL();
 
-    pageFlip.loadFromImages(images);
+thumb.onclick = ()=>{
+pageFlip.flip(pageNumber-1);
+};
 
-    setTimeout(() => {
+document.getElementById("thumbnails").appendChild(thumb);
 
-        loader.style.display = "none";
-        bookEl.style.display = "block";
-        controls.style.display = "flex";
+}
 
-        bookEl.style.transform = `scale(${zoomLevel})`;
 
-        document.getElementById("pageInfo").innerText =
-            "1 / " + pdf.numPages;
+// ---------- RENDER PAGE ----------
+async function renderPage(pageNumber){
 
-    }, 400);
+if(renderedPages[pageNumber]) return;
 
-    // Navegación
-    document.getElementById("next").addEventListener("click", () => {
-        pageFlip.flipNext();
-    });
+const page = await pdf.getPage(pageNumber);
 
-    document.getElementById("prev").addEventListener("click", () => {
-        pageFlip.flipPrev();
-    });
+const viewport = page.getViewport({scale:1.5});
 
-    pageFlip.on("flip", (e) => {
+const canvas = document.createElement("canvas");
+const context = canvas.getContext("2d");
 
-        document.getElementById("pageInfo").innerText =
-            (e.data + 1) + " / " + pdf.numPages;
+canvas.width = viewport.width;
+canvas.height = viewport.height;
 
-    });
+await page.render({
+canvasContext:context,
+viewport:viewport
+}).promise;
 
-    // Zoom botones
-    document.getElementById("zoomIn").addEventListener("click", () => {
+renderedPages[pageNumber] = canvas.toDataURL();
 
-        zoomLevel += zoomStep;
-        bookEl.style.transform = `scale(${zoomLevel})`;
+pageFlip.updateFromImages(Object.values(renderedPages));
 
-    });
+}
 
-    document.getElementById("zoomOut").addEventListener("click", () => {
 
-        if (zoomLevel > 0.4) {
+// ---------- INITIAL LOAD ----------
+let firstPages = Math.min(6,totalPages);
 
-            zoomLevel -= zoomStep;
-            bookEl.style.transform = `scale(${zoomLevel})`;
+for(let i=1;i<=firstPages;i++){
 
-        }
+const page = await pdf.getPage(i);
 
-    });
+const viewport = page.getViewport({scale:1.5});
 
-    document.getElementById("resetZoom").addEventListener("click", () => {
+const canvas = document.createElement("canvas");
+const context = canvas.getContext("2d");
 
-        zoomLevel = 0.8;
-        bookEl.style.transform = `scale(${zoomLevel})`;
+canvas.width = viewport.width;
+canvas.height = viewport.height;
 
-    });
+await page.render({
+canvasContext:context,
+viewport:viewport
+}).promise;
 
-    // Zoom con rueda del mouse
-    bookEl.addEventListener("wheel", function(e){
+renderedPages[i] = canvas.toDataURL();
 
-        e.preventDefault();
+let percent = Math.round((i/firstPages)*100);
 
-        if(e.deltaY < 0){
-            zoomLevel += zoomStep;
-        }else{
-            zoomLevel -= zoomStep;
-        }
+progressBar.style.width = percent+"%";
+progressText.innerText = "Cargando "+percent+"%";
 
-        zoomLevel = Math.max(0.4, Math.min(2, zoomLevel));
+}
 
-        bookEl.style.transform = `scale(${zoomLevel})`;
+pageFlip.loadFromImages(Object.values(renderedPages));
 
-    });
 
-    // Descargar
-    document.getElementById("download").addEventListener("click", () => {
+// ---------- GENERATE THUMBNAILS ----------
+for(let i=1;i<=totalPages;i++){
 
-        const link = document.createElement("a");
-        link.href = pdfUrl;
-        link.download = "catalogo.pdf";
-        link.target = "_blank";
+setTimeout(()=>renderThumbnail(i),i*30);
 
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+}
 
-    });
 
-    // Fullscreen
-    document.getElementById("fullscreen").addEventListener("click", () => {
+// ---------- SHOW BOOK ----------
+setTimeout(()=>{
 
-        if (!document.fullscreenElement) {
-            bookEl.requestFullscreen();
-        } else {
-            document.exitFullscreen();
-        }
+loader.style.display="none";
+bookEl.style.display="block";
+controls.style.display="flex";
 
-    });
+bookEl.style.transform=`scale(${zoomLevel})`;
 
-    // Swipe móvil
-    let touchStartX = 0;
+document.getElementById("pageInfo").innerText =
+"1 / "+totalPages;
 
-    bookEl.addEventListener("touchstart", e => {
-        touchStartX = e.changedTouches[0].screenX;
-    });
+},400);
 
-    bookEl.addEventListener("touchend", e => {
 
-        let touchEndX = e.changedTouches[0].screenX;
+// ---------- NAVIGATION ----------
+document.getElementById("next").onclick=()=>pageFlip.flipNext();
+document.getElementById("prev").onclick=()=>pageFlip.flipPrev();
 
-        if(touchEndX < touchStartX - 50){
-            pageFlip.flipNext();
-        }
+pageFlip.on("flip",(e)=>{
 
-        if(touchEndX > touchStartX + 50){
-            pageFlip.flipPrev();
-        }
+const currentPage = e.data+1;
 
-    });
+document.getElementById("pageInfo").innerText =
+currentPage+" / "+totalPages;
+
+renderPage(currentPage+1);
+renderPage(currentPage+2);
+
+});
+
+
+// ---------- ZOOM ----------
+document.getElementById("zoomIn").onclick=()=>{
+
+zoomLevel+=zoomStep;
+
+bookEl.style.transform=`scale(${zoomLevel})`;
+
+};
+
+document.getElementById("zoomOut").onclick=()=>{
+
+if(zoomLevel>.4){
+
+zoomLevel-=zoomStep;
+
+bookEl.style.transform=`scale(${zoomLevel})`;
+
+}
+
+};
+
+document.getElementById("resetZoom").onclick=()=>{
+
+zoomLevel=.8;
+
+bookEl.style.transform=`scale(${zoomLevel})`;
+
+};
+
+
+// ---------- MOUSE ZOOM ----------
+bookEl.addEventListener("wheel",function(e){
+
+e.preventDefault();
+
+if(e.deltaY<0) zoomLevel+=zoomStep;
+else zoomLevel-=zoomStep;
+
+zoomLevel=Math.max(.4,Math.min(2,zoomLevel));
+
+bookEl.style.transform=`scale(${zoomLevel})`;
+
+});
+
+
+// ---------- DOWNLOAD ----------
+document.getElementById("download").onclick=()=>{
+
+const link=document.createElement("a");
+
+link.href=pdfUrl;
+link.download="catalogo.pdf";
+
+document.body.appendChild(link);
+
+link.click();
+
+document.body.removeChild(link);
+
+};
+
+
+// ---------- FULLSCREEN ----------
+document.getElementById("fullscreen").onclick=()=>{
+
+if(!document.fullscreenElement)
+bookEl.requestFullscreen();
+else
+document.exitFullscreen();
+
+};
 
 });
 </script>
