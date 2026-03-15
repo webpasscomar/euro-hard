@@ -19,10 +19,7 @@
         <span id="pageInfo">1 / 1</span>
         <button id="next">⟩</button>
 
-        <div class="separator"></div>
-
-        <button id="zoomOut">−</button>
-        <button id="zoomIn">+</button>
+        <div class="separator"></div> 
         <button id="resetZoom">Reset</button>
 
         <div class="separator"></div>
@@ -127,7 +124,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const progressBar = document.getElementById("progressBar");
     const progressText = document.getElementById("progressText");
 
-    const pdfUrl = "{{ asset('storage/pdfs/' . $catalog->pdf) }}";
+    const pdfUrl = "{{ asset('storage/' . $catalog->pdf) }}";
 
     let zoomLevel = 0.8;
     const zoomStep = 0.1;

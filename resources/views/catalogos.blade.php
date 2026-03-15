@@ -25,10 +25,13 @@
       </div>
     </div>
     <div class="row g-4">
-
+      @php
+      $total = $catalogos->count();
+      $col = $total % 2 == 0 ? 6 : 4; // 2 columnas si es par, 3 si es impar
+      @endphp
       @forelse ($catalogos as $catalogo)
 
-      <div class="col-lg-4 col-md-6 col-sm-12">
+      <div class="col-md-{{ $col }} mb-4">
 
         <div class="catalogo-card">
           <div class="catalogo-img-wrapper">

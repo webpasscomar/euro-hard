@@ -16,9 +16,4 @@ class Catalog extends Model
         'image',
         'order',
     ];  
-
-    public function getRouteKeyName()
-    {
-    return 'slug';
-    }
 }
