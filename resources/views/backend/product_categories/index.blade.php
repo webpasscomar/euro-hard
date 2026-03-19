@@ -17,6 +17,8 @@
                         <tr>
                             <th class="text-left">Cod.</th>
                             <th class="text-left align-middle">Nombre</th>
+                            <th class="text-left align-middle">Orden</th>
+                            <th class="text-left align-middle">Ambientes</th>
                             <th class="text-left align-middle">Color</th>
                             <th class="text-left align-middle">Imágen</th>
                             <th class="text-left align-middle">Banner</th>
@@ -29,6 +31,12 @@
                             <tr>
                                 <td class="align-middle text-left">{{ $productCategory->id }}</td>
                                 <td class="align-middle text-left">{{ $productCategory->name }}</td>
+                                <td class="align-middle text-left">{{ $productCategory->unit }}</td>
+                                <td class="align-middle text-left">
+                                    @foreach ($productCategory->parents as $parent)
+                                        <span class="badge badge-info">{{ $parent->name }}</span>
+                                    @endforeach
+                                </td>
                                 <td class="align-middle text-left">
                                     <div class="w-8 h-8 rounded-full border-1 border-black"
                                         style="background-color: {{ $productCategory->color }}"></div>

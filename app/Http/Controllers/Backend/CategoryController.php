@@ -18,7 +18,7 @@ class CategoryController extends Controller
    */
   public function index(): View
   {
-    $productCategories = Category::all();
+    $productCategories = Category::orderBy('unit')->get();
     return view('backend.product_categories.index', compact('productCategories'));
   }
 
@@ -67,6 +67,7 @@ class CategoryController extends Controller
         'image' => $image_name,
         'banner' => $banner_name,
         'status' => 1,
+        'unit' => $request->input('unit'),
         'categoryParent_id' => $request->input('categoryParent_id'),
       ]);
 
@@ -147,6 +148,7 @@ class CategoryController extends Controller
         'feature' => $request->input('feature'),
         'image' => $image_name,
         'banner' => $banner_name,
+        'unit' => $request->input('unit'),
         'categoryParent_id' => $request->input('categoryParent_id'),
       ]);
 

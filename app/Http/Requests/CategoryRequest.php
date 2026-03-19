@@ -63,6 +63,7 @@ class CategoryRequest extends FormRequest
         }
       ],
       'banner' => $put ? 'image|mimes:jpeg,png,jpg,svg|max:1024' : 'required|image|mimes:jpeg,png,jpg,svg|max:1024',
+      'unit' => 'nullable|integer',
     ];
   }
 

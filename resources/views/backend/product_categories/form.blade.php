@@ -1,6 +1,6 @@
 <div class="row">
     {{-- Nombre --}}
-    <div class="col-md-6">
+    <div class="col-md-5">
         <div class="form-group mb-3">
             <label for="name" class="form-label">Nombre</label><span class="fs-4 text-danger">*</span>
             <input type="text" id="name" name="name" class="form-control"
@@ -15,12 +15,24 @@
     </div>
 
     {{-- Slug --}}
-    <div class="col-md-6">
+    <div class="col-md-5">
         <div class="form-group mb-3">
             <label for="slug" class="form-label">Slug</label><span class="fs-4 text-danger">*</span>
             <input type="text" id="slug" name="slug" class="form-control"
                 value="{{ old('slug', $productCategory->slug ?? '') }}">
             @error('slug')
+                <span class="ms-1 text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+    </div>
+
+    {{-- Orden --}}
+    <div class="col-md-2">
+        <div class="form-group mb-3">
+            <label for="unit" class="form-label">Orden</label>
+            <input type="number" id="unit" name="unit" class="form-control"
+                value="{{ old('unit', $productCategory->unit ?? '') }}">
+            @error('unit')
                 <span class="ms-1 text-danger">{{ $message }}</span>
             @enderror
         </div>

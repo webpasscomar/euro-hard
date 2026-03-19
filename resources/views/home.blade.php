@@ -125,7 +125,7 @@
                                 ? asset('storage/product_categories/' . $categoria->image)
                                 : asset('img/no_disponible.jpg');
                     @endphp
-                    <div class="col-lg-3 col-md-6 col-sm-12 p-3">
+                    <div class="col-lg-4 col-md-6 col-sm-12 p-3">
                         <div class="content-cat">
                             {{-- {{ route('noticia.show', [$noticia->categoria->slug, $noticia->slug]) }} --}}
                             @if ($categoria->slug == 'novedades')

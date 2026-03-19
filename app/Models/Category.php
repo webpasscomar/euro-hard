@@ -17,10 +17,12 @@ class Category extends Model
     'name',
     'slug',
     'feature',
+    'unit',
     'color',
     'image',
     'banner',
     'status',
+    'categoryParent_id',
   ];
 
   // Relación entre categorias padres e hijas de muchos a muchos

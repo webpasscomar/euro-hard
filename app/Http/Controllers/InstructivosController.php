@@ -3,21 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class InstructivosController extends Controller
 {
   public function index()
   {
-    $products = Product::where('status', 1)
-      ->where(function ($query) {
-        $query->whereNotNull('instruction_file')
-          ->orWhereNotNull('video');
-      })          
-      ->orderby ('orderNumber')
+    $categories = Category::whereHas('products', function ($query) {
+      $query->where('status', 1)
+        ->where(function ($q) {
+          $q->whereNotNull('instruction_file')
+            ->orWhereNotNull('video');
+        });
+    })
+      ->with(['products' => function ($query) {
+        $query->where('status', 1)
+          ->where(function ($q) {
+            $q->whereNotNull('instruction_file')
+              ->orWhereNotNull('video');
+          })
+          ->orderBy('orderNumber');
+      }])
+      ->orderBy('unit')
       ->get();
 
-    //      dd($products);
-    return view('instructivos', compact('products'));
+    return view('instructivos', compact('categories'));
   }
 }

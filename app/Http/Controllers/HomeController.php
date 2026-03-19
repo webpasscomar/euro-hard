@@ -23,6 +23,8 @@ class HomeController extends Controller
     // $categoriasPadre = ProductCategory::get();
     $categoriasPadre = Category::where('status', 1)
       ->whereDoesntHave('parents')
+      ->orderBy('unit', 'asc')
+      ->take(3)
       ->get();
 
     $metaTitle = "Herrajes y accesorios";
