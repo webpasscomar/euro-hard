@@ -9,6 +9,7 @@ use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
@@ -41,22 +42,26 @@ class CategoryController extends Controller
   public function store(CategoryRequest $request): RedirectResponse
   {
     // $request->validated();
+    $image_name = '';
+    $banner_name = '';
     try {
       //    Guardar imágen de la categoria si se carga
       if ($request->hasFile('image')) {
-        $original_name = $request->file('image')->getClientOriginalName();
+        $file = $request->file('image');
+        $extension = $file->getClientOriginalExtension();
+        $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $id = Category::max('id') + 1;
-        $image_name = $id . '_product_category_' . $original_name;
-        $request->file('image')->storeAs('product_categories', $image_name);
+        $image_name = $id . '_product_category_' . Str::slug($filename) . '.' . $extension;
+        $file->storeAs('product_categories', $image_name, 'public');
       }
       // Guardar imágen del banner si se carga
       if ($request->hasFile('banner')) {
-        $original_name = $request->file('banner')->getClientOriginalName();
+        $file = $request->file('banner');
+        $extension = $file->getClientOriginalExtension();
+        $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $id = Category::max('id') + 1;
-        $banner_name = $id . '_product_category_banner_' . $original_name;
-        $request->file('banner')->storeAs('product_categories', $banner_name);
-      } else {
-        $banner_name = '';
+        $banner_name = $id . '_product_category_banner_' . Str::slug($filename) . '.' . $extension;
+        $file->storeAs('product_categories', $banner_name, 'public');
       }
       // Crear categoria
       $productCategory = Category::create([
@@ -118,25 +123,29 @@ class CategoryController extends Controller
     try {
       // Si se cambia la imágen eliminar la anterior y subir la nueva
       if ($request->hasFile('image')) {
-        if (Storage::disk('public')->exists('product_categories/' . $productCategory->image)) {
+        if ($productCategory->image && Storage::disk('public')->exists('product_categories/' . $productCategory->image)) {
           Storage::disk('public')->delete('product_categories/' . $productCategory->image);
         };
-        $original_name = $request->file('image')->getClientOriginalName();
+        $file = $request->file('image');
+        $extension = $file->getClientOriginalExtension();
+        $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $id = $productCategory->id;
-        $image_name = $id . '_product_category_' . $original_name;
-        $request->file('image')->storeAs('product_categories', $image_name);
+        $image_name = $id . '_product_category_' . Str::slug($filename) . '.' . $extension;
+        $file->storeAs('product_categories', $image_name, 'public');
       } else {
         $image_name = $productCategory->image;
       }
       // Si se cambia la imágen del banner eliminar la anterior y subir la nueva
       if ($request->hasFile('banner')) {
-        if (Storage::disk('public')->exists('product_categories/' . $productCategory->banner)) {
+        if ($productCategory->banner && Storage::disk('public')->exists('product_categories/' . $productCategory->banner)) {
           Storage::disk('public')->delete('product_categories/' . $productCategory->banner);
         };
-        $original_name = $request->file('banner')->getClientOriginalName();
+        $file = $request->file('banner');
+        $extension = $file->getClientOriginalExtension();
+        $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $id = $productCategory->id;
-        $banner_name = $id . '_product_category_banner_' . $original_name;
-        $request->file('banner')->storeAs('product_categories', $banner_name);
+        $banner_name = $id . '_product_category_banner_' . Str::slug($filename) . '.' . $extension;
+        $file->storeAs('product_categories', $banner_name, 'public');
       } else {
         $banner_name = $productCategory->banner;
       }

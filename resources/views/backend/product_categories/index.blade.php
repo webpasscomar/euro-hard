@@ -42,12 +42,12 @@
                                         style="background-color: {{ $productCategory->color }}"></div>
                                 </td>
                                 <td class="align-middle text-left">
-                                    <img src="{{ isset($productCategory->image) && file_exists(public_path('storage/product_categories/' . $productCategory->image)) ? asset('storage/product_categories/' . $productCategory->image) : asset('img/Imagen-no-disponible.png') }}"
-                                        alt="{{ $productCategory->title }}" class="img-fluid" width="40" height="40">
+                                    <img src="{{ $productCategory->image && file_exists(public_path('storage/product_categories/' . $productCategory->image)) ? asset('storage/product_categories/' . $productCategory->image) : asset('img/Imagen-no-disponible.png') }}"
+                                        alt="{{ $productCategory->name }}" class="img-fluid" width="40" height="40">
                                 </td>
                                 <td class="align-middle text-left">
-                                    <img src="{{ isset($productCategory->banner) && file_exists(public_path('storage/product_categories/' . $productCategory->banner)) ? asset('storage/product_categories/' . $productCategory->banner) : asset('img/Imagen-no-disponible.png') }}"
-                                        alt="{{ $productCategory->title }}" class="img-fluid" width="40" height="40">
+                                    <img src="{{ $productCategory->banner && file_exists(public_path('storage/product_categories/' . $productCategory->banner)) ? asset('storage/product_categories/' . $productCategory->banner) : asset('img/Imagen-no-disponible.png') }}"
+                                        alt="{{ $productCategory->name }}" class="img-fluid" width="40" height="40">
                                 </td>
                                 <td class="text-center align-middle">
                                     <livewire:components.toggle-button :model="$productCategory" field="status"

@@ -135,7 +135,7 @@
                                         class="link-mas-info">
                             @endif
                             {{-- <a href="{{ route('productos.categorias', [$categoria->slug]) }}" class="link-mas-info"> --}}
-                            <div class="img-content-cat" style="background-image: url({{ $categoriaImage }})">
+                            <div class="img-content-cat" style="background-image: url('{{ $categoriaImage }}')">
                                 <div class="title-cat-column" style="background: {{ $categoria->color }}">
                                     {{ $categoria->name }}
                                 </div>
