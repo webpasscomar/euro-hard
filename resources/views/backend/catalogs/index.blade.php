@@ -19,7 +19,7 @@
                         <th>Título</th>
                         <th>Slug</th>
                         <th>Orden</th>
-                        <th>Status</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -39,16 +39,13 @@
 
                         <td>{{ $catalog->order }}</td>
 
-                        <td>
-                            @if($catalog->status)
-                            <span class="badge bg-success">Activo</span>
-                            @else
-                            <span class="badge bg-danger">Inactivo</span>
-                            @endif
-                        </td>
+                        <td class="text-center align-middle">
+                  <livewire:components.toggle-button :model="$catalog" field="status" wire:key="{{ $catalog->id }}" />
+                </td>
 
                         <td>
-                            <a href="{{ route('admin.catalogs.edit',$catalog->id) }}" class="btn btn-sm btn-primary">Editar</a>
+                            <a href="{{ route('admin.catalogs.edit',$catalog->id) }}" class="btn btn-sm btn-outline-secondary" title="Editar">
+                            <i class="fas fa-pencil-alt"></i></a>
                         </td>
 
                     </tr>
