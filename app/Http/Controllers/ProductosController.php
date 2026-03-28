@@ -23,8 +23,10 @@ class ProductosController extends Controller
       ->where('status', 1)
       ->firstOrFail();
 
-    $subcategorias = $categoria->children->sortBy('unit');
-    return view('productos-categorias', compact('categoria', 'subcategorias'));
+    $subcategorias = $categoria->children()->where('status', 1)->orderBy('unit')->get();
+    $productos = $categoria->products()->where('status', 1)->orderBy('orderNumber')->get();
+
+    return view('productos-categorias', compact('categoria', 'subcategorias', 'productos'));
   }
 
 
