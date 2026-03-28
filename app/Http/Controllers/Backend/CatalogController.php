@@ -118,6 +118,10 @@ class CatalogController extends Controller
 
     // 5️⃣ Guardar imagen normalmente
     if ($request->hasFile('image')) {
+      // borrar anterior
+      if ($catalog->image && Storage::disk('public')->exists($catalog->image)) {
+          Storage::disk('public')->delete($catalog->image);
+      }
       // ===== Guardar Imagen con el mismo nombre =====
       $imageFile = $request->file('image');
       $imageName = $catalog->slug . '.' . $imageFile->getClientOriginalExtension();
