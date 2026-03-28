@@ -83,11 +83,12 @@ class ProductosController extends Controller
 
   public function productosHome(): View
   {
-    $subcategorias = Category::where('status', 1)
-      ->whereHas('parents')
+    $categoriasPadre = Category::where('status', 1)
+      ->whereDoesntHave('parents')
+      ->where('name', '!=', 'Novedades')
       ->orderBy('unit')
       ->get();
-    return view('productos-home', compact('subcategorias'));
+    return view('productos-home', compact('categoriasPadre'));
   }
 
 

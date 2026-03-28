@@ -6,14 +6,14 @@
       <div class="container-fluid">
         <div class="container-title-hero">
           <div class="content-icon-EH-hero">
-            <img src="images/icono-EH-gris.svg" class="icon-EH-hero">
+            <img src="{{ asset('images/icono-EH-gris.svg') }}" class="icon-EH-hero">
           </div>
           <h1 class="title-hero">Herrajes y accesorios</h1>
         </div>
       </div>
       <div class="img-hero">
         <div class="img-overlay"></div>
-        <img src="images/slider-home-3.jpg">
+        <img src="{{ asset('images/slider-home-3.jpg') }}">
       </div>
     </div>
     <div class="container">
@@ -24,28 +24,28 @@
           </h5>
         </div>
       </div>
-      {{-- Carousel subcategorias --}}
+      {{-- Carousel categorias padre --}}
       <div class="row">
         <div class="owl-carousel owl-theme">
-          @foreach ($subcategorias as $subcategoria)
+          @foreach ($categoriasPadre as $categoria)
             @php
               $imagePath =
-                  $subcategoria->image && file_exists(public_path('storage/product_categories/' . $subcategoria->image))
-                      ? asset('storage/product_categories/' . $subcategoria->image)
+                  $categoria->image && file_exists(public_path('storage/product_categories/' . $categoria->image))
+                      ? asset('storage/product_categories/' . $categoria->image)
                       : asset('img/no_disponible.jpg');
             @endphp
             <div class="item item1">
               <div class="content-cat carrusel-size">
-                <a href="{{ route('productos.subcategoria', [$subcategoria->slug]) }}" class="link-mas-info">
-                  <div class="img-content-subcat" style="background-image: url({{ $imagePath }})">
-                    <div class="title-cat-column" style="background-color: {{ $subcategoria->color }}">
-                      {{ $subcategoria->name }}
+                <a href="{{ route('productos.categorias', [$categoria->slug]) }}" class="link-mas-info">
+                  <div class="img-content-cat" style="background-image: url('{{ $imagePath }}')">
+                    <div class="title-cat-column" style="background-color: {{ $categoria->color }}">
+                      {{ $categoria->name }}
                     </div>
                   </div>
                   <div class="footer-content-cat-home">
                     <div class="cat-capitulo">
-                      <span class="estilo">{{ $subcategoria->feature }}</span>
-                      {{-- <span class="estilo">{{$subcategoria->unit}}</span> --}}
+                      <span class="estilo">{{ $categoria->feature }}</span>
+                      {{-- <span class="estilo">{{$categoria->unit}}</span> --}}
                     </div>
                     <div class="btn-mas-info">
                       + info
@@ -75,7 +75,7 @@
           items: 2
         },
         1000: {
-          items: 4
+          items: 2
         }
       }
     });
