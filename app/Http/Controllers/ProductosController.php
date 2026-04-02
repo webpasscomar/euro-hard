@@ -100,7 +100,8 @@ class ProductosController extends Controller
       ->when($query, function ($q) use ($query) {
         $q->where('name', 'LIKE', "%$query%")
           ->orWhere('description', 'LIKE', "%$query%")
-          ->orWhere('code', 'LIKE', "%$query%");
+          ->orWhere('code', 'LIKE', "%$query%")
+          ->orWhere('information', 'LIKE', "%$query%");
       })->get();
     return view('productos', compact('productos', 'query'));
   }
