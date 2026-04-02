@@ -1,4 +1,5 @@
 /.phpunit.cache
+/CLAUDE.local.md
 /node_modules
 /public/build
 /public/hot
