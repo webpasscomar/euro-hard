@@ -1,0 +1,17 @@
+node_modules/
+vendor/
+.git/
+public/storage/
+storage/framework/
+storage/logs/
+.env
+.env-docker
+# No ignorar locks para que Dockerfile pueda usarlos
+# composer.lock
+# package-lock.json
+# package.json
+# composer.json
+# php.ini
+Dockerfile
+docker-compose.yml
+npm-debug.log
