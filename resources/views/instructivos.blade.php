@@ -27,14 +27,14 @@
       @forelse($parentCategories as $parent)
         <div class="row">
           <div class="col-12 mt-4 mb-2">
-            <h3 class="title-category negro border-bottom pb-2">{{ Str::upper($parent->name) }}</h3>
+            <h4>{{ Str::upper($parent->name) }}</h4>
           </div>
         </div>
         @if($parent->children->isNotEmpty())
           @foreach($parent->children as $child)
             <div class="row">
-              <div class="col-12 mt-4 mb-2">
-                <h3 class="title-category negro border-bottom pb-2">{{ Str::upper($child->name) }}</h3>
+              <div class="col-12 mt-2 mb-2">
+                <h5 class="title-category negro border-bottom pb-2">{{ $child->name }}</h5>
               </div>
             </div>
             <div class="row">

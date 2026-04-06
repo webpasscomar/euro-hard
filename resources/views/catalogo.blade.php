@@ -155,6 +155,10 @@ border-radius:4px;
 #thumbnails img:hover{
 opacity:1;
 }
+#thumbnails img.active{
+    opacity:1;
+    border:2px solid #333;
+}
 
 </style>
 
@@ -187,38 +191,7 @@ size:"fixed",
 usePortrait:true
 });
 
-const renderedPages = {};
-
-
-// ---------- THUMBNAILS ----------
-async function renderThumbnail(pageNumber){
-
-const page = await pdf.getPage(pageNumber);
-
-const viewport = page.getViewport({scale:.25});
-
-const canvas = document.createElement("canvas");
-const context = canvas.getContext("2d");
-
-canvas.width = viewport.width;
-canvas.height = viewport.height;
-
-await page.render({
-canvasContext:context,
-viewport:viewport
-}).promise;
-
-const thumb = document.createElement("img");
-
-thumb.src = canvas.toDataURL();
-
-thumb.onclick = ()=>{
-pageFlip.flip(pageNumber-1);
-};
-
-document.getElementById("thumbnails").appendChild(thumb);
-
-}
+const renderedPages = new Array(totalPages + 1);
 
 
 // ---------- RENDER PAGE ----------
@@ -243,7 +216,47 @@ viewport:viewport
 
 renderedPages[pageNumber] = canvas.toDataURL();
 
-pageFlip.updateFromImages(Object.values(renderedPages));
+const imagesArray = renderedPages.slice(1);
+
+pageFlip.updateFromImages(imagesArray);
+
+}
+
+
+// ---------- THUMBNAILS ----------
+async function renderThumbnail(pageNumber){
+
+const page = await pdf.getPage(pageNumber);
+
+const viewport = page.getViewport({scale:.25});
+
+const canvas = document.createElement("canvas");
+const context = canvas.getContext("2d");
+
+canvas.width = viewport.width;
+canvas.height = viewport.height;
+
+await page.render({
+canvasContext:context,
+viewport:viewport
+}).promise;
+
+const thumb = document.createElement("img");
+
+thumb.src = canvas.toDataURL();
+
+thumb.onclick = async () => {
+
+    if (!renderedPages[pageNumber]) {
+        await renderPage(pageNumber);
+    }
+
+    const imagesArray = renderedPages.slice(1).filter(img => img);
+    pageFlip.updateFromImages(imagesArray);
+
+    pageFlip.turnToPage(pageNumber - 1);
+};
+document.getElementById("thumbnails").appendChild(thumb);
 
 }
 
@@ -277,7 +290,7 @@ progressText.innerText = "Cargando "+percent+"%";
 
 }
 
-pageFlip.loadFromImages(Object.values(renderedPages));
+pageFlip.loadFromImages(renderedPages.slice(1, firstPages + 1));
 
 
 // ---------- GENERATE THUMBNAILS ----------

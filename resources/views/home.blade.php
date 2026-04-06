@@ -140,19 +140,19 @@
                                     {{ $categoria->name }}
                                 </div>
                             </div>
-                            <div class="footer-content-cat-home">
+<!--                             <div class="footer-content-cat-home">
                                 <div class="color-cat">
                                     @foreach ($categoria->children as $categoria)
                                         <div class="cat-color-line" style="background: {{ $categoria->color }}"></div>
                                     @endforeach
-                                    <!-- {{-- <div class="cat-color-line-soporte"></div>
+                                      <div class="cat-color-line-soporte"></div>
                                         <div class="cat-color-line-conexion"></div>
-                                        <div class="cat-color-line-productividad"></div> --}} -->
+                                        <div class="cat-color-line-productividad"></div> --}} 
                                 </div>
                                 <div class="btn-mas-info">
                                     + info
                                 </div>
-                            </div>
+                            </div> -->
                             </a>
                         </div>
                     </div>
