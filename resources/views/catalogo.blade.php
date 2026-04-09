@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid position-relative d-flex justify-content-center align-items-center"
-     style="height:100vh;background:#f5f5f5;overflow:hidden;">
+     style="min-height:100dvh;background:#f5f5f5;overflow:hidden;">
 
     <!-- LOADER -->
     <div id="loader" class="d-flex flex-column align-items-center">
@@ -159,7 +159,32 @@ opacity:1;
     opacity:1;
     border:2px solid #333;
 }
+@media (max-width: 768px){
 
+ .toolbar{
+    position: fixed;
+    top: 60px;
+    left: 0;
+    transform: none;
+    width: 100%;
+    justify-content: flex-start;
+
+    overflow-x: auto;
+    white-space: nowrap;
+
+    padding: 8px;
+    border-radius: 0;
+  }
+  #book{
+    width: 100%;
+    height: auto;
+  }
+.toolbar button,
+.toolbar span,
+.separator{
+  flex: 0 0 auto;
+    }
+}
 </style>
 
 

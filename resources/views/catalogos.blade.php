@@ -13,7 +13,7 @@
     </div>
     <div class="img-hero">
       <div class="img-overlay"></div>
-      <img src="{{ asset('img/headers/novedades.jpg') }}">
+      <img src="{{ asset('img/headers/catalogos.jpeg') }}">
     </div>
   </div>
   <div class="container">
