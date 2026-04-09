@@ -15,7 +15,6 @@
 
     <!-- TOOLBAR -->
     <div id="controls" class="toolbar" style="display:none;">
-
         <button id="prev"><i class="bi bi-chevron-left"></i></button>
         <span id="pageInfo">1 / 1</span>
         <button id="next"><i class="bi bi-chevron-right"></i></button>
@@ -33,7 +32,6 @@
         <div class="separator"></div>
 
         <button id="fullscreen"><i class="bi bi-fullscreen"></i></button>
-
     </div>
 
     <!-- BOOK -->
@@ -49,65 +47,49 @@
 @push('js')
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
 
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc =
 "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 </script>
 
-<script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
-
 <style>
-
-#book{
-width:1000px;
-height:700px;
-}
+#book{ width:1000px;height:700px; }
 
 #loader{
-position:absolute;
-top:50%;
-left:50%;
+position:absolute;top:50%;left:50%;
 transform:translate(-50%,-50%);
 }
 
 .spinner{
-width:50px;
-height:50px;
+width:50px;height:50px;
 border:5px solid #ddd;
 border-top:5px solid #333;
 border-radius:50%;
 animation:spin 1s linear infinite;
 }
 
-@keyframes spin{
-100%{transform:rotate(360deg);}
-}
+@keyframes spin{100%{transform:rotate(360deg);}}
 
 .progress-bar-container{
-width:200px;
-height:6px;
-background:#ddd;
-border-radius:3px;
+width:200px;height:6px;
+background:#ddd;border-radius:3px;
 overflow:hidden;
 }
 
 .progress-bar-fill{
-height:100%;
-width:0%;
+height:100%;width:0%;
 background:#333;
 transition:width .3s ease;
 }
 
 .toolbar{
 position:absolute;
-top:15px;
-left:50%;
+top:15px;left:50%;
 transform:translateX(-50%);
-display:flex;
-align-items:center;
+display:flex;align-items:center;
 gap:10px;
 background:rgba(0,0,0,.7);
 padding:8px 15px;
@@ -117,30 +99,21 @@ z-index:20;
 }
 
 .toolbar button{
-background:none;
-border:none;
-color:white;
-font-size:18px;
+background:none;border:none;
+color:white;font-size:18px;
 cursor:pointer;
 }
 
-.toolbar button:hover{
-opacity:.7;
-}
-
 .separator{
-width:1px;
-height:18px;
+width:1px;height:18px;
 background:rgba(255,255,255,.4);
 }
 
 #thumbnails{
 position:absolute;
-bottom:20px;
-left:50%;
+bottom:20px;left:50%;
 transform:translateX(-50%);
-display:flex;
-gap:6px;
+display:flex;gap:6px;
 overflow-x:auto;
 max-width:90%;
 }
@@ -148,48 +121,19 @@ max-width:90%;
 #thumbnails img{
 width:60px;
 cursor:pointer;
-opacity:.6;
+opacity:.3;
 border-radius:4px;
+transition:.2s;
 }
 
-#thumbnails img:hover{
-opacity:1;
-}
 #thumbnails img.active{
-    opacity:1;
-    border:2px solid #333;
-}
-@media (max-width: 768px){
-
- .toolbar{
-    position: fixed;
-    top: 60px;
-    left: 0;
-    transform: none;
-    width: 100%;
-    justify-content: flex-start;
-
-    overflow-x: auto;
-    white-space: nowrap;
-
-    padding: 8px;
-    border-radius: 0;
-  }
-  #book{
-    width: 100%;
-    height: auto;
-  }
-.toolbar button,
-.toolbar span,
-.separator{
-  flex: 0 0 auto;
-    }
+opacity:1;
+border:2px solid #333;
 }
 </style>
 
 
 <script>
-
 document.addEventListener("DOMContentLoaded", async function(){
 
 const loader = document.getElementById("loader");
@@ -205,130 +149,123 @@ let zoomLevel = .8;
 const zoomStep = .1;
 
 const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
-
 const totalPages = pdf.numPages;
 
 const pageFlip = new St.PageFlip(bookEl,{
-width:500,
-height:700,
-showCover:true,
-size:"fixed",
-usePortrait:true
+    width:500,
+    height:700,
+    showCover:true,
+    size:"fixed",
+    usePortrait:true
 });
 
 const renderedPages = new Array(totalPages + 1);
+const thumbnailsMap = new Array(totalPages + 1);
 
+// ---------- UPDATE THUMB ----------
+function updateThumbnail(pageNumber){
+    const thumb = thumbnailsMap[pageNumber];
+    if(!thumb) return;
+
+    thumb.src = renderedPages[pageNumber];
+    thumb.style.opacity = 1;
+}
 
 // ---------- RENDER PAGE ----------
 async function renderPage(pageNumber){
 
-if(renderedPages[pageNumber]) return;
+    if(pageNumber > totalPages) return;
+    if(renderedPages[pageNumber]) return;
 
-const page = await pdf.getPage(pageNumber);
+    const page = await pdf.getPage(pageNumber);
+    const viewport = page.getViewport({scale:1.5});
 
-const viewport = page.getViewport({scale:1.5});
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
 
-const canvas = document.createElement("canvas");
-const context = canvas.getContext("2d");
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
 
-canvas.width = viewport.width;
-canvas.height = viewport.height;
+    await page.render({canvasContext:context,viewport}).promise;
 
-await page.render({
-canvasContext:context,
-viewport:viewport
-}).promise;
+    renderedPages[pageNumber] = canvas.toDataURL();
 
-renderedPages[pageNumber] = canvas.toDataURL();
+    updateThumbnail(pageNumber);
 
-const imagesArray = renderedPages.slice(1);
-
-pageFlip.updateFromImages(imagesArray);
-
+    pageFlip.updateFromImages(renderedPages.slice(1));
 }
 
+// ---------- CREATE THUMB ----------
+function createThumbnail(pageNumber){
 
-// ---------- THUMBNAILS ----------
-async function renderThumbnail(pageNumber){
+    const thumb = document.createElement("img");
+    thumb.dataset.page = pageNumber;
 
-const page = await pdf.getPage(pageNumber);
+    thumb.onclick = async () => {
+        if (!renderedPages[pageNumber]) {
+            await renderPage(pageNumber);
+        }
+        pageFlip.turnToPage(pageNumber - 1);
+    };
 
-const viewport = page.getViewport({scale:.25});
+    thumbnailsMap[pageNumber] = thumb;
+    document.getElementById("thumbnails").appendChild(thumb);
 
-const canvas = document.createElement("canvas");
-const context = canvas.getContext("2d");
+    if(renderedPages[pageNumber]){
+        updateThumbnail(pageNumber);
+    }
+}
 
-canvas.width = viewport.width;
-canvas.height = viewport.height;
+// ---------- THUMB LAZY ----------
+function generateThumbnailsLazy(){
 
-await page.render({
-canvasContext:context,
-viewport:viewport
-}).promise;
+    let i = 1;
 
-const thumb = document.createElement("img");
+    function batch(){
+        let count = 0;
 
-thumb.src = canvas.toDataURL();
+        while(i <= totalPages && count < 5){
+            createThumbnail(i);
+            i++;
+            count++;
+        }
 
-thumb.onclick = async () => {
-
-    if (!renderedPages[pageNumber]) {
-        await renderPage(pageNumber);
+        if(i <= totalPages){
+            setTimeout(batch, 50);
+        }
     }
 
-    const imagesArray = renderedPages.slice(1).filter(img => img);
-    pageFlip.updateFromImages(imagesArray);
-
-    pageFlip.turnToPage(pageNumber - 1);
-};
-document.getElementById("thumbnails").appendChild(thumb);
-
+    batch();
 }
-
 
 // ---------- INITIAL LOAD ----------
 let firstPages = Math.min(6,totalPages);
 
 for(let i=1;i<=firstPages;i++){
 
-const page = await pdf.getPage(i);
+    const page = await pdf.getPage(i);
+    const viewport = page.getViewport({scale:1.5});
 
-const viewport = page.getViewport({scale:1.5});
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
 
-const canvas = document.createElement("canvas");
-const context = canvas.getContext("2d");
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
 
-canvas.width = viewport.width;
-canvas.height = viewport.height;
+    await page.render({canvasContext:context,viewport}).promise;
 
-await page.render({
-canvasContext:context,
-viewport:viewport
-}).promise;
+    renderedPages[i] = canvas.toDataURL();
 
-renderedPages[i] = canvas.toDataURL();
+    updateThumbnail(i);
 
-let percent = Math.round((i/firstPages)*100);
-
-progressBar.style.width = percent+"%";
-progressText.innerText = "Cargando "+percent+"%";
-
+    let percent = Math.round((i/firstPages)*100);
+    progressBar.style.width = percent+"%";
+    progressText.innerText = "Cargando "+percent+"%";
 }
 
 pageFlip.loadFromImages(renderedPages.slice(1, firstPages + 1));
 
-
-// ---------- GENERATE THUMBNAILS ----------
-for(let i=1;i<=totalPages;i++){
-
-setTimeout(()=>renderThumbnail(i),i*30);
-
-}
-
-
-// ---------- SHOW BOOK ----------
-setTimeout(()=>{
-
+// ---------- SHOW UI FAST ----------
 loader.style.display="none";
 bookEl.style.display="block";
 controls.style.display="flex";
@@ -338,96 +275,55 @@ bookEl.style.transform=`scale(${zoomLevel})`;
 document.getElementById("pageInfo").innerText =
 "1 / "+totalPages;
 
-},400);
+// ---------- START THUMBS BACKGROUND ----------
+setTimeout(()=>generateThumbnailsLazy(),300);
 
-
-// ---------- NAVIGATION ----------
+// ---------- NAV ----------
 document.getElementById("next").onclick=()=>pageFlip.flipNext();
 document.getElementById("prev").onclick=()=>pageFlip.flipPrev();
 
 pageFlip.on("flip",(e)=>{
+    const currentPage = e.data+1;
 
-const currentPage = e.data+1;
+    document.getElementById("pageInfo").innerText =
+    currentPage+" / "+totalPages;
 
-document.getElementById("pageInfo").innerText =
-currentPage+" / "+totalPages;
-
-renderPage(currentPage+1);
-renderPage(currentPage+2);
-
+    renderPage(currentPage+1);
+    renderPage(currentPage+2);
 });
-
 
 // ---------- ZOOM ----------
 document.getElementById("zoomIn").onclick=()=>{
-
-zoomLevel+=zoomStep;
-
-bookEl.style.transform=`scale(${zoomLevel})`;
-
+    zoomLevel+=zoomStep;
+    bookEl.style.transform=`scale(${zoomLevel})`;
 };
 
 document.getElementById("zoomOut").onclick=()=>{
-
-if(zoomLevel>.4){
-
-zoomLevel-=zoomStep;
-
-bookEl.style.transform=`scale(${zoomLevel})`;
-
-}
-
+    if(zoomLevel>.4){
+        zoomLevel-=zoomStep;
+        bookEl.style.transform=`scale(${zoomLevel})`;
+    }
 };
 
 document.getElementById("resetZoom").onclick=()=>{
-
-zoomLevel=.8;
-
-bookEl.style.transform=`scale(${zoomLevel})`;
-
+    zoomLevel=.8;
+    bookEl.style.transform=`scale(${zoomLevel})`;
 };
-
-
-// ---------- MOUSE ZOOM ----------
-bookEl.addEventListener("wheel",function(e){
-
-e.preventDefault();
-
-if(e.deltaY<0) zoomLevel+=zoomStep;
-else zoomLevel-=zoomStep;
-
-zoomLevel=Math.max(.4,Math.min(2,zoomLevel));
-
-bookEl.style.transform=`scale(${zoomLevel})`;
-
-});
-
 
 // ---------- DOWNLOAD ----------
 document.getElementById("download").onclick=()=>{
-
-const link=document.createElement("a");
-
-link.href=pdfUrl;
-link.download="catalogo.pdf";
-
-document.body.appendChild(link);
-
-link.click();
-
-document.body.removeChild(link);
-
+    const link=document.createElement("a");
+    link.href=pdfUrl;
+    link.download="catalogo.pdf";
+    link.click();
 };
-
 
 // ---------- FULLSCREEN ----------
 document.getElementById("fullscreen").onclick=()=>{
-
-if(!document.fullscreenElement)
-bookEl.requestFullscreen();
-else
-document.exitFullscreen();
-
+    if(!document.fullscreenElement)
+        bookEl.requestFullscreen();
+    else
+        document.exitFullscreen();
 };
 
 });
