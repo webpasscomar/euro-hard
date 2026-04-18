@@ -20,7 +20,7 @@
                 </div>
                 <div class="carousel-inner">
                     {{-- <div class="carousel-item active" data-bs-interval="5000">
-            <div style="background: url(images/slider-home-1.jpg);" class="bd-placeholder-img"
+            <div style="background: url(img/slider-home-1.jpg);" class="bd-placeholder-img"
               xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice"
               focusable="false">
               <div class="img-overlay"></div>
@@ -28,14 +28,14 @@
             <div class="container-fluid">
               <div class="carousel-caption text-start carousel-content-info">
                 <div class="content-icon-EH">
-                  <img src="images/icono-EH.svg" class="icon-EH">
+                  <img src="img/icono-EH.svg" class="icon-EH">
                 </div>
                 <h1 class="title-carrusel">Lanzamiento</h1>
               </div>
             </div>
           </div>
           <div class="carousel-item" data-bs-interval="5000">
-            <div style="background: url(images/slider-home-2.jpg);" class="bd-placeholder-img"
+            <div style="background: url(img/slider-home-2.jpg);" class="bd-placeholder-img"
               xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice"
               focusable="false">
               <div class="img-overlay"></div>
@@ -43,14 +43,14 @@
             <div class="container">
               <div class="carousel-caption text-start carousel-content-info">
                 <div class="content-icon-EH">
-                  <img src="images/icono-EH.svg" class="icon-EH">
+                  <img src="img/icono-EH.svg" class="icon-EH">
                 </div>
                 <h1 class="title-carrusel">Cocinas</h1>
               </div>
             </div>
           </div>
           <div class="carousel-item" data-bs-interval="5000">
-            <div style="background: url(images/slider-home-3.jpg);" class="bd-placeholder-img"
+            <div style="background: url(img/slider-home-3.jpg);" class="bd-placeholder-img"
               xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice"
               focusable="false">
               <div class="img-overlay"></div>
@@ -58,14 +58,14 @@
             <div class="container">
               <div class="carousel-caption text-start carousel-content-info">
                 <div class="content-icon-EH">
-                  <img src="images/icono-EH.svg" class="icon-EH">
+                  <img src="img/icono-EH.svg" class="icon-EH">
                 </div>
                 <h1 class="title-carrusel">Novedades</h1>
               </div>
             </div>
           </div>
           <div class="carousel-item" data-bs-interval="5000">
-            <div style="background: url(images/slider-home-4.jpg);" class="bd-placeholder-img"
+            <div style="background: url(img/slider-home-4.jpg);" class="bd-placeholder-img"
               xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice"
               focusable="false">
               <div class="img-overlay"></div>
@@ -73,7 +73,7 @@
             <div class="container">
               <div class="carousel-caption text-start carousel-content-info">
                 <div class="content-icon-EH">
-                  <img src="images/icono-EH.svg" class="icon-EH">
+                  <img src="img/icono-EH.svg" class="icon-EH">
                 </div>
                 <h1 class="title-carrusel">Living</h1>
               </div>
@@ -90,7 +90,7 @@
                                 <img src="{{ asset('storage/galleries/' . $slider->image) }}" alt="{{ $slider->title }}">
                                 <div class="carousel-caption text-start carousel-content-info">
                                     <div class="content-icon-EH-hero">
-                                        <img src="{{ asset('images/icono-EH.svg') }}" class="icon-EH-hero">
+                                        <img src="{{ asset('img/icono-EH.svg') }}" class="icon-EH-hero">
                                     </div>
                                     <h1 class="title-carrusel">{{ Str::title($slider->title) }}</h1>
                                 </div>

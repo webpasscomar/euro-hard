@@ -22,11 +22,11 @@
   <title>@yield('metaTitle', 'EuroHard')</title>
   <meta name="description" content="@yield('metaDescription', 'EuroHard | Herrajes y accesorios')">
 
-  <link rel="icon" type="image/png" href="{{ asset('images/favicon/favicon-96x96.png') }}" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon/favicon-96x96.png') }}" />
-  <link rel="shortcut icon" href="{{ asset('images/favicon/favicon.ico') }}" />
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicon/apple-touch-icon.png') }}" />
-  <link rel="manifest" href="{{ asset('images/favicon/site.webmanifest') }}" />
+  <link rel="icon" type="image/png" href="{{ asset('img/favicon/favicon-96x96.png') }}" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="{{ asset('img/favicon/favicon-96x96.png') }}" />
+  <link rel="shortcut icon" href="{{ asset('img/favicon/favicon.ico') }}" />
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-touch-icon.png') }}" />
+  <link rel="manifest" href="{{ asset('img/favicon/site.webmanifest') }}" />
 
   <!-- Bootstrap core CSS -->
   {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"

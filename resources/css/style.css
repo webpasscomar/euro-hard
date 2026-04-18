@@ -391,7 +391,7 @@ input.form-control::placeholder {
 }
 
 .icon-WA {
-  background: url(../../public/images/back-icon-footer.svg);
+  background: url(../../public/img/back-icon-footer.svg);
   background-repeat: no-repeat;
   width: 44px;
   height: 44px;
@@ -400,7 +400,7 @@ input.form-control::placeholder {
 }
 
 .icon-WA:hover {
-  background: url(../../public/images/back-icon-footer-WA-hover.svg);
+  background: url(../../public/img/back-icon-footer-WA-hover.svg);
   background-repeat: no-repeat;
   width: 44px;
   height: 44px;
@@ -408,7 +408,7 @@ input.form-control::placeholder {
 }
 
 .icon-YT {
-  background: url(../../public/images/back-icon-footer.svg);
+  background: url(../../public/img/back-icon-footer.svg);
   background-repeat: no-repeat;
   width: 44px;
   height: 44px;
@@ -417,7 +417,7 @@ input.form-control::placeholder {
 }
 
 .icon-YT:hover {
-  background: url(../../public/images/back-icon-footer-YT-hover.svg);
+  background: url(../../public/img/back-icon-footer-YT-hover.svg);
   background-repeat: no-repeat;
   width: 44px;
   height: 44px;
@@ -425,7 +425,7 @@ input.form-control::placeholder {
 }
 
 .icon-IG {
-  background: url(../../public/images/back-icon-footer.svg);
+  background: url(../../public/img/back-icon-footer.svg);
   background-repeat: no-repeat;
   width: 44px;
   height: 44px;
@@ -434,7 +434,7 @@ input.form-control::placeholder {
 }
 
 .icon-IG:hover {
-  background: url(../../public/images/back-icon-footer-IG-hover.svg);
+  background: url(../../public/img/back-icon-footer-IG-hover.svg);
   background-repeat: no-repeat;
   width: 44px;
   height: 44px;
@@ -543,7 +543,7 @@ h1.title-carrusel {
 }
 
 .img-content-cat {
-  /*background: url(../../public/images/cat-coc-lav.png);*/
+  /*background: url(../../public/img/cat-coc-lav.png);*/
   height: 370px;
   background-repeat: no-repeat;
   background-size: 120%;
@@ -554,7 +554,7 @@ h1.title-carrusel {
 }
 
 .img-content-cat1 {
-  /*background: url(../../public/images/cat-coc-lav.png);*/
+  /*background: url(../../public/img/cat-coc-lav.png);*/
   height: 370px;
   background-repeat: no-repeat;
   background-size: 120%;
@@ -565,7 +565,7 @@ h1.title-carrusel {
 }
 
 .img-content-cat2 {
-  background: url(../../public/images/cat-liv.png);
+  background: url(../../public/img/cat-liv.png);
   height: 370px;
   background-repeat: no-repeat;
   background-size: 120%;
@@ -576,7 +576,7 @@ h1.title-carrusel {
 }
 
 .img-content-cat3 {
-  background: url(../../public/images/cat-dorm.png);
+  background: url(../../public/img/cat-dorm.png);
   height: 370px;
   background-repeat: no-repeat;
   background-size: 120%;
@@ -587,7 +587,7 @@ h1.title-carrusel {
 }
 
 .img-content-cat4 {
-  background: url(../../public/images/cat-noved.png);
+  background: url(../../public/img/cat-noved.png);
   height: 370px;
   background-repeat: no-repeat;
   background-size: 120%;
@@ -869,7 +869,7 @@ img.icon-EH-hero {
 .owl-carousel .owl-nav button.owl-next::before {
   content: '';
   /*unicode for arrow-right*/
-  background: url('../../public/images/angle-der.svg');
+  background: url('../../public/img/angle-der.svg');
   margin-right: 5px;
   background-size: 100%;
   position: absolute;
@@ -883,7 +883,7 @@ img.icon-EH-hero {
 .owl-carousel .owl-nav button.owl-prev::before {
   content: '';
   /*unicode for arrow-right*/
-  background: url(../../public/images/angle-izq.svg);
+  background: url(../../public/img/angle-izq.svg);
   margin-right: 5px;
   background-size: 100%;
   position: absolute;
@@ -1105,7 +1105,7 @@ img.icon-EH-hero {
 }
 
 .img-content-subcat {
-  /* background: url(../images/cat-01.jpg); */
+  /* background: url(../img/cat-01.jpg); */
   height: 370px;
   background-repeat: no-repeat;
   background-size: 120%;
@@ -1116,7 +1116,7 @@ img.icon-EH-hero {
 }
 
 .img-content-subcat2 {
-  background: url(../images/cat-02.jpg);
+  background: url(../img/cat-02.jpg);
   height: 370px;
   background-repeat: no-repeat;
   background-size: 120%;
@@ -1127,7 +1127,7 @@ img.icon-EH-hero {
 }
 
 .img-content-subcat3 {
-  background: url(../images/cat-03.jpg);
+  background: url(../img/cat-03.jpg);
   height: 370px;
   background-repeat: no-repeat;
   background-size: 120%;
@@ -1138,7 +1138,7 @@ img.icon-EH-hero {
 }
 
 .img-content-subcat4 {
-  background: url(../images/cat-04.jpg);
+  background: url(../img/cat-04.jpg);
   height: 370px;
   background-repeat: no-repeat;
   background-size: 120%;
@@ -1174,7 +1174,7 @@ img.icon-EH-hero {
   position: absolute;
   width: 72px;
   height: 40px;
-  background: url(../../public/images/back-new.svg);
+  background: url(../../public/img/back-new.svg);
   z-index: 999;
   background-size: 100%;
   background-repeat: no-repeat;
@@ -1294,7 +1294,7 @@ button.btn-gris:hover {
   position: absolute;
   width: 72px;
   height: 40px;
-  background: url(../images/back-new-line.svg);
+  background: url(../img/back-new-line.svg);
   z-index: 999;
   background-size: 100%;
   background-repeat: no-repeat;

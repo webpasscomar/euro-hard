@@ -64,7 +64,7 @@ return [
         */
 
   'logo' => '<b style="color:#fb8282;">E</b>uro<b style="color:#fb8282;">H</b>ard',
-  'logo_img' => 'images/logo.png',
+  'logo_img' => 'img/logo.png',
   'logo_img_class' => 'brand-image rounded-circle images-circle elevation-3',
   'logo_img_xl' => null,
   'logo_img_xl_class' => 'brand-image-xs',
@@ -86,7 +86,7 @@ return [
   'auth_logo' => [
     'enabled' => false,
     'images' => [
-      'path' => 'vendor/adminlte/dist/images/AdminLTELogo.png',
+      'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
       'alt' => 'Auth Logo',
       'class' => '',
       'width' => 50,
@@ -113,7 +113,7 @@ return [
     'enabled' => false,
     'mode' => 'fullscreen',
     'images' => [
-      'path' => 'vendor/adminlte/dist/images/AdminLTELogo.png',
+      'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
       'alt' => 'AdminLTE Preloader Image',
       'effect' => 'animation__shake',
       'width' => 60,

@@ -818,7 +818,7 @@ const defaultOptions = {
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE
   },
   imageResourcesPath: {
-    value: "./images/",
+    value: "./img/",
     kind: OptionKind.VIEWER
   },
   maxCanvasPixels: {

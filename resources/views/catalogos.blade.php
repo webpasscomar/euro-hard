@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <div class="container-title-hero">
         <div class="content-icon-EH-hero">
-          <img src="{{ asset('images/icono-EH.svg') }}" class="icon-EH-hero">
+          <img src="{{ asset('img/icono-EH.svg') }}" class="icon-EH-hero">
         </div>
         <h1 class="title-hero">Catálogos</h1>
       </div>

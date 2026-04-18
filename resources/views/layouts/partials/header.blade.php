@@ -3,7 +3,7 @@
     <div class="col-lg-4 col-md-8 col-8 content-logo-search">
       <a href="/"
         class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none link-logo">
-        <img src="{{ asset('images/logo-eurohard.svg') }}" alt="EuroHard" class="logo-header" />
+        <img src="{{ asset('img/logo-eurohard.svg') }}" alt="EuroHard" class="logo-header" />
       </a>
       <form action="{{ route('productos.buscar') }}" class="form-search mobile" role="search">
         <input type="search" class="form-control" name="buscar" placeholder="Buscar..." aria-label="Buscar">
@@ -39,7 +39,7 @@
             class="nav-link {{ request()->routeIS('contacto') ? 'active' : '' }}">Contacto</a></li>
         {{-- 
         <li class="nav-item"><a href="#" class="nav-link btn-icon-cart"><img
-                            src="{{ asset('images/icon-cart.svg') }}" alt="Carrito de Compras" class="icon-cart" /></a>
+                            src="{{ asset('img/icon-cart.svg') }}" alt="Carrito de Compras" class="icon-cart" /></a>
         </li> 
         --}}
       </ul>
@@ -47,7 +47,7 @@
   </div>
   <nav class="navbar bg-body-tertiary fixed-top nav-mobile">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/"><img src="{{ asset('images/logo-eurohard.svg') }}" alt="EuroHard"
+      <a class="navbar-brand" href="/"><img src="{{ asset('img/logo-eurohard.svg') }}" alt="EuroHard"
           class="logo-header" /></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
         aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -55,7 +55,7 @@
       </button>
       <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
-          <a class="navbar-brand" href="/"><img src="{{ asset('images/logo-EH-menu-mobile.svg') }}"
+          <a class="navbar-brand" href="/"><img src="{{ asset('img/logo-EH-menu-mobile.svg') }}"
               alt="EuroHard" class="logo-header-menu-mobile" /></a>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>

@@ -32,7 +32,7 @@
             <div class="container-fluid">
                 <div class="container-title-hero">
                     <div class="content-icon-EH-hero">
-                        <img src="images/icono-EH.svg" class="icon-EH-hero">
+                        <img src="img/icono-EH.svg" class="icon-EH-hero">
                     </div>
                     <h1 class="title-hero">Ubicación</h1>
                 </div>

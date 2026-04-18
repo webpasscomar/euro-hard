@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="container-title-hero">
                     <div class="content-icon-EH-hero">
-                        <img src="{{ asset('images/icono-EH-gris.svg') }}" class="icon-EH-hero">
+                        <img src="{{ asset('img/icono-EH-gris.svg') }}" class="icon-EH-hero">
                     </div>
                     <h1 class="title-hero">{{ Str::title($subcategoria->name) }}</h1>
                 </div>

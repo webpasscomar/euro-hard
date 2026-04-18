@@ -6,7 +6,7 @@
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #3a3838; height: 60px;">
                     <h1 class="modal-title" id="modalYoutubeTitle"><img
-                            src="{{ asset('images/logo-eurohard-white.png') }}" alt=""
+                            src="{{ asset('img/logo-eurohard-white.png') }}" alt=""
                             class="img-fluid w-75 mb-3">
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"

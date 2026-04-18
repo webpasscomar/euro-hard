@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="container-title-hero">
                     <div class="content-icon-EH-hero">
-                        <img src="{{ asset('images/icono-EH-gris.svg') }}" class="icon-EH-hero">
+                        <img src="{{ asset('img/icono-EH-gris.svg') }}" class="icon-EH-hero">
                     </div>
                     {{-- No mostrar si se muestran los productos a traves de la búsqueda --}}
 
@@ -36,7 +36,7 @@
                     class="w-100 h-100">
             @endempty
         @else
-            <img src="{{ asset('images/slider-home-2.jpg') }}" alt="Búsqueda de productos" class="img-fluid">
+            <img src="{{ asset('img/slider-home-2.jpg') }}" alt="Búsqueda de productos" class="img-fluid">
         @endif
     </div>
 </div>

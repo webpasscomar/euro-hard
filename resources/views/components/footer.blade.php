@@ -60,7 +60,7 @@
         <div class="subtitle1 blanco bold">
           DATA FISCAL
         </div>
-        <img src="{{ asset('images/datafiscal-qr.png') }}" alt="">
+        <img src="{{ asset('img/datafiscal-qr.png') }}" alt="">
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12 p-3">
         <div class="subtitle1 blanco bold">

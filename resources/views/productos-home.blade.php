@@ -6,14 +6,14 @@
       <div class="container-fluid">
         <div class="container-title-hero">
           <div class="content-icon-EH-hero">
-            <img src="{{ asset('images/icono-EH-gris.svg') }}" class="icon-EH-hero">
+            <img src="{{ asset('img/icono-EH-gris.svg') }}" class="icon-EH-hero">
           </div>
           <h1 class="title-hero">Herrajes y accesorios</h1>
         </div>
       </div>
       <div class="img-hero">
         <div class="img-overlay"></div>
-        <img src="{{ asset('images/slider-home-3.jpg') }}">
+        <img src="{{ asset('img/headers/productos.jpg') }}">
       </div>
     </div>
     <div class="container">
