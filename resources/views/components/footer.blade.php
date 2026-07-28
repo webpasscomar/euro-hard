@@ -22,7 +22,7 @@
           HORARIOS
         </div>
         <div class="txt-information">
-          Lun a Vie 9 a 12 y de 14 a 17:30
+          Lun a Vie 8 a 12 y de 13:30 a 17:30
         </div>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12 p-3">
