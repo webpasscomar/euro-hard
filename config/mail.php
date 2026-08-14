@@ -109,15 +109,15 @@ return [
     */
 
   'from' => [
-    'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-    'name' => env('MAIL_FROM_NAME', 'Example'),
+    'address' => env('MAIL_FROM_ADDRESS', 'info@euro-hard.com.ar'),
+    'name' => env('MAIL_FROM_NAME', 'EuroHard'),
   ],
 
   // Formularios de contacto - variables de entorno
-  'form' => [
-    'contact' => env('MAIL_CONTACT', 'contact@example.com'),
-    'experience' => env('MAIL_EXPERIENCE', 'experience@example.com'),
-    'distributors' => env('MAIL_DISTRIBUTORS', 'distributors@example.com'),
-    'products' => env('MAIL_PRODUCTS', 'products@example.com'),
-  ]
+'form' => [
+  'contact' => env('MAIL_CONTACT'),
+  'experience' => env('MAIL_EXPERIENCE'),
+  'distributors' => env('MAIL_DISTRIBUTORS'),
+  'products' => env('MAIL_PRODUCTS'),
+]
 ];

@@ -29,7 +29,6 @@ class FormProductReceive extends Mailable
   {
     return new Envelope(
       subject: 'Contacto - Productos',
-      from: config('mail.form.products'),
     );
   }
 

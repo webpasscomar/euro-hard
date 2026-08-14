@@ -28,7 +28,6 @@ class FormDistributorReceive extends Mailable
   {
     return new Envelope(
       subject: 'Contacto - Distribuidores',
-      from: config('mail.form.distributors'),
     );
   }
 

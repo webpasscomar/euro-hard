@@ -29,7 +29,6 @@ class FormExperienceReceive extends Mailable
   {
     return new Envelope(
       subject: 'Contacto-Experiencia',
-      from: config('mail.from.address')
     );
   }
 
