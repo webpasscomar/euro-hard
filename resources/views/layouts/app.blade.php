@@ -90,18 +90,28 @@
   <script src={{ 'https://www.google.com/recaptcha/api.js?render=' . config('services.recaptcha.site_key') }}></script>
   <script>
     document.addEventListener('submit', (e) => {
+      const siteKey = '{{ config('services.recaptcha.site_key') }}';
+
+      if (!siteKey) {
+        return;
+      }
+
       e.preventDefault();
       grecaptcha.ready(function() {
-        grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', {
+        grecaptcha.execute(siteKey, {
           action: 'submit'
         }).then(function(token) {
           let form = e.target;
-          let input = document.createElement('input');
-          input.type = "hidden";
-          input.name = "g-recaptcha-response";
-          input.value = token;
+          let input = form.querySelector('input[name="g-recaptcha-response"]');
 
-          form.appendChild(input);
+          if (!input) {
+            input = document.createElement('input');
+            input.type = "hidden";
+            input.name = "g-recaptcha-response";
+            form.appendChild(input);
+          }
+
+          input.value = token;
           form.submit();
         });
       });

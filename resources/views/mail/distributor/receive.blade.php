@@ -22,14 +22,9 @@
 </ol>
 </x-mail::panel>
 <x-mail::panel>
-Inconvenientes con productos: **{{ $contact['inconvenient'] }}**
+Mensaje / Comentario:
+{{ $contact['inconvenient_description'] ?? 'Sin comentarios' }}
 </x-mail::panel>
-@if($contact['inconvenient'] == 'si')
-## Detalles del inconveniente:
-<x-mail::panel>
-{{ $contact['inconvenient_description'] }}
-</x-mail::panel>
-@endif 
 <br>
 Ir al sitio: <a href="{{config('app.url')}}" target="_blank">EUROHARD</a> 
 </x-mail::message>
