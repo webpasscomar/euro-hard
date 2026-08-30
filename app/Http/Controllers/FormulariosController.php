@@ -66,7 +66,7 @@ class FormulariosController extends Controller
 
     if ($response) {
       // Enviar correo al usuario - Formulario Experiencia
-      Mail::to($data['email'])->send(new FormExperienceSend($data['fullName']));
+      Mail::to($data['email'])->send(new FormExperienceSend($data['fullName'], $data['email']));
       Mail::to(config('mail.form.experience'))->send(new FormExperienceReceive($data));
 
       toast('EL formulario se envió correctamente', 'success');
@@ -114,7 +114,7 @@ class FormulariosController extends Controller
 
     if ($response) {
       // Correo enviado al contacto
-      Mail::to($data['email'])->send(new FormDistributorSend($data['fullName']));
+      Mail::to($data['email'])->send(new FormDistributorSend($data['fullName'], $data['email']));
       // Correo que con los datos del contacto
       Mail::to(config('mail.form.distributors'))->send(new FormDistributorReceive($data));
       toast('EL formulario se envió correctamente', 'success');
@@ -158,7 +158,7 @@ class FormulariosController extends Controller
 
     if ($response) {
       // Se envia mail al cliente
-      Mail::to($request->input('email'))->send(new FormProductSend($request->input('fullName')));
+      Mail::to($request->input('email'))->send(new FormProductSend($request->input('fullName'), $request->input('email')));
       // Se reciben los datos del formulario en el correo correspondiente
 
       // Si envian la imágen adjunta se guarda temporalmente en storage tmp , luego al enviar el email se elimina
