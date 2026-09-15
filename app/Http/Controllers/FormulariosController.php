@@ -66,7 +66,7 @@ class FormulariosController extends Controller
 
     if ($response) {
       // Enviar correo al usuario - Formulario Experiencia
-      Mail::to($data['email'])->send(new FormExperienceSend($data['fullName']));
+      Mail::to($data['email'])->send(new FormExperienceSend($data['fullName'], $data['email']));
       Mail::to(config('mail.form.experience'))->send(new FormExperienceReceive($data));
 
       toast('EL formulario se envió correctamente', 'success');
@@ -80,34 +80,41 @@ class FormulariosController extends Controller
   // Formulario de distribuidores
   public function enviar_formulario_distribuidores(Request $request): RedirectResponse
   {
-    $data = $request->validate([
+    $rules = [
       'fullName' => 'required',
       'phone' => 'required',
       'email' => 'required',
       'client' => 'required',
       'province' => 'required',
       'products' => 'required|array',
-      'inconvenient' => 'required',
-      'inconvenient_description' => $request->input('inconvenient') == 'si' ? 'required' : 'nullable',
-      'g-recaptcha-response' => 'required|captcha'
-    ], [
+      'inconvenient_description' => 'nullable|string',
+    ];
+
+    $messages = [
       'fullName.required' => 'Ingrese el nombre',
       'phone.required' => 'Ingrese el teléfono',
       'email.required' => 'Ingrese el correo',
       'client.required' => 'Seleccione una opción',
       'province.required' => 'Seleccione una provincia',
       'products.required' => 'Seleccione uno ó más productos',
-      'inconvenient.required' => 'Seleccione una opción',
-      'inconvenient_description.required' => 'Escriba una descripción del problema',
-      'g-recaptcha.required' => 'Error. Captcha inválido',
-      'g-recaptcha.captcha' => 'Error. Captcha inválido',
-    ]);
+      'inconvenient_description.string' => 'El comentario debe ser texto válido',
+    ];
 
-    $response = NoCaptcha::verifyResponse($request->input('g-recaptcha-response'));
+    if (config('services.recaptcha.site_key')) {
+      $rules['g-recaptcha-response'] = 'required|captcha';
+      $messages['g-recaptcha.required'] = 'Error. Captcha inválido';
+      $messages['g-recaptcha.captcha'] = 'Error. Captcha inválido';
+    }
+
+    $data = $request->validate($rules, $messages);
+
+    $response = config('services.recaptcha.site_key')
+      ? NoCaptcha::verifyResponse($request->input('g-recaptcha-response'))
+      : true;
 
     if ($response) {
       // Correo enviado al contacto
-      Mail::to($data['email'])->send(new FormDistributorSend($data['fullName']));
+      Mail::to($data['email'])->send(new FormDistributorSend($data['fullName'], $data['email']));
       // Correo que con los datos del contacto
       Mail::to(config('mail.form.distributors'))->send(new FormDistributorReceive($data));
       toast('EL formulario se envió correctamente', 'success');
@@ -151,7 +158,7 @@ class FormulariosController extends Controller
 
     if ($response) {
       // Se envia mail al cliente
-      Mail::to($request->input('email'))->send(new FormProductSend($request->input('fullName')));
+      Mail::to($request->input('email'))->send(new FormProductSend($request->input('fullName'), $request->input('email')));
       // Se reciben los datos del formulario en el correo correspondiente
 
       // Si envian la imágen adjunta se guarda temporalmente en storage tmp , luego al enviar el email se elimina

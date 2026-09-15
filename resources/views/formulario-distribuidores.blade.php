@@ -28,11 +28,7 @@
         <div class="col-lg-4">
           <div class="content-colum-form-izq">
             <div class="description-nove">
-              Los invitamos a realizar la siguiente encuesta para continuar garantizando la satisfacción que
-              brinda
-              EUROHARD. Toda las respuestas que usted nos brinde serán confidenciales, de uso exclusivo del
-              área de
-              marketing.
+              Lo invitamos a completar el siguiente formulario para conocer su interés en formar parte de la red de distribuidores de EUROHARD. La información que nos brinde será confidencial y de uso exclusivo del área comercial.
             </div>
           </div>
         </div>
@@ -113,27 +109,8 @@
                   @enderror
                 </div>
               </div>
-              <label class="label-forms">¿Tuvo algún inconveniente con los productos EUROHARD? <span
+              <label class="label-forms">Mensaje/Comentario<span
                   class="requerido">*</span></label>
-              <div class="check-content" id="sectionFormProblemas">
-                <div class="check-individual">
-                  <div class="row">
-                    <div class="col-lg-4 content-check-input">
-                      <input type="checkbox" name="inconvenient" id="Si" value="si"
-                        class="only-one-inconvenient myinput large" @checked(old('inconvenient') == 'si')>
-                      Si
-                    </div>
-                    <div class="col-lg-4 content-check-input">
-                      <input type="checkbox" name="inconvenient" id="No" value="no"
-                        class="only-one-inconvenient myinput large" @checked(old('inconvenient') == 'no')>
-                      No
-                    </div>
-                  </div>
-                </div>
-                @error('inconvenient')
-                  <p class="text-danger p-0 mt-1">{{ $message }}</p>
-                @enderror
-              </div>
               <textarea class="form-control contact-content @error('inconvenient_description') is-invalid @enderror"
                 name="inconvenient_description" id="Inconvenientes" rows="8" aria-label="Inconvenientes">{{ old('inconvenient_description') }}</textarea>
               @error('inconvenient_description')
@@ -150,45 +127,22 @@
             <script type="text/javascript">
               document.addEventListener('DOMContentLoaded', function() {
                 let Checked = null;
-                let checkedInconvenient = null;
-                // Obtener los checkboxes y asignar el estado inicial (Laravel "old()")
-                // Chequear tipo de cliente
+
                 const checkboxes = document.getElementsByClassName('only-one');
                 for (let CheckBox of checkboxes) {
                   if (CheckBox.checked) {
-                    Checked = CheckBox; // Marcar el checkbox inicial si viene de `old()`
+                    Checked = CheckBox;
                   }
 
                   CheckBox.onclick = function() {
                     if (Checked === this) {
-                      // Permitir desmarcar el checkbox actual
                       this.checked = false;
-                      Checked = null; // Resetear la variable
+                      Checked = null;
                     } else {
                       if (Checked != null) {
-                        Checked.checked = false; // Desmarcar el anterior
+                        Checked.checked = false;
                       }
-                      Checked = this; // Actualizar al nuevo checkbox
-                    }
-                  };
-                }
-                // chequear inconveniente
-                const checkboxes = document.getElementsByClassName('only-one-inconvenient');
-                for (let CheckBox of checkboxes) {
-                  if (CheckBox.checked) {
-                    Checked = CheckBox; // Marcar el checkbox inicial si viene de `old()`
-                  }
-
-                  CheckBox.onclick = function() {
-                    if (Checked === this) {
-                      // Permitir desmarcar el checkbox actual
-                      this.checked = false;
-                      Checked = null; // Resetear la variable
-                    } else {
-                      if (Checked != null) {
-                        Checked.checked = false; // Desmarcar el anterior
-                      }
-                      Checked = this; // Actualizar al nuevo checkbox
+                      Checked = this;
                     }
                   };
                 }
