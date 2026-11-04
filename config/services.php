@@ -39,4 +39,8 @@ return [
     'secret_key' => env('NOCAPTCHA_SECRET'),
   ],
 
+  'gtm' => [
+    'container_id' => env('GTM_CONTAINER_ID'),
+  ],
+
 ];
