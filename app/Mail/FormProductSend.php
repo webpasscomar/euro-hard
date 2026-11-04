@@ -14,12 +14,14 @@ class FormProductSend extends Mailable
   use Queueable, SerializesModels;
 
   public $fullName;
+  public $email;
   /**
    * Create a new message instance.
    */
-  public function __construct($fullName)
+  public function __construct($fullName, $email = null)
   {
     $this->fullName = $fullName;
+    $this->email = $email ?? config('mail.from.address', 'info@euro-hard.com.ar');
   }
 
   /**
@@ -29,7 +31,8 @@ class FormProductSend extends Mailable
   {
     return new Envelope(
       subject: 'EUROHARD',
-      from: config('mail.form.products'),
+      from: config('mail.from.address', 'info@euro-hard.com.ar'),
+      replyTo: [$this->email],
     );
   }
 
