@@ -60,7 +60,7 @@ class ProductController extends Controller
       if ($request->hasFile('image_main')) {
         $name = $request->file('image_main')->getClientOriginalName();
         $image_main_name = Product::max('id') + 1 . '_product_' . $name;
-        $request->file('image_main')->storeAs('products', $image_main_name);
+        $request->file('image_main')->storeAs('products', $image_main_name, 'public');
       } else {
         $image_main_name = null;
       };
@@ -69,7 +69,7 @@ class ProductController extends Controller
       if ($request->hasFile('image_1')) {
         $name1 = $request->file('image_1')->getClientOriginalName();
         $image_1 = Product::max('id') + 1 . '_product_gallery1_' . $name1;
-        $request->file('image_1')->storeAs('products', $image_1);
+        $request->file('image_1')->storeAs('products', $image_1, 'public');
       } else {
         $image_1 = null;
       };
@@ -77,7 +77,7 @@ class ProductController extends Controller
       if ($request->hasFile('image_2')) {
         $name2 = $request->file('image_2')->getClientOriginalName();
         $image_2 = Product::max('id') + 1 . '_product_gallery2_' . $name2;
-        $request->file('image_2')->storeAs('products', $image_2);
+        $request->file('image_2')->storeAs('products', $image_2, 'public');
       } else {
         $image_2 = null;
       };
@@ -85,7 +85,7 @@ class ProductController extends Controller
       if ($request->hasFile('image_3')) {
         $name3 = $request->file('image_3')->getClientOriginalName();
         $image_3 = Product::max('id') + 1 . '_product_gallery3_' . $name3;
-        $request->file('image_3')->storeAs('products', $image_3);
+        $request->file('image_3')->storeAs('products', $image_3, 'public');
       } else {
         $image_3 = null;
       };
@@ -93,7 +93,7 @@ class ProductController extends Controller
       if ($request->hasFile('image_4')) {
         $name4 = $request->file('image_4')->getClientOriginalName();
         $image_4 = Product::max('id') + 1 . '_product_gallery4_' . $name4;
-        $request->file('image_4')->storeAs('products', $image_4);
+        $request->file('image_4')->storeAs('products', $image_4, 'public');
       } else {
         $image_4 = null;
       };
@@ -101,7 +101,7 @@ class ProductController extends Controller
       if ($request->hasFile('image_5')) {
         $name5 = $request->file('image_5')->getClientOriginalName();
         $image_5 = Product::max('id') + 1 . '_product_gallery5_' . $name5;
-        $request->file('image_5')->storeAs('products', $image_5);
+        $request->file('image_5')->storeAs('products', $image_5, 'public');
       } else {
         $image_5 = null;
       };
@@ -109,7 +109,7 @@ class ProductController extends Controller
       if ($request->hasFile('image_6')) {
         $name6 = $request->file('image_6')->getClientOriginalName();
         $image_6 = Product::max('id') + 1 . '_product_gallery6_' . $name6;
-        $request->file('image_6')->storeAs('products', $image_6);
+        $request->file('image_6')->storeAs('products', $image_6, 'public');
       } else {
         $image_6 = null;
       };
@@ -119,7 +119,7 @@ class ProductController extends Controller
       if ($request->hasFile('datasheet_file')) {
         $file_name = $request->file('datasheet_file')->getClientOriginalName();
         $datasheet_file_name = Product::max('id') + 1 . '_product_datasheet_' . $file_name;
-        $request->file('datasheet_file')->storeAs('products', $datasheet_file_name);
+        $request->file('datasheet_file')->storeAs('products', $datasheet_file_name, 'public');
       } else {
         $datasheet_file_name = null;
       }
@@ -127,7 +127,7 @@ class ProductController extends Controller
       if ($request->hasFile('instruction_file')) {
         $file_name = $request->file('instruction_file')->getClientOriginalName();
         $instructions_file_name = Product::max('id') + 1 . '_product_instructions_' . $file_name;
-        $request->file('instruction_file')->storeAs('products', $instructions_file_name);
+        $request->file('instruction_file')->storeAs('products', $instructions_file_name, 'public');
       } else {
         $instructions_file_name = null;
       }
@@ -176,9 +176,9 @@ class ProductController extends Controller
       toast('Producto creado con éxito', 'success');
       return redirect()->route('admin.products.index');
     } catch (\Throwable $th) {
-      // dd($th);
+      report($th);
       toast('No se pudo crear el producto', 'error');
-      return redirect()->route('admin.products.index');
+      return back()->withInput();
     };
   }
 
@@ -218,7 +218,7 @@ class ProductController extends Controller
         // Guardar la nueva imágen con el nombre generado
         $name = $request->file('image_main')->getClientOriginalName();
         $image_main_name = $product->id . '_product_' . $name;
-        $request->file('image_main')->storeAs('products', $image_main_name);
+        $request->file('image_main')->storeAs('products', $image_main_name, 'public');
       } else {
         $image_main_name = $product->image_main;
       };
@@ -232,7 +232,7 @@ class ProductController extends Controller
         // Guardar la nueva imágen con el nombre generado
         $name1 = $request->file('image_1')->getClientOriginalName();
         $image_1 = $product->id . '_product_gallery1_' . $name1;
-        $request->file('image_1')->storeAs('products', $image_1);
+        $request->file('image_1')->storeAs('products', $image_1, 'public');
       } else {
         $image_1 = $product->image_1;
       };
@@ -245,7 +245,7 @@ class ProductController extends Controller
         // Guardar la nueva imágen con el nombre generado
         $name2 = $request->file('image_2')->getClientOriginalName();
         $image_2 = $product->id . '_product_gallery2_' . $name2;
-        $request->file('image_2')->storeAs('products', $image_2);
+        $request->file('image_2')->storeAs('products', $image_2, 'public');
       } else {
         $image_2 = $product->image_2;
       };
@@ -258,7 +258,7 @@ class ProductController extends Controller
         // Guardar la nueva imágen con el nombre generado
         $name3 = $request->file('image_3')->getClientOriginalName();
         $image_3 = $product->id . '_product_gallery3_' . $name3;
-        $request->file('image_3')->storeAs('products', $image_3);
+        $request->file('image_3')->storeAs('products', $image_3, 'public');
       } else {
         $image_3 = $product->image_3;
       };
@@ -271,7 +271,7 @@ class ProductController extends Controller
         // Guardar la nueva imágen con el nombre generado
         $name4 = $request->file('image_4')->getClientOriginalName();
         $image_4 = $product->id . '_product_gallery4_' . $name4;
-        $request->file('image_4')->storeAs('products', $image_4);
+        $request->file('image_4')->storeAs('products', $image_4, 'public');
       } else {
         $image_4 = $product->image_4;
       };
@@ -284,7 +284,7 @@ class ProductController extends Controller
         // Guardar la nueva imágen con el nombre generado
         $name5 = $request->file('image_5')->getClientOriginalName();
         $image_5 = $product->id . '_product_gallery5_' . $name5;
-        $request->file('image_5')->storeAs('products', $image_5);
+        $request->file('image_5')->storeAs('products', $image_5, 'public');
       } else {
         $image_5 = $product->image_5;
       };
@@ -297,7 +297,7 @@ class ProductController extends Controller
         // Guardar la nueva imágen con el nombre generado
         $name6 = $request->file('image_6')->getClientOriginalName();
         $image_6 = $product->id . '_product_gallery6_' . $name6;
-        $request->file('image_6')->storeAs('products', $image_6);
+        $request->file('image_6')->storeAs('products', $image_6, 'public');
       } else {
         $image_6 = $product->image_6;
       };
@@ -312,7 +312,7 @@ class ProductController extends Controller
         // Guardar el nuevo arvhivo
         $file_name = $request->file('datasheet_file')->getClientOriginalName();
         $datasheet_file_name = $product->id . '_product_datasheet_' . $file_name;
-        $request->file('datasheet_file')->storeAs('products', $datasheet_file_name);
+        $request->file('datasheet_file')->storeAs('products', $datasheet_file_name, 'public');
       } else {
         $datasheet_file_name = $product->datasheet_file;
       }
@@ -325,7 +325,7 @@ class ProductController extends Controller
         // Guardar el nuevo arvhivo
         $file_name = $request->file('instruction_file')->getClientOriginalName();
         $instructions_file_name = $product->id . '_product_instructions_' . $file_name;
-        $request->file('instruction_file')->storeAs('products', $instructions_file_name);
+        $request->file('instruction_file')->storeAs('products', $instructions_file_name, 'public');
       } else {
         $instructions_file_name = $product->instruction_file;
       }

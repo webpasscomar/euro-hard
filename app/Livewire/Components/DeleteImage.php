@@ -4,7 +4,6 @@ namespace App\Livewire\Components;
 
 use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
 class DeleteImage extends Component
@@ -23,15 +22,19 @@ class DeleteImage extends Component
         return view('livewire.components.delete-image');
     }
 
-    #[On('delete')]
-    public function delete($field)
+    public function delete(): void
     {
-        // dd($this->product->{$this->field});
-        if (Storage::exists('products/' . $this->product->{$field})) {
-            Storage::delete('products/' . $this->product->{$field});
+        if (! in_array($this->field, ['image_main', 'image_1', 'image_2', 'image_3', 'image_4', 'image_5', 'image_6'], true)) {
+            abort(404);
         }
+
+        $image = $this->product->{$this->field};
+        if (filled($image) && Storage::disk('public')->exists('products/' . $image)) {
+            Storage::disk('public')->delete('products/' . $image);
+        }
+
         $this->product->update([
-            $field => null
+            $this->field => null
         ]);
 
         toast('La imágen se eliminó correctamente', 'success');
